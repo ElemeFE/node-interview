@@ -16,7 +16,7 @@
 
 > 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
 
-可以清楚掉 require 的缓存重新 require, 是具体情况还可以用 vm 模块重新执行.
+可以清除掉 `require` 的缓存重新 `require`, 是具体情况还可以用 VM 模块重新执行.
 
 当然这个问题可能是典型的 [`X-Y Problem`](http://coolshell.cn/articles/10804.html), 使用 js 实现热更新很容易碰到 v8 优化之后各地拿到缓存的引用导致热更新 js 没意义. 当然热更新 json 还是可以简单一点比如用读取文件的方式来热更新, 但是这样也不如从 redis 之类的数据库中读取比较合理.
 
@@ -26,11 +26,11 @@
 
 ### 模块机制
 
-node 的基础中毫无疑问的应该是有关于模块机制的方面的, 也即 require 这个模块的一些原理的问题.
+node 的基础中毫无疑问的应该是有关于模块机制的方面的, 也即 `require` 这个内置功能的一些原理的问题.
 
-关于模块互相引用之类的, 不了解的推荐先好好读读[官方文档](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
+关于模块互相引用之类的, 不了解的推荐先好好读读[官方文档](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html).
 
-然后官方文档已经说得很清楚了, 每个 node 进程只有一个 vm 的上下文, 不会跟浏览器相差多少, 模块机制在文档中也描述的非常清楚了:
+其实官方文档已经说得很清楚了, 每个 node 进程只有一个 VM 的上下文, 不会跟浏览器相差多少, 模块机制在文档中也描述的非常清楚了:
 
 ```javascript
 function require(...) {

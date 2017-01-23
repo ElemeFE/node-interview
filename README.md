@@ -36,9 +36,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所言本教程的目的是教你如何通过
 
 > 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
 
-* `[Doc]` Modules (模块)
-* `[Doc]` Globals (全局变量)
-* `[Doc]` VM (虚拟机)
+* [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
+* [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)
+* [`[Doc]` VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
 
 ### 常见问题
 
@@ -105,11 +105,11 @@ Hi, 欢迎来到 ElemeFE, 如标题所言本教程的目的是教你如何通过
 
 ## Network
 
-*### 常见问题
+### 常见问题
 
 * HTTP 协议中的 POST 和 PUT 有什么区别?
-`TCP/UDP` 的区别? `TCP` 粘包是怎么回事，如何处理? `UDP` 有粘包吗?
-`time_wait` 是什么情况?出现过多的 `close_wait` 可能是什么原因?
+* `TCP/UDP` 的区别? `TCP` 粘包是怎么回事，如何处理? `UDP` 有粘包吗?
+* `time_wait` 是什么情况?出现过多的 `close_wait` 可能是什么原因?
 * socket hang up 是什么意思? 一般什么情况下出现?
 * 列举几个提高网络传输速度的办法?
 

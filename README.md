@@ -26,10 +26,10 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* [js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-value)
+* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
-* [const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-const)
-* [Javascript 中不同类型以及不同环境下变量的内存都是何时释放?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-mem)
+* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-const)
+* Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-mem)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)</font>
 
@@ -46,9 +46,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* [a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
-* [如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
-* [如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
+* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
+* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
+* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)</font>
 
@@ -62,12 +62,12 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* [Promise 中 .then 的第二参数与 .catch 有什么区别?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-1)
-* [Eventemitter 的 emit 是同步还是异步?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-2)
-* [如何判断接口是否异步? 是否只要有回调函数就是异步?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-3)
-* [nextTick, setTimeout 以及 setImmediate 三者有什么区别?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-4)
-* [如何实现一个 sleep 函数?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-5)
-* [如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-6)
+* Promise 中 .then 的第二参数与 .catch 有什么区别? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-1)
+* Eventemitter 的 emit 是同步还是异步? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-2)
+* 如何判断接口是否异步? 是否只要有回调函数就是异步? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-3)
+* nextTick, setTimeout 以及 setImmediate 三者有什么区别? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-4)
+* 如何实现一个 sleep 函数? [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-5)
+* 如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce) [答案/讨论](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-6)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)</font>
 

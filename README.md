@@ -18,18 +18,18 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 覆盖点
 
-* `[Basic]` 类型判断
-* `[Basic]` 作用域
-* `[Basic]` 引用传递
-* `[Basic]` 内存释放
-* `[Basic]` ES6 新特性
+* [`[Basic]` 类型判断](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#类型判断)
+* [`[Basic]` 作用域](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#作用域)
+* [`[Basic]` 引用传递](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#引用传递)
+* [`[Basic]` 内存释放](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#内存释放)
+* [`[Basic]` ES6 新特性](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#es6-新特性)
 
 ### 常见问题
 
-* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?
+* [js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
-* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是?
-* Javascript 中不同类型以及不同环境下变量的内存都是何时释放?
+* [const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-const)
+* [Javascript 中不同类型以及不同环境下变量的内存都是何时释放?](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-mem)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)</font>
 
@@ -40,33 +40,36 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
 * [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)
 * [`[Doc]` VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
+* [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#模块机制)
+* [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#热更新)
+* [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#上下文)
 
 ### 常见问题
 
-* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
-* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
-* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
+* [a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
+* [如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
+* [如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)</font>
 
-## 事件/异步
+## [事件/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)
 
-* `[Basic]` Promise
-* `[Doc]` Events (事件)
+* [`[Basic]` Promise](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#Promise)
+* [`[Doc]` Events (事件)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#Events)
 * `[Doc]` Timers (定时器)
-* `[Point]` 并行
-* `[Point]` 阻塞/异步
+* [`[Point]` 阻塞/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#阻塞/异步)
+* `[Point]` 并行/并发
 
 ### 常见问题
 
-* Promise 中 .then 的第二参数与 .catch 有什么区别?
-* Eventemitter 的 emit 是同步还是异步?
-* 如何判断接口是否异步? 是否只要有回调函数就是异步?
-* nextTick, setTimeout 以及 setImmediate 三者有什么区别?
-* 如何实现一个 sleep 函数?
-* 如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce)
+* [Promise 中 .then 的第二参数与 .catch 有什么区别?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-1)
+* [Eventemitter 的 emit 是同步还是异步?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-2)
+* [如何判断接口是否异步? 是否只要有回调函数就是异步?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-3)
+* [nextTick, setTimeout 以及 setImmediate 三者有什么区别?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-4)
+* [如何实现一个 sleep 函数?](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-5)
+* [如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-6)
 
-`更多整理中`
+<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)</font>
 
 ## 进程
 

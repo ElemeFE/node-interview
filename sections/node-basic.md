@@ -6,15 +6,15 @@
 
 ## 常见问题
 
-> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
+> <a name="q-loop"></a> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
 
 不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. (注①)
 
-> 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
+> <a name="q-global"></a> 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
 
 能. (注②)
 
-> 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
+> <a name="q-hot"></a> 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
 
 可以清除掉 `require` 的缓存重新 `require`, 是具体情况还可以用 VM 模块重新执行.
 
@@ -69,7 +69,7 @@ function require(...) {
 
 另外还有非常基础和常见的问题, 比如 module.exports 和 exports 的区别这里也能一并解决了 exports 只是 module.exports 的一个引用. 没看懂可以在细看我以前发的[帖子](https://cnodejs.org/topic/5734017ac3e4ef7657ab1215).
 
-再晋级一点, 众所周知, node 的模块机制是基于 `CommonJS` 规范的. 对于从前端转 node 的同学, 如果面试官想问的难一点会考验关于 `CommonJS` 的一些问题. 比如比较 `AMD`, `CMD`, `CommonJS` 三者的区别, 包括询问关于 node 中 `require` 的实现原理等.
+再晋级一点, 众所周知, node 的模块机制是基于 `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 规范的. 对于从前端转 node 的同学, 如果面试官想问的难一点会考验关于 `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 的一些问题. 比如比较 `AMD`, `CMD`, `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 三者的区别, 包括询问关于 node 中 `require` 的实现原理等.
 
 ### 热更新
 

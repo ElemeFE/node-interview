@@ -117,8 +117,51 @@ Node.js 中执行 js 代码的过程是单线程的. 只有当前代码都执行
 
 如果在线上的网站中出现了死循环的逻辑被触发, 整个进程就会一直卡在死循环中, 如果没有多进程部署的话, 之后的网站请求全部会超时, js 代码没有结束那么事件队列就会停下等待不会执行异步, 整个网站无法响应.
 
-整理中
+## Timers
+
+在笔者这里将 Node.js 中的异步简单的划分为两种, 硬异步和软异步. 
+
+硬异步是指由于 IO 操作或者外部调用走 libuv 而需要异步的情况. 当然, 也存在 readFileSync, execSync 等例外情况, 不过 node 由于是单线程的, 所以如果常规业务在普通时段执行可能比较耗时同步的 IO 操作会使得其执行过程中其他的所有操作都不能响应, 有点作死的感觉. 不过在启动/初始化以及一些工具脚本的应用场景下是完全没问题的. 而一般的场景下 IO 操作都是需要异步的.
+
+软异步是指, 通过 setTimeout 等方式来实现的异步. 关于 nextTick, setTimeout 以及 setImmediate 三者的区别参见[该帖](https://cnodejs.org/topic/5556efce7cabb7b45ee6bcac)
+
+**Event loop 示例**
+
+```
+   ┌───────────────────────┐
+┌─>│        timers         │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+│  │     I/O callbacks     │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+│  │     idle, prepare     │
+│  └──────────┬────────────┘      ┌───────────────┐
+│  ┌──────────┴────────────┐      │   incoming:   │
+│  │         poll          │<─────┤  connections, │
+│  └──────────┬────────────┘      │   data, etc.  │
+│  ┌──────────┴────────────┐      └───────────────┘
+│  │        check          │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+└──┤    close callbacks    │
+   └───────────────────────┘
+```
+
+关于事件循环, Timers 以及 nextTick 的关系详见官方文档 [The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
 ## 并行/并发
 
-整理中
+并行 (Parallel) 与并发 (Concurrent) 是两个很常见的概念.
+
+可以看 Erlang 作者 Joe Armstrong 的博客 ([Concurrent and Parallel](http://joearms.github.io/2013/04/05/concurrent-and-parallel-programming.html))
+
+![con_and_par](http://joearms.github.io/images/con_and_par.jpg)
+
+并发 (Concurrent) = 2 队列对应 1 咖啡机.
+
+并行 (Parallel) = 2 队列对应 2 咖啡机.
+
+Node.js 通过事件循环来挨个抽取实践队列中的一个个 Task 执行, 从而避免了传统的多线程情况下 `2个队列对应 1个咖啡机` 的时候上线文切换以及资源争抢/同步的问题, 所以获得了高并发的成就.
+
+至于在 node 中并行, 你可以通过 cluster 来再添加一个咖啡机.

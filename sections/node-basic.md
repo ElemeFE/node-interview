@@ -8,11 +8,11 @@
 
 > <a name="q-loop"></a> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
 
-不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. (注①)
+不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. (注<a href="#mark-1">①</a>)
 
 > <a name="q-global"></a> 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
 
-能. (注②)
+能. (注<a href="#mark-2">②</a>)
 
 > <a name="q-hot"></a> 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
 
@@ -49,7 +49,7 @@ function require(...) {
 }
 ```
 
-每个 `.js` 能独立一个环境只是因为 node 帮你在外层包了一圈自执行, 所以你使用 `t = 111` 定义全局变量在其他地方当然能拿到. ②情况如下:
+每个 `.js` 能独立一个环境只是因为 node 帮你在外层包了一圈自执行, 所以你使用 `t = 111` 定义全局变量在其他地方当然能拿到. <a name="mark-2">②</a>情况如下:
 
 ```javascript
 
@@ -65,11 +65,11 @@ function require(...) {
 })();
 ```
 
-①然后互相引用的问题中, 模块在导出的只是 `var module = { exports: {} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完 exports 就是 `{}` 在 b.js 的开头拿到的就是 `{}` 而已.
+<a name="mark-1">①</a>然后互相引用的问题中, 模块在导出的只是 `var module = { exports: {} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完 exports 就是 `{}` 在 b.js 的开头拿到的就是 `{}` 而已.
 
 另外还有非常基础和常见的问题, 比如 module.exports 和 exports 的区别这里也能一并解决了 exports 只是 module.exports 的一个引用. 没看懂可以在细看我以前发的[帖子](https://cnodejs.org/topic/5734017ac3e4ef7657ab1215).
 
-再晋级一点, 众所周知, node 的模块机制是基于 `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 规范的. 对于从前端转 node 的同学, 如果面试官想问的难一点会考验关于 `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 的一些问题. 比如比较 `AMD`, `CMD`, `[CommonJS](http://javascript.ruanyifeng.com/nodejs/module.html)` 三者的区别, 包括询问关于 node 中 `require` 的实现原理等.
+再晋级一点, 众所周知, node 的模块机制是基于 [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 规范的. 对于从前端转 node 的同学, 如果面试官想问的难一点会考验关于 [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 的一些问题. 比如比较 `AMD`, `CMD`, [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 三者的区别, 包括询问关于 node 中 `require` 的实现原理等.
 
 ### 热更新
 

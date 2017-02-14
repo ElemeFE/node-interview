@@ -54,11 +54,11 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ## [事件/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)
 
-* [`[Basic]` Promise](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#Promise)
-* [`[Doc]` Events (事件)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#Events)
-* [`[Doc]` Timers (定时器)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#Timers)
-* [`[Point]` 阻塞/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#阻塞/异步)
-* [`[Point]` 并行/并发](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#并行/并发)
+* [`[Basic]` Promise](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#promise)
+* [`[Doc]` Events (事件)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#events)
+* [`[Doc]` Timers (定时器)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#timers)
+* [`[Point]` 阻塞/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#阻塞异步)
+* [`[Point]` 并行/并发](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#并行并发)
 
 ### 常见问题
 

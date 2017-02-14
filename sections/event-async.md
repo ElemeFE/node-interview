@@ -103,6 +103,54 @@ Node.js 中 Eventemitter 的 emit 是同步的. 在官方文档中有说明:
 
 > The EventListener calls all listeners synchronously in the order in which they were registered. This is important to ensure the proper sequencing of events and to avoid race conditions or logic errors.
 
+另外, 可以讨论如下的执行结果是输出 `hi 1` 还是 `hi 2`?
+
+```javascript
+const EventEmitter = require('events');
+
+let emitter = new EventEmitter();
+
+emitter.on('myEvent', () => {
+  console.log('hi 1');
+});
+
+emitter.on('myEvent', () => {
+  console.log('hi 2');
+});
+
+emitter.emit('myEvent');
+```
+
+或者如下情况是否会死循环?
+
+```javascript
+const EventEmitter = require('events');
+
+let emitter = new EventEmitter();
+
+emitter.on('myEvent', () => {
+  console.log('hi');
+  emitter.emit('myEvent');
+});
+
+emitter.emit('myEvent');
+```
+
+以及这样会不会死循环?
+
+```javascript
+const EventEmitter = require('events');
+
+let emitter = new EventEmitter();
+
+emitter.on('myEvent', function sth () {
+  emitter.on('myEvent', sth);
+  console.log('hi');
+});
+
+emitter.emit('myEvent');
+```
+
 使用 emitter 处理问题可以处理比较复杂的状态场景, 比如 TCP 的复杂状态机, 做多项异步操作的时候每一步都可能报错, 这个时候 .emit 错误并且执行某些 .once 的操作可以将你从泥沼中拯救出来.
 
 另外可以注意一下的是, 有些同学喜欢用 emitter 来监控某些类的状态, 但是在这些类释放的时候可能会忘记释放 emitter, 而 emitter 的 listener 可能一直这些类的内部持有其引用从而可能导致内存泄漏.
@@ -148,7 +196,7 @@ Node.js 中执行 js 代码的过程是单线程的. 只有当前代码都执行
    └───────────────────────┘
 ```
 
-关于事件循环, Timers 以及 nextTick 的关系详见官方文档 [The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+关于事件循环, Timers 以及 nextTick 的关系详见官方文档 [The Node.js Event Loop, Timers, and process.nextTick() (英文)](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) 以及阮一峰的 [JavaScript 运行机制详解：再谈Event Loop (中文)](http://www.ruanyifeng.com/blog/2014/10/event-loop.html) 等.
 
 ## 并行/并发
 

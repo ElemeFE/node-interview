@@ -107,36 +107,110 @@ function test() {
 
 Node.js 的 `child_process.fork()` 不像 POSIX [fork(2)](http://man7.org/linux/man-pages/man2/fork.2.html) 系统调用, 不会拷贝当前父进程. 这里对于其他语言转过的同学可能比较误导, 可以作为一个比较偏的面试题.
 
+* spawn() 启动一个子进程来执行命令
+  * options.detached 父进程死后是否允许子进程存活
+  * options.stdio 指定子进程的三个标准流
+* spawnSync() 同步版的 spawn, 可指定超时, 返回的对象可获得子进程的情况
+* exec() 启动一个子进程来执行命令, 带回调参数获知子进程的情况, 可指定进程运行的超时时间
+* execSync() 同步版的 exec(), 可指定超时, 返回子进程的输出 (stdout)
+* execFile() 启动一个子进程来执行一个可执行文件, 可指定进程运行的超时时间
+* execFileSync() 同步版的 execFile(), 返回子进程的输出, 如何超时或者 exit code 不为 0, 会直接 throw Error
+* fork() 加强版的 spawn(), 返回值是 ChildProcess 对象可以与子进程交互
+
+其中 exec/execSync 方法会直接调用 bash 来解释命令, 所以如果有命令有外部参数, 则需要注意被注入的情况.
+
 ### child.kill 与 child.send
 
 常见会问的面试题, 如 `child.kill` 与 `child.send` 的区别. 二者一个是基于信号系统, 一个是基于 IPC.
 
-中李忠
 
 ## Cluster
 
-Cluster 是常见的 Node.js 利用多核的办法. 它是基于 `child_process.fork()` 实现的, 所以 cluster 产生的进程之间是通过 IPC 来通信的, 并且它也没有拷贝父进程的空间, 而是通过加入 cluster.isMaster 这个标识, 来区分父进程以及子进程, 达到类似 POSIX 的 fork 的效果.
+Cluster 是常见的 Node.js 利用多核的办法. 它是基于 `child_process.fork()` 实现的, 所以 cluster 产生的进程之间是通过 IPC 来通信的, 并且它也没有拷贝父进程的空间, 而是通过加入 cluster.isMaster 这个标识, 来区分父进程以及子进程, 达到类似 POSIX 的 [fork](http://man7.org/linux/man-pages/man2/fork.2.html) 的效果.
 
-整理中
+```javascript
+const cluster = require('cluster');            // | | 
+const http = require('http');                  // | | 
+const numCPUs = require('os').cpus().length;   // | |    都执行了
+                                               // | | 
+if (cluster.isMaster) {                        // |-|-----------------
+  // Fork workers.                             //   | 
+  for (var i = 0; i < numCPUs; i++) {          //   | 
+    cluster.fork();                            //   | 
+  }                                            //   | 仅父进程执行 (a.js)
+  cluster.on('exit', (worker) => {             //   | 
+    console.log(`${worker.process.pid} died`); //   | 
+  });                                          //   |
+} else {                                       // |-------------------
+  // Workers can share any TCP connection      // | 
+  // In this case it is an HTTP server         // | 
+  http.createServer((req, res) => {            // | 
+    res.writeHead(200);                        // |   仅子进程执行 (b.js)
+    res.end('hello world\n');                  // | 
+  }).listen(8000);                             // | 
+}                                              // |-------------------
+                                               // | |
+console.log('hello');                          // | |    都执行了
+```
+
+在上述代码中 numCPUs 虽然是全局变量但是, 在父进程中修改它, 子进程中并不会改变, 因为父进程与子进程是完全独立的两个空间. 他们所谓的共有仅仅只是都执行了, 并不是同一份.
+
+你可以把父进程执行的部分当做 `a.js`, 子进程执行的部分当做 `b.js`, 你可以把他们想象成是先执行了 `node a.js` 然后 cluster.fork 了几次, 就执行执行了几次 `node b.js`. 而 cluster 模块则是二者之间的一个桥梁, 你可以通过 cluster 提供的方法, 让其二者之间进行沟通交流.
+
+### How It Works (翻译/整理中)
+
+The worker processes are spawned using the child_process.fork() method, so that they can communicate with the parent via IPC and pass server handles back and forth.
+
+The cluster module supports two methods of distributing incoming connections.
+
+The first one (and the default one on all platforms except Windows), is the round-robin approach, where the master process listens on a port, accepts new connections and distributes them across the workers in a round-robin fashion, with some built-in smarts to avoid overloading a worker process.
+
+The second approach is where the master process creates the listen socket and sends it to interested workers. The workers then accept incoming connections directly.
+
+The second approach should, in theory, give the best performance. In practice however, distribution tends to be very unbalanced due to operating system scheduler vagaries. Loads have been observed where over 70% of all connections ended up in just two processes, out of a total of eight.
+
+Because server.listen() hands off most of the work to the master process, there are three cases where the behavior between a normal Node.js process and a cluster worker differs:
+
+* server.listen({fd: 7}) Because the message is passed to the master, file descriptor 7 in the parent will be listened on, and the handle passed to the worker, rather than listening to the worker's idea of what the number 7 file descriptor references.
+* server.listen(handle) Listening on handles explicitly will cause the worker to use the supplied handle, rather than talk to the master process. If the worker already has the handle, then it's presumed that you know what you are doing.
+* server.listen(0) Normally, this will cause servers to listen on a random port. However, in a cluster, each worker will receive the same "random" port each time they do listen(0). In essence, the port is random the first time, but predictable thereafter. If you want to listen on a unique port, generate a port number based on the cluster worker ID.
+* There is no routing logic in Node.js, or in your program, and no shared state between the workers. Therefore, it is important to design your program such that it does not rely too heavily on in-memory data objects for things like sessions and login.
+
+Because workers are all separate processes, they can be killed or re-spawned depending on your program's needs, without affecting other workers. As long as there are some workers still alive, the server will continue to accept connections. If no workers are alive, existing connections will be dropped and new connections will be refused. Node.js does not automatically manage the number of workers for you, however. It is your responsibility to manage the worker pool for your application's needs.
 
 ## 进程间通信
 
-Node.js 的进程是有 IPC 频道 来产生了, 当 IPC 频道 close 就会触发 `disconnect` 事件.
+IPC (Inter-process communication) 进程间通信技术. 常见的进程间通信技术列表如下:
 
-而后是关于进程间通信 (IPC) 的问题, 一般不会直接问 IPC 的实现, 而是会问什么情况下需要 IPC, 使用 IPC 处理过什么业务场景等.
+类型|无连接|可靠|流控制|优先级
+---|-----|----|-----|-----
+普通PIPE|N|Y|Y|N
+命名PIPE|N|Y|Y|N
+消息队列|N|Y|Y|N
+信号量|N|Y|Y|Y
+共享存储|N|Y|Y|Y
+UNIX流SOCKET|N|Y|Y|N
+UNIX数据包SOCKET|Y|Y|N|N
 
-整理中
+Node.js 中的 IPC 通信是由 libuv 通过管道技术实现的,  在 windows 下由命名管道（named pipe）实现也就是上表中的最后第二个,  *nix 系统则采用 UDS (Unix Domain Socket) 实现.
+
+普通的 socket 是为网络通讯设计的, 而网络本身是不可靠的, 而为 IPC 设计的 socket 则不然, 因为默认本地的网络环境是可靠的, 所以可以简化大量不必要的 encode/decode 以及计算校验等, 得到效率更高的 UDS 通信.
+
+如果了解 Node.js 的 IPC 的话, 可以问个比较有意思的问题 "在 IPC 通道建立之前, 父进程与子进程是怎么通信的? 如果没有通信, 那 IPC 是怎么建立的?"
+
+这个问题也挺简单, 只是个思路的问题. 在通过 child_process 简历子进程的时候, 是可以指定子进程的 env (环境变量) 的. 所以 Node.js 在启动子进程的时候, 主进程先建立 IPC 频道, 然后将 IPC 频道的 fd (文件描述符) 通过环境变量 (`NODE_CHANNEL_FD`) 的方式传递给子进程, 然后子进程通过 fd 连上 IPC 与父进程建立连接.
+
+最后于进程间通信 (IPC) 的问题, 一般不会直接问 IPC 的实现, 而是会问什么情况下需要 IPC, 以及使用 IPC 处理过什么业务场景等.
+
 
 ## 守护进程
 
 最后的守护进程, 是服务端方面一个很基础的概念了. 很多人可能只知道通过 pm2 之类的工具可以将进程以守护进程的方式启动, 却不了解什么是守护进程, 为什么要用守护进程. 对于水平好的同学, 我们是希望能了解守护进程的实现的.
 
-守护进程是不依赖终端（tty）的进程，不会因为用户退出终端而停止运行的进程。
-
-普通的进程，在用户退出终端之后就会直接关闭。通过 & 启动到后台的进程，之后会由于会话（session组）被回收而终止进程。
+普通的进程, 在用户退出终端之后就会直接关闭。通过 `&` 启动到后台的进程, 之后会由于会话（session组）被回收而终止进程。守护进程是不依赖终端（tty）的进程, 不会因为用户退出终端而停止运行的进程。
 
 ```c
-// 守护进程初始化函数
+// 守护进程实现 (C语言版本)
 void init_daemon()
 {
     pid_t pid;

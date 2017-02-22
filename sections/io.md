@@ -1,12 +1,12 @@
 # IO
 
-* `[Doc]` Stream (流)
-* `[Doc]` Buffer
-* `[Doc]` String Decoder (字符串解码)
-* `[Doc]` Console (控制台)
-* `[Doc]` File System (文件系统)
-* `[Doc]` Readline
-* `[Doc]` REPL
+* [`[Doc]` Buffer](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#buffer)
+* [`[Doc]` String Decoder (字符串解码)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#string-decoder)
+* [`[Doc]` Stream (流)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#stream)
+* [`[Doc]` Console (控制台)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
+* [`[Doc]` File System (文件系统)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#file)
+* [`[Doc]` Readline](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
+* [`[Doc]` REPL](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#repl)
 
 # 简述
 
@@ -14,7 +14,7 @@ Node.js 是以 IO 密集型业务著称. 那么问题来了, 你真的了解什�
 
 ## Buffer
 
-Buffer 是 Node.js 中用于处理二进制数据的类, 其中与 IO 相关的操作 (网络/文件等) 均基于 Buffer. Buffer 类的实例非常类似整数数组, 但其大小是固定不变的, 并且其内存在 V8 堆栈外分配原始内存空间. Buffer 类的实例创建之后, 其所占用的内存大小就不能再进行调整.
+Buffer 是 Node.js 中用于处理二进制数据的类, 其中与 IO 相关的操作 (网络/文件等) 均基于 Buffer. Buffer 类的实例非常类似整数数组, ***但其大小是固定不变的***, 并且其内存在 V8 堆栈外分配原始内存空间. Buffer 类的实例创建之后, 其所占用的内存大小就不能再进行调整.
 
 在 Node.js v6.x 之后 `new Buffer()` 接口开始被废弃, 理由是参数类型不同会返回不同类型的 Buffer 对象, 所以当开发者没有正确校验参数或没有正确初始化 Buffer 对象的内容时, 以及不了解的情况下初始化  就会在不经意间向代码中引入安全性和可靠性问题.
 

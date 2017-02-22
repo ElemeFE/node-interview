@@ -3,6 +3,9 @@
 * [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
 * [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)
 * [`[Doc]` VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
+* [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#模块机制)
+* [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#热更新)
+* [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#上下文)
 
 ## 常见问题
 

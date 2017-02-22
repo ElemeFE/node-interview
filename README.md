@@ -101,13 +101,13 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* Buffer 一般用于处理什么数据? 其长度能否动态变化?
+* Buffer 一般用于处理什么数据? 其长度能否动态变化? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#buffer)
 * Stream 的 highWaterMark 与 drain 事件是什么? 二者之间的关系是? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#缓冲区)
 * Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
 * 什么是文件描述符? 输入流/输出流/错误流是什么?
 * console.log 是同步还是异步? 如何实现一个 console.log? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
 * 如何同步的获取用户的输入? 
-* Readline 是如何实现的? (有思路即可) [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#Readline)
+* Readline 是如何实现的? (有思路即可) [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)</font>
 

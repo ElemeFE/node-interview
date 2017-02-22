@@ -1,19 +1,10 @@
 # 进程
 
-* `[Doc]` Process (进程)
-* `[Doc]` Child Processes (子进程)
-* `[Doc]` Cluster (集群)
-* `[Basic]` 进程间通信
-* `[Basic]` 守护进程
-
-> <a name="q-cwd"></a> 进程的当前工作目录是什么? 有什么作用?
-
-当前进程启动的目录, 通过 process.cwd() 获取, 通常是命令行启动的时候所在的目录 (也可以在启动时指定), 文件操作等使用相对路径的时候会相对当前工作目录来获取文件.
-
-> <a name="q-child"></a> 父进程或子进程的死亡是否会影响对方? 什么是僵死进程?
-
-子进程死亡不会影响父进程, 不过 node 中父进程会收到子进程死亡的信号. 反之父进程死亡, 子进程也会跟着死亡, 如果子进程没有随之终止而继续存在的状态, 被称作僵死进程.
-
+* [`[Doc]` Process (进程)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#process)
+* [`[Doc]` Child Processes (子进程)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#child-process)
+* [`[Doc]` Cluster (集群)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#cluster)
+* [`[Basic]` 进程间通信](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#进程间通信)
+* [`[Basic]` 守护进程](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
 
 ## 简述
 
@@ -89,7 +80,11 @@ function test() {
 
 你可以通过[设置环境变量](http://cn.bing.com/search?q=linux+%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)来指定配置, 然后通过 `process.env` 来获取配置项. 另外也可以通过读取定义好的配置文件来获取, 在这方面有很多不错的库例如 `dotenv`, `node-config` 等, 而在使用这些库来加载配置文件的时候, 通常都会碰到一个当前工作目录的问题.
 
-通过 `process.cwd()` 获取当前目录 (current working directory), 一些获取配置的第三方模块就是通过你的当前目录来找配置文件的. 所以如果你错误的目录启动脚本, 可能没法得到正确的结果. 在程序中可以通过 `process.chdir()` 来改变当前的工作目录.
+> <a name="q-cwd"></a> 进程的当前工作目录是什么? 有什么作用?
+
+当前进程启动的目录, 通过 process.cwd() 获取当前工作目录 (current working directory), 通常是命令行启动的时候所在的目录 (也可以在启动时指定), 文件操作等使用相对路径的时候会相对当前工作目录来获取文件.
+
+一些获取配置的第三方模块就是通过你的当前目录来找配置文件的. 所以如果你错误的目录启动脚本, 可能没法得到正确的结果. 在程序中可以通过 `process.chdir()` 来改变当前的工作目录.
 
 ### 标准流
 
@@ -104,6 +99,8 @@ function test() {
 ## Child Process
 
 子进程 (Child Process) 是进程中一个重要的概念. 你可以通过 Node.js 的 `child_process` 模块来执行可执行文件, 调用命令行命令, 比如其他语言的程序等. 也可以通过该模块来将 .js 代码以子进程的方式启动. 比较有名的网易的分布式架构 [pomelo](https://github.com/NetEase/pomelo) 就是基于该模块 (而不是 `cluster`) 来实现多进程分布式架构的.
+
+> <a name="q-fork"></a> child_process.fork 与 POSIX 的 fork 有什么区别?
 
 Node.js 的 `child_process.fork()` 不像 POSIX [fork(2)](http://man7.org/linux/man-pages/man2/fork.2.html) 系统调用, 不会拷贝当前父进程. 这里对于其他语言转过的同学可能比较误导, 可以作为一个比较偏的面试题.
 
@@ -123,6 +120,9 @@ Node.js 的 `child_process.fork()` 不像 POSIX [fork(2)](http://man7.org/linux/
 
 常见会问的面试题, 如 `child.kill` 与 `child.send` 的区别. 二者一个是基于信号系统, 一个是基于 IPC.
 
+> <a name="q-child"></a> 父进程或子进程的死亡是否会影响对方? 什么是僵死进程?
+
+子进程死亡不会影响父进程, 不过 node 中父进程会收到子进程死亡的信号. 反之父进程死亡, 子进程也会跟着死亡, 如果子进程没有随之终止而继续存在的状态, 被称作僵死进程.
 
 ## Cluster
 

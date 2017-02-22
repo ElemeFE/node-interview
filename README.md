@@ -85,7 +85,8 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 * 进程的当前工作目录是什么? 有什么作用? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-cwd)
 * child_process.fork 与 POSIX 的 fork 有什么区别? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-fork)
-* 父进程或子进程的死亡是否会影响对方? 什么是僵死进程? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
+* 父进程或子进程的死亡是否会影响对方? 什么是孤儿进程? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
+* cluster 是如何保证负载均衡的? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#how-it-works)
 * 什么是守护进程? 如何实现守护进程? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
 
 [阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md)

@@ -277,7 +277,23 @@ int printf(FILE *stream, 要打印的内容)
 
 当你使用 ssh 在远程服务器上运行一个命令的时候, 在服务器上的命令输出虽然也是写入到服务器上 shell 的 stdout, 但是这个远程的 shell 是从 sshd 服务上 fork 出来的, 其 stdout 是继承自 sshd 的一个 fd, 这个 fd 其实是个 socket, 所以最终其实是写入到了一个 socket 中, 通过这个 socket 传输你本地的计算机上的 shell 的 stdout.
 
-另外 `console.error` 则是将数据写入到错误流中 (`process.stderr`).
+如果你理解了上述情况, 那么你也就能理解为什么守护进程需要关闭 stdio, 如果切到后台的守护进程没有关闭 stdio 的话, 那么你在用 shell 操作的过程中, 屏幕上会莫名其妙的多出来一些输出. 此处对应[守护进程](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)的 C 实现中的这一段:
+
+```c
+for (; i < getdtablesize(); ++i) {
+   close(i);  // 关闭打开的 fd
+}
+```
+
+Linux/unix 的 fd 都被设计为整型数字, 从 0 开始. 你可以尝试运行如下代码查看.
+
+```
+console.log(process.stdin.fd); // 0
+console.log(process.stdout.fd); // 1
+console.log(process.stderr.fd); // 2
+```
+
+在上一节中的 [在 IPC 通道建立之前, 父进程与子进程是怎么通信的? 如果没有通信, 那 IPC 是怎么建立的?](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child) 中使用环境变量传递 fd 的方法, 这么看起来就很直白了, 因为传递 fd 其实是直接传递了一个整型数字.
 
 ### 如何同步的获取用户的输入?
 

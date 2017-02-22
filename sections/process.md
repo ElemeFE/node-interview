@@ -62,13 +62,19 @@
    └───────────────────────┘
 ```
 
-`process.nextTick` 并不属于 Event loop 中的某一个阶段, 而是在 Event loop 的每一个阶段结束后, 直接执行 `nextTickQueue` 中插入的 "Tick", 并且直到整个 Queue 处理完. 所以面试时又有可以问的问题了, 递归调用 process.nextTick 会怎么样?
-
-![](http://imgcdn.thecover.cn/FguJbLPxBE8-xlpM9TgO-Ed0OqFx?imageMogr2/quality/80/ignore-error/1)
+`process.nextTick` 并不属于 Event loop 中的某一个阶段, 而是在 Event loop 的每一个阶段结束后, 直接执行 `nextTickQueue` 中插入的 "Tick", 并且直到整个 Queue 处理完. 所以面试时又有可以问的问题了, 递归调用 process.nextTick 会怎么样? (doge
 
 ```javascript
 function test() { 
   process.nextTick(() => test());
+}
+```
+
+这种情况与以下情况, 有什么区别? 为什么?
+
+```javascript
+function test() { 
+  setTimeout(() => test(), 0);
 }
 ```
 
@@ -120,9 +126,9 @@ Node.js 的 `child_process.fork()` 不像 POSIX [fork(2)](http://man7.org/linux/
 
 常见会问的面试题, 如 `child.kill` 与 `child.send` 的区别. 二者一个是基于信号系统, 一个是基于 IPC.
 
-> <a name="q-child"></a> 父进程或子进程的死亡是否会影响对方? 什么是僵死进程?
+> <a name="q-child"></a> 父进程或子进程的死亡是否会影响对方? 什么是孤儿进程?
 
-子进程死亡不会影响父进程, 不过 node 中父进程会收到子进程死亡的信号. 反之父进程死亡, 子进程也会跟着死亡, 如果子进程没有随之终止而继续存在的状态, 被称作僵死进程.
+子进程死亡不会影响父进程, 不过 node 中父进程会收到子进程死亡的信号. 反之父进程死亡, 一般情况下子进程也会跟着死亡, 如果子进程需要死亡却没有随之终止而继续存在的状态, 被称作孤儿进程. 另外, 子进程死亡之后资源没有回收的情况被称作僵死进程.
 
 ## Cluster
 
@@ -157,26 +163,17 @@ console.log('hello');                          // | |    都执行了
 
 你可以把父进程执行的部分当做 `a.js`, 子进程执行的部分当做 `b.js`, 你可以把他们想象成是先执行了 `node a.js` 然后 cluster.fork 了几次, 就执行执行了几次 `node b.js`. 而 cluster 模块则是二者之间的一个桥梁, 你可以通过 cluster 提供的方法, 让其二者之间进行沟通交流.
 
-### How It Works (翻译/整理中)
+### How It Works
 
-The worker processes are spawned using the child_process.fork() method, so that they can communicate with the parent via IPC and pass server handles back and forth.
+worker 进程是由 child_process.fork() 方法创建的, 所以可以通过 IPC 在主进程和子进程之间相互传递服务器句柄. 
 
-The cluster module supports two methods of distributing incoming connections.
+cluster 模块提供了两种分发连接的方式. 
 
-The first one (and the default one on all platforms except Windows), is the round-robin approach, where the master process listens on a port, accepts new connections and distributes them across the workers in a round-robin fashion, with some built-in smarts to avoid overloading a worker process.
+第一种方式 (默认方式, 不适用于 windows), 通过轮询（round-robin）的方式分发连接. 主进程监听端口, 接收到新连接之后, 通过内建的算法来决定将 accept 到的客户端 socket fd 传递给指定的 worker 处理. 使用该方式时, 每个连接由哪个 worker 来处理, 完全由 master 的 round-robin 算法决定.
 
-The second approach is where the master process creates the listen socket and sends it to interested workers. The workers then accept incoming connections directly.
+第二种方式是由主进程创建 socket 监听端口后, 将 socket 的句柄直接分发给相应的 workder, 然后当连接进来时, 就直接由相应的 worker 来 accept 连接并处理.
 
-The second approach should, in theory, give the best performance. In practice however, distribution tends to be very unbalanced due to operating system scheduler vagaries. Loads have been observed where over 70% of all connections ended up in just two processes, out of a total of eight.
-
-Because server.listen() hands off most of the work to the master process, there are three cases where the behavior between a normal Node.js process and a cluster worker differs:
-
-* server.listen({fd: 7}) Because the message is passed to the master, file descriptor 7 in the parent will be listened on, and the handle passed to the worker, rather than listening to the worker's idea of what the number 7 file descriptor references.
-* server.listen(handle) Listening on handles explicitly will cause the worker to use the supplied handle, rather than talk to the master process. If the worker already has the handle, then it's presumed that you know what you are doing.
-* server.listen(0) Normally, this will cause servers to listen on a random port. However, in a cluster, each worker will receive the same "random" port each time they do listen(0). In essence, the port is random the first time, but predictable thereafter. If you want to listen on a unique port, generate a port number based on the cluster worker ID.
-* There is no routing logic in Node.js, or in your program, and no shared state between the workers. Therefore, it is important to design your program such that it does not rely too heavily on in-memory data objects for things like sessions and login.
-
-Because workers are all separate processes, they can be killed or re-spawned depending on your program's needs, without affecting other workers. As long as there are some workers still alive, the server will continue to accept connections. If no workers are alive, existing connections will be dropped and new connections will be refused. Node.js does not automatically manage the number of workers for you, however. It is your responsibility to manage the worker pool for your application's needs.
+使用第二种方式时, 多个 worker 之间会存在竞争关系, 产生一个老生常谈的 "惊群效应" 从而导致效率变低的问题. 该问题常见于 Apache. 并且各自竞争的情况下无法控制一个新的连接由哪个进程来处理, 从而导致各 worker 进程之间的负载不均衡, 比如 70% 的连接终止于八个进程中的两个.
 
 ## 进程间通信
 
@@ -196,7 +193,9 @@ Node.js 中的 IPC 通信是由 libuv 通过管道技术实现的,  在 windows 
 
 普通的 socket 是为网络通讯设计的, 而网络本身是不可靠的, 而为 IPC 设计的 socket 则不然, 因为默认本地的网络环境是可靠的, 所以可以简化大量不必要的 encode/decode 以及计算校验等, 得到效率更高的 UDS 通信.
 
-如果了解 Node.js 的 IPC 的话, 可以问个比较有意思的问题 "在 IPC 通道建立之前, 父进程与子进程是怎么通信的? 如果没有通信, 那 IPC 是怎么建立的?"
+如果了解 Node.js 的 IPC 的话, 可以问个比较有意思的问题 
+
+> <a name="q-ipc-fd"></a> 在 IPC 通道建立之前, 父进程与子进程是怎么通信的? 如果没有通信, 那 IPC 是怎么建立的?
 
 这个问题也挺简单, 只是个思路的问题. 在通过 child_process 简历子进程的时候, 是可以指定子进程的 env (环境变量) 的. 所以 Node.js 在启动子进程的时候, 主进程先建立 IPC 频道, 然后将 IPC 频道的 fd (文件描述符) 通过环境变量 (`NODE_CHANNEL_FD`) 的方式传递给子进程, 然后子进程通过 fd 连上 IPC 与父进程建立连接.
 
@@ -207,7 +206,7 @@ Node.js 中的 IPC 通信是由 libuv 通过管道技术实现的,  在 windows 
 
 最后的守护进程, 是服务端方面一个很基础的概念了. 很多人可能只知道通过 pm2 之类的工具可以将进程以守护进程的方式启动, 却不了解什么是守护进程, 为什么要用守护进程. 对于水平好的同学, 我们是希望能了解守护进程的实现的.
 
-普通的进程, 在用户退出终端之后就会直接关闭。通过 `&` 启动到后台的进程, 之后会由于会话（session组）被回收而终止进程。守护进程是不依赖终端（tty）的进程, 不会因为用户退出终端而停止运行的进程。
+普通的进程, 在用户退出终端之后就会直接关闭. 通过 `&` 启动到后台的进程, 之后会由于会话（session组）被回收而终止进程. 守护进程是不依赖终端（tty）的进程, 不会因为用户退出终端而停止运行的进程.
 
 ```c
 // 守护进程实现 (C语言版本)
@@ -225,13 +224,13 @@ void init_daemon()
         exit(0);        // 父进程退出
     }
 
-    setsid();           // 子进程开启新会话，并成为会话首进程和组长进程
+    setsid();           // 子进程开启新会话, 并成为会话首进程和组长进程
     if ((pid = fork()) == -1) {
         printf("Fork error !\n");
         exit(-1);
     }
     if (pid != 0) {
-        exit(0);        // 结束第一子进程，第二子进程不再是会话首进程
+        exit(0);        // 结束第一子进程, 第二子进程不再是会话首进程
                         // 避免当前会话组重新与tty连接
     }
     chdir("/tmp");      // 改变工作目录

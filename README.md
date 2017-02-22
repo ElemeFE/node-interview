@@ -81,19 +81,19 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* [进程的当前工作目录是什么? 有什么作用?](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-cwd)
-* [child_process.fork 与 POSIX 的 fork 有什么区别?](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-fork)
-* [父进程或子进程的死亡是否会影响对方? 什么是僵死进程?](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
-* [什么是守护进程? 如何实现守护进程?](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
+* 进程的当前工作目录是什么? 有什么作用? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-cwd)
+* child_process.fork 与 POSIX 的 fork 有什么区别? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-fork)
+* 父进程或子进程的死亡是否会影响对方? 什么是僵死进程? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
+* 什么是守护进程? 如何实现守护进程? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md)</font>
 
 
-## IO
+## [IO](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)
 
-* `[Doc]` Stream (流)
 * `[Doc]` Buffer
 * `[Doc]` String Decoder (字符串解码)
+* `[Doc]` Stream (流)
 * `[Doc]` Console (控制台)
 * `[Doc]` File System (文件系统)
 * `[Doc]` Readline
@@ -101,12 +101,14 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* Stream 的 pipe 是如何使用? 在 pipe 的过程中数据是引用传递还是拷贝传递?
-* 什么是文件句柄? 输入流/输出流/错误流是什么?
-* console.log 是同步还是异步? 如何实现一个 console.log?
+* Buffer 一般用于处理什么数据? 其长度能否动态变化?
+* Stream 的 highWaterMark 与 drain 事件是什么? 二者之间的关系是? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#缓冲区)
+* Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
+* 什么是文件描述符? 输入流/输出流/错误流是什么?
+* console.log 是同步还是异步? 如何实现一个 console.log? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
 * Readline 是如何实现的? 如何实现一个同步的 Readline?
 
-`更多整理中`
+<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)</font>
 
 ## Network
 

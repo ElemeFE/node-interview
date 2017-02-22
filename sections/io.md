@@ -28,7 +28,7 @@ Buffer.allocUnsafe()|创建一个未初始化的 Buffer 对象
 
 Node.js 的 Buffer 在 ES6 增加了 TypedArray 类型之后, 修改了原来的 Buffer 的实现, 选择基于 TypedArray 中 Uint8Array 来实现, 从而提升了一波性能.
 
-使用上, 你需要了解如下例子:
+使用上, 你需要了解如下情况:
 
 ```javascript
 const arr = new Uint16Array(2);
@@ -147,7 +147,7 @@ int copy(const char *src, const char *dest)
 
 ### 缓冲区
 
-Node.js 中 stream 的缓冲区, 以开头的 C语言 拷贝文件的代码为模板讨论, (抛开异步的区别看) 则是从 <font color="blue">src</font> 中读出数据到 <font color="blue">buf</font> 中后, 并没有直接写入 <font color="blue">dest</font> 中, 而是先放在一个比较大的缓冲区中, 等待写入(消费) <font color="blue">dest</font> 中. 即, 在缓冲区的帮助下可以使读与写的过程分离.
+Node.js 中 stream 的缓冲区, 以开头的 C语言 拷贝文件的代码为模板讨论, (抛开异步的区别看) 则是从 `src` 中读出数据到 `buf` 中后, 并没有直接写入 `dest` 中, 而是先放在一个比较大的缓冲区中, 等待写入(消费) `dest` 中. 即, 在缓冲区的帮助下可以使读与写的过程分离.
 
 Readable 和 Writable 流都会将数据储存在内部的缓冲区中. 缓冲区可以分别通过 `writable._writableState.getBuffer()` 和 `readable._readableState.buffer` 来访问. 缓冲区的大小, 由构造 stream 时候的 `highWaterMark` 标志指定可容纳的 byte 大小, 对于 `objectMode` 的 stream, 该标志表示可以容纳的对象个数.
 
@@ -244,11 +244,95 @@ Node.js 封装了标准 POSIX 文件 I/O 操作的集合. 通过 require('fs') �
 
 ### stdio
 
-标准的 IO 流, 即输入流 (stdin), 输出流 (stdout), 错误流 (stderr).
+stdio (standard input output) 标准的输入输出流, 即输入流 (stdin), 输出流 (stdout), 错误流 (stderr) 三者. 在 Node.js 中分别对应 `process.stdin` (Readable), `process.stdout` (Writable) 以及 `process.stderr` (Writable) 三个 stream.
 
+输出函数是每个人在学习任何一门编程语言时所需要学到的第一个函数. 例如 C语言的 `printf("hello, world!");` python/ruby 的 `print 'hello, world!'` 以及 Javascript 中的 `console.log('hello, world!');`
 
+以 C语言的伪代码来看的话, 这类输出函数的实现思路如下:
 
-整理中
+```c
+int printf(FILE *stream, 要打印的内容)
+{
+  // ...
+
+  // 1. 申请一个临时内存空间
+  char *s = malloc(4096);
+
+  // 2. 处理好要打印的的内容, 其值存储在 s 中
+  //      ...
+
+  // 3. 将 s 上的内容写入到 stream 中
+  fwrite(s, stream);
+
+  // 4. 释放临时空间
+  free(s);
+
+  // ...
+}
+```
+
+我们需要了解的是第 3 步, 其中的 stream 则是指 stdout (输出流). 实际上在 shell 上运行一个应用程序的时候, shell 做的第一个操作是 fork 当前 shell 的进程 (所以, 如果你通过 ps 去查看你从 shell 上启动的进程, 其父进程 pid 就是当前 shell 的 pid), 在这个过程中也把 shell 的 stdio 继承给了你当前的应用进程, 所以你在当前进程里面将数据写入到 stdout, 也就是写入到了 shell 的 stdout, 即在当前 shell 上显示了.
+
+输入也是同理, 当前进程继承了 shell 的 stdin, 所以当你从 stdin 中读取数据时, 其实就获取到你在 shell 上输入的数据. (PS: shell 可以是 windows 下的 cmd, powershell, 也可以是 linux 下 bash 或者 zsh 等)
+
+当你使用 ssh 在远程服务器上运行一个命令的时候, 在服务器上的命令输出虽然也是写入到服务器上 shell 的 stdout, 但是这个远程的 shell 是从 sshd 服务上 fork 出来的, 其 stdout 是继承自 sshd 的一个 fd, 这个 fd 其实是个 socket, 所以最终其实是写入到了一个 socket 中, 通过这个 socket 传输你本地的计算机上的 shell 的 stdout.
+
+另外 `console.error` 则是将数据写入到错误流中 (`process.stderr`).
+
+### 如何同步的获取用户的输入?
+
+如果你理解了上述的内容, 那么放到 Node.js 中来看, 获取用户的输入其实就是读取 Node.js 进程中的输入流 (即 process.stdin 这个 stream) 的数据.
+
+而要同步读取, 则是不用异步的 read 接口, 而是用同步的 readSync 接口去读取 stdin 的数据即可实现. 以下来自万能的 stackoverflow:
+
+```javascript
+/*
+ * http://stackoverflow.com/questions/3430939/node-js-readsync-from-stdin
+ * @mklement0
+ */
+var fs = require('fs');
+
+var BUFSIZE = 256;
+var buf = new Buffer(BUFSIZE);
+var bytesRead;
+
+module.exports = function() {
+  var fd = ('win32' === process.platform) ? process.stdin.fd : fs.openSync('/dev/stdin', 'rs');
+  bytesRead = 0;
+
+  try {
+    bytesRead = fs.readSync(fd, buf, 0, BUFSIZE);
+  } catch (e) {
+    if (e.code === 'EAGAIN') { // 'resource temporarily unavailable'
+      // Happens on OS X 10.8.3 (not Windows 7!), if there's no
+      // stdin input - typically when invoking a script without any
+      // input (for interactive stdin input).
+      // If you were to just continue, you'd create a tight loop.
+      console.error('ERROR: interactive stdin input not supported.');
+      process.exit(1);
+    } else if (e.code === 'EOF') {
+      // Happens on Windows 7, but not OS X 10.8.3:
+      // simply signals the end of *piped* stdin input.
+      return '';
+    }
+    throw e; // unexpected exception
+  }
+
+  if (bytesRead === 0) {
+    // No more stdin input available.
+    // OS X 10.8.3: regardless of input method, this is how the end 
+    //   of input is signaled.
+    // Windows 7: this is how the end of input is signaled for
+    //   *interactive* stdin input.
+    return '';
+  }
+  // Process the chunk read.
+
+  var content = buf.toString(null, 0, bytesRead - 1);
+
+  return content;
+};
+```
 
 ## Readline
 
@@ -268,6 +352,8 @@ rl.on('line', (line) => {
 ```
 
 实现上, realine 在读取 TTY 的数据时, 是通过 `input.on('keypress', onkeypress)` 时发现用户按下了回车键来判断是新的 line 的, 而读取一般的 stream 时, 则是通过缓存数据然后用正则 .test 来判断是否为 new line 的.
+
+PS: 打个广告, 如果在编写脚本时, 不习惯这样异步获取输入, 想要同步获取同步的用户输入可以看一看这个 Node.js 版本类 C语言使用的 [scanf](https://github.com/Lellansin/node-scanf/) 模块 (支持 ts).
 
 ## REPL
 

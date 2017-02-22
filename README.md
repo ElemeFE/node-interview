@@ -2,17 +2,19 @@
 
 # 如何通过饿了么 Node.js 面试
 
-Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过饿了么大前端的面试, 职位是 2~3 年经验的 Node.js 服务端程序员, 如果你对这个职位感兴趣或者想了解一下相关情况，那么欢迎阅读.
+Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过饿了么大前端的面试, 职位是 2~3 年经验的 Node.js 服务端程序员, 如果你对这个职位感兴趣或者学习 Node.js 一些进阶的内容, 那么欢迎阅读.
 
-需要注意的是, 本文针对的并不是零基础的同学, 你需要有一定的 JavaScript/Node 基础, 并且有一定的工作经验.
+需要注意的是, 本文针对的并不是零基础的同学, 你需要有一定的 JavaScript/Node.js 基础, 并且有一定的工作经验. 另外本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分.
 
-如果你觉得大多不了解, 就不用投简历了 <del>(这样两边都节约了时间)</del>, 如果你觉得大都有了解或者<font color="blue">光看大纲都都觉得很简单那么欢迎投递简历至 ElemeFe (fe.job@ele.me)</font>.
+如果你觉得大多不了解, 就不用投简历了 <del>(这样两边都节约了时间)</del>, 如果你觉得大都有了解或者***光看大纲都都觉得很简单那么欢迎投递简历至 ElemeFe (fe.job@ele.me)***.
 
 ### 导读
 
-虽然说目的是要通过面试, 但是本教程并不是简单的把所有面试题列出来, 而<font color="red">主要是将面试中需要确认你是否懂的点列举出来</font>, 并进行一定程度的讨论. 本文将一些常见的问题划分归类, 每类标明涵盖的一些`覆盖点`, 并且列举几个`常见问题`, 通常这些问题都是 2~3 年工作经验需要了解或者面对的. 如果你对某类问题感兴趣, 或者想知道其中列举问题的答案, 可以通过该类下方的 `阅读更多` 查看更多的内容.
+虽然说目的是要通过面试, 但是本教程并不是简单的把所有面试题列出来, 而<font color="red">主要是将面试中需要确认你是否懂的点列举出来</font>, 并进行一定程度的讨论.
 
-大纲列举的并不是很全面, 细节上覆盖率不高, 很多讨论只是点到即止, 就是希望大家带着问题去思考.
+本文将一些常见的问题划分归类, 每类标明涵盖的一些`覆盖点`, 并且列举几个`常见问题`, 通常这些问题都是 2~3 年工作经验需要了解或者面对的. 如果你对某类问题感兴趣, 或者想知道其中列举问题的答案, 可以通过该类下方的 `阅读更多` 查看更多的内容.
+
+整体上大纲列举的并不是很全面, 细节上覆盖率不高, 很多讨论只是点到即止, 希望大家带着问题去思考.
 
 ## [Js 基础问题](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
 
@@ -26,12 +28,12 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-value)
+* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
-* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-const)
-* Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-mem)
+* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-const)
+* Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md#q-mem)
 
-<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)</font>
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
 
 ## [node 基础问题](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
 
@@ -46,11 +48,11 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
-* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
-* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
+* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
+* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
+* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
 
-<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)</font>
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
 
 ## [事件/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)
 
@@ -62,14 +64,14 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* Promise 中 .then 的第二参数与 .catch 有什么区别? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-1)
-* Eventemitter 的 emit 是同步还是异步? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-2)
-* 如何判断接口是否异步? 是否只要有回调函数就是异步? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-3)
-* nextTick, setTimeout 以及 setImmediate 三者有什么区别? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-4)
-* 如何实现一个 sleep 函数? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-5)
-* 如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce) [more](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-6)
+* Promise 中 .then 的第二参数与 .catch 有什么区别? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-1)
+* Eventemitter 的 emit 是同步还是异步? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-2)
+* 如何判断接口是否异步? 是否只要有回调函数就是异步? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-3)
+* nextTick, setTimeout 以及 setImmediate 三者有什么区别? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-4)
+* 如何实现一个 sleep 函数? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-5)
+* 如何实现一个异步的 reduce? (注:不是异步完了之后同步 reduce) [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#q-6)
 
-<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)</font>
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)
 
 ## [进程](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md)
 
@@ -81,12 +83,12 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* 进程的当前工作目录是什么? 有什么作用? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-cwd)
-* child_process.fork 与 POSIX 的 fork 有什么区别? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-fork)
-* 父进程或子进程的死亡是否会影响对方? 什么是僵死进程? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
-* 什么是守护进程? 如何实现守护进程? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
+* 进程的当前工作目录是什么? 有什么作用? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-cwd)
+* child_process.fork 与 POSIX 的 fork 有什么区别? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-fork)
+* 父进程或子进程的死亡是否会影响对方? 什么是僵死进程? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#q-child)
+* 什么是守护进程? 如何实现守护进程? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
 
-<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md)</font>
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md)
 
 
 ## [IO](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)
@@ -101,15 +103,15 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* Buffer 一般用于处理什么数据? 其长度能否动态变化? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#buffer)
-* Stream 的 highWaterMark 与 drain 事件是什么? 二者之间的关系是? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#缓冲区)
-* Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
-* 什么是文件描述符? 输入流/输出流/错误流是什么?
-* console.log 是同步还是异步? 如何实现一个 console.log? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
-* 如何同步的获取用户的输入? 
-* Readline 是如何实现的? (有思路即可) [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
+* Buffer 一般用于处理什么数据? 其长度能否动态变化? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#buffer)
+* Stream 的 highWaterMark 与 drain 事件是什么? 二者之间的关系是? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#缓冲区)
+* Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
+* 什么是文件描述符? 输入流/输出流/错误流是什么? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#file)
+* console.log 是同步还是异步? 如何实现一个 console.log? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
+* 如何同步的获取用户的输入?  [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#如何同步的获取用户的输入)
+* Readline 是如何实现的? (有思路即可) [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
 
-<font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)</font>
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)
 
 ## Network
 

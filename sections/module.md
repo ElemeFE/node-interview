@@ -1,4 +1,4 @@
-# node 基础问题
+# 模块
 
 * [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
 * [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)

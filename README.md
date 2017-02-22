@@ -35,7 +35,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
 
-## [node 基础问题](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
+## [模块](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
 
 > 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
 

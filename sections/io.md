@@ -10,7 +10,7 @@
 
 # 简述
 
-Node.js 是以 IO 密集型业务著称. 那么问题来了, 你真的了解什么叫 IO, 什么又叫 IO 密集型吗?
+Node.js 是以 IO 密集型业务著称. 那么问题来了, 你真的了解什么叫 IO, 什么又叫 IO 密集型业务吗?
 
 ## Buffer
 
@@ -125,37 +125,39 @@ int copy(const char *src, const char *dest)
 }
 ```
 
-应用的场景很简单, 你要拷贝一个 20G 大的文件, 如果你一次性将 20G 的数据读入到内存, 你的内存条可能不够用, 或者严重影响性能. 但是你如果使用一个 1MB 大小的缓存 (buf) 每次读取 1Mb, 然后写入 1Mb, 那么不论这个文件多大都只会占用 1Mb 的内存. 
+应用的场景很简单, 你要拷贝一个 20G 大的文件, 如果你一次性将 20G 的数据读入到内存, 你的内存条可能不够用, 或者严重影响性能. 但是你如果使用一个 1MB 大小的缓存 (buf) 每次读取 1Mb, 然后写入 1Mb, 那么不论这个文件多大都只会占用 1Mb 的内存.
 
 而在 Node.js 中, 原理与上述 C 代码类似, 不过在读写的实现上通过 libuv 与 EventEmitter 加上了异步的特性. 在 linux/unix 中你可以通过 `|` 来感受到流式操作.
 
 ### Stream 的类型
 
+
 类|使用场景|重写方法
---|------|-------
+---|---|---
 [Readable](https://github.com/substack/stream-handbook#readable-streams)|只读|_read
 [Writable](https://github.com/substack/stream-handbook#writable-streams)|只写|_write
 [Duplex](https://github.com/substack/stream-handbook#duplex)|读写|_read, _write
 [Transform](https://github.com/substack/stream-handbook#transform)|操作被写入数据, 然后读出结果|_transform, _flush
 
+
 ### 对象模式
 
-通过 Node API 创建的流, 只能够对字符串或者 buffer 对象进行操作. 但其实流的实现是可以基于其他的 Javascript 类型(除了 null, 它在流中有特殊的含义)的. 这样的流就处在 "对象模式" 中.
-在创建流对象的时候, 可以通过提供 objectMode 参数来生成对象模式的流. 试图将现有的流转换为对象模式是不安全的.
+通过 Node API 创建的流, 只能够对字符串或者 buffer 对象进行操作. 但其实流的实现是可以基于其他的 Javascript 类型(除了 null, 它在流中有特殊的含义)的. 这样的流就处在 "对象模式(objectMode)" 中.
+在创建流对象的时候, 可以通过提供 `objectMode` 参数来生成对象模式的流. 试图将现有的流转换为对象模式是不安全的.
 
 ### 缓冲区
 
-Node.js 中 stream 的缓冲区, 以开头的 C语言 拷贝文件的代码为模板讨论, (抛开异步的区别看) 则是从 src 中读出数据到 buf 中后, 并没有直接写入 dest 中, 而是先放在一个比较大的缓冲区中, 等待写入(消费) dest 中. 即, 在缓冲区的帮助下可以使读与写的过程分离.
+Node.js 中 stream 的缓冲区, 以开头的 C语言 拷贝文件的代码为模板讨论, (抛开异步的区别看) 则是从 <font color="blue">src</font> 中读出数据到 <font color="blue">buf</font> 中后, 并没有直接写入 <font color="blue">dest</font> 中, 而是先放在一个比较大的缓冲区中, 等待写入(消费) <font color="blue">dest</font> 中. 即, 在缓冲区的帮助下可以使读与写的过程分离.
 
-Readable 和 Writable 流都会将数据储存在内部的缓冲区中. 缓冲区可以分别通过 writable._writableState.getBuffer() 和 readable._readableState.buffer 来访问. 缓冲区的大小, 由构造 stream 时候的 highWaterMark 标志指定可容纳的 byte 大小, 对于 objectMode 的 stream, 该标志表示可以容纳的对象个数.
+Readable 和 Writable 流都会将数据储存在内部的缓冲区中. 缓冲区可以分别通过 `writable._writableState.getBuffer()` 和 `readable._readableState.buffer` 来访问. 缓冲区的大小, 由构造 stream 时候的 `highWaterMark` 标志指定可容纳的 byte 大小, 对于 `objectMode` 的 stream, 该标志表示可以容纳的对象个数.
 
 #### 可读流
 
-当一个可读实例调用 stream.push() 方法的时候, 数据将会被推入缓冲区. 如果数据没有被消费, 即调用 stream.read() 方法读取的话, 那么数据会一直留在缓冲队列中. 当缓冲区中的数据到达 highWaterMark 指定的阈值, 可读流将停止从底层汲取数据, 直到当前缓冲的报备成功消耗为止.
+当一个可读实例调用 `stream.push()` 方法的时候, 数据将会被推入缓冲区. 如果数据没有被消费, 即调用 `stream.read()` 方法读取的话, 那么数据会一直留在缓冲队列中. 当缓冲区中的数据到达 `highWaterMark` 指定的阈值, 可读流将停止从底层汲取数据, 直到当前缓冲的报备成功消耗为止.
 
 #### 可写流
 
-在一个在可写实例上不停地调用 writable.write(chunk) 的时候数据会被写入可写流的缓冲区. 如果当前缓冲区的缓冲的数据量低于 highWaterMark 设定的值, 调用 writable.write() 方法会返回 true (表示数据已经写入缓冲区), 否则当缓冲的数据量达到了阈值, 数据无法写入缓冲区 write 方法会返回 false, 直到 drain 时间触发之后才能继续调用 write 写入.
+在一个在可写实例上不停地调用 writable.write(chunk) 的时候数据会被写入可写流的缓冲区. 如果当前缓冲区的缓冲的数据量低于 `highWaterMark` 设定的值, 调用 writable.write() 方法会返回 true (表示数据已经写入缓冲区), 否则当缓冲的数据量达到了阈值, 数据无法写入缓冲区 write 方法会返回 false, 直到 drain 事件触发之后才能继续调用 write 写入.
 
 ```javascript
 // Write the data to the supplied writable stream one million times.
@@ -191,9 +193,9 @@ Duplex 流和 Transform 流都是同时可读写的, 他们会在内部维持两
 
 ### pipe
 
-stream 的 .pipe(), 将一个可写流附到可读流上, 同时将可写流切换到流模式, 并把所有数据推给可写流. 在 pipe 传递数据的过程中, objectMode 是传递引用, 非 objectMode 则是拷贝一份数据传递下去.
+stream 的 `.pipe()`, 将一个可写流附到可读流上, 同时将可写流切换到流模式, 并把所有数据推给可写流. 在 pipe 传递数据的过程中, `objectMode` 是传递引用, 非 `objectMode` 则是拷贝一份数据传递下去.
 
-pipe 方法最主要的目的就是将数据的流动缓冲到一个可接受的水平, 不让不同速度的数据源之间的差异导致内存被占满. 关于 pipe 的实现请看 David Cai 的 [通过源码解析 Node.js 中导流（pipe）的实现](https://cnodejs.org/topic/56ba030271204e03637a3870)
+pipe 方法最主要的目的就是将数据的流动缓冲到一个可接受的水平, 不让不同速度的数据源之间的差异导致内存被占满. 关于 pipe 的实现参见 David Cai 的 [通过源码解析 Node.js 中导流（pipe）的实现](https://cnodejs.org/topic/56ba030271204e03637a3870)
 
 ## Console
 
@@ -220,9 +222,8 @@ print('hello world');
 
 ### console.log.bind(console) 问题
 
-[console.js 源代码](https://github.com/nodejs/node/blob/v6.x/lib/console.js#L34)
-
 ```javascript
+// 源码出处 https://github.com/nodejs/node/blob/v6.x/lib/console.js
 function Console(stdout, stderr) {
   // ... init ...
 
@@ -237,7 +238,7 @@ function Console(stdout, stderr) {
 
 ## File
 
-“一切皆是文件”是 Unix/Linux 的基本哲学之一, 不仅普通的文件、目录、字符设备、块设备、套接字等在 Unix/Linux 中都是以文件被对待, 也就是说这些资源的操作对象均为 fd (文件描述符), 都可以通过同一套 system call 来读写. 在 linux 中你可以通过 ulimit 来管理 fd 资源.
+“一切皆是文件”是 Unix/Linux 的基本哲学之一, 不仅普通的文件、目录、字符设备、块设备、套接字等在 Unix/Linux 中都是以文件被对待, 也就是说这些资源的操作对象均为 fd (文件描述符), 都可以通过同一套 system call 来读写. 在 linux 中你可以通过 ulimit 来对 fd 资源进行一定程度的管理限制.
 
 Node.js 封装了标准 POSIX 文件 I/O 操作的集合. 通过 require('fs') 可以加载该模块. 该模块中的所有方法都有异步执行和同步执行两个版本. 你可以通过 fs.open 获得一个文件的文件描述符.
 
@@ -251,8 +252,25 @@ Node.js 封装了标准 POSIX 文件 I/O 操作的集合. 通过 require('fs') �
 
 ## Readline
 
-整理中
+`readline` 模块提供了一个用于从 Readble 的 stream (例如 process.stdin) 中一次读取一行的接口. 当然你也可以用来读取文件或者 net, http 的 stream, 比如:
+
+```javascript
+const readline = require('readline');
+const fs = require('fs');
+
+const rl = readline.createInterface({
+  input: fs.createReadStream('sample.txt')
+});
+
+rl.on('line', (line) => {
+  console.log(`Line from file: ${line}`);
+});
+```
+
+实现上, realine 在读取 TTY 的数据时, 是通过 `input.on('keypress', onkeypress)` 时发现用户按下了回车键来判断是新的 line 的, 而读取一般的 stream 时, 则是通过缓存数据然后用正则 .test 来判断是否为 new line 的.
 
 ## REPL
+
+Read-Eval-Print-Loop (REPL)
 
 整理中

@@ -91,13 +91,13 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ## [IO](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)
 
-* `[Doc]` Buffer
-* `[Doc]` String Decoder (字符串解码)
-* `[Doc]` Stream (流)
-* `[Doc]` Console (控制台)
-* `[Doc]` File System (文件系统)
-* `[Doc]` Readline
-* `[Doc]` REPL
+* [`[Doc]` Buffer](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#buffer)
+* [`[Doc]` String Decoder (字符串解码)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#string-decoder)
+* [`[Doc]` Stream (流)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#stream)
+* [`[Doc]` Console (控制台)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
+* [`[Doc]` File System (文件系统)](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#file)
+* [`[Doc]` Readline](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
+* [`[Doc]` REPL](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#repl)
 
 ### 常见问题
 
@@ -106,7 +106,8 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
 * 什么是文件描述符? 输入流/输出流/错误流是什么?
 * console.log 是同步还是异步? 如何实现一个 console.log? [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
-* Readline 是如何实现的? 如何实现一个同步的 Readline?
+* 如何同步的获取用户的输入? 
+* Readline 是如何实现的? (有思路即可) [more](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#Readline)
 
 <font color="blue">[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)</font>
 

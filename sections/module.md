@@ -1,21 +1,11 @@
 # 模块
 
-* [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
-* [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)
-* [`[Doc]` VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
 * [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#模块机制)
 * [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#热更新)
 * [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#上下文)
 
 ## 常见问题
 
-> <a name="q-loop"></a> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
-
-不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. (注<a href="#mark-1">①</a>)
-
-> <a name="q-global"></a> 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
-
-能. (注<a href="#mark-2">②</a>)
 
 > <a name="q-hot"></a> 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题?
 
@@ -52,7 +42,9 @@ function require(...) {
 }
 ```
 
-每个 `.js` 能独立一个环境只是因为 node 帮你在外层包了一圈自执行, 所以你使用 `t = 111` 定义全局变量在其他地方当然能拿到. <a name="mark-2">②</a>情况如下:
+> <a name="q-global"></a> 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来?
+
+① 每个 `.js` 能独立一个环境只是因为 node 帮你在外层包了一圈自执行, 所以你使用 `t = 111` 定义全局变量在其他地方当然能拿到. 情况如下:
 
 ```javascript
 
@@ -68,7 +60,9 @@ function require(...) {
 })();
 ```
 
-<a name="mark-1">①</a>然后互相引用的问题中, 模块在导出的只是 `var module = { exports: {} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完 exports 就是 `{}` 在 b.js 的开头拿到的就是 `{}` 而已.
+> <a name="q-loop"></a> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
+
+② 不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. 模块在导出的只是 `var module = { exports: {} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完 exports 就是 `{}` 在 b.js 的开头拿到的就是 `{}` 而已.
 
 另外还有非常基础和常见的问题, 比如 module.exports 和 exports 的区别这里也能一并解决了 exports 只是 module.exports 的一个引用. 没看懂可以在细看我以前发的[帖子](https://cnodejs.org/topic/5734017ac3e4ef7657ab1215).
 
@@ -88,7 +82,7 @@ function require(...) {
 
 ### 上下文
 
-如果你已经了解注释 ①② 那么你也应该了解, 对于 Node.js 而言, 正常情况下只有一个上下文, 甚至于内置的很多方面例如 `require` 的实现只是在启动的时候运行了[内置的函数](https://github.com/nodejs/node/tree/master/lib). 
+如果你已经了解 ①② 那么你也应该了解, 对于 Node.js 而言, 正常情况下只有一个上下文, 甚至于内置的很多方面例如 `require` 的实现只是在启动的时候运行了[内置的函数](https://github.com/nodejs/node/tree/master/lib). 
 
 每个单独的 `.js` 文件并不意味着单独的上下文, 在某个 `.js` 文件中污染了全局的作用域一样能影响到其他的地方.
 

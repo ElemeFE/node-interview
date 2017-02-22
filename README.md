@@ -35,24 +35,21 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
 
-## [模块](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
+## [模块](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md)
 
 > 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
 
-* [`[Doc]` Modules (模块)](https://nodejs.org/dist/latest-v6.x/docs/api/modules.html)
-* [`[Doc]` Globals (全局变量)](https://nodejs.org/dist/latest-v6.x/docs/api/globals.html)
-* [`[Doc]` VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
-* [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#模块机制)
-* [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#热更新)
-* [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#上下文)
+* [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#模块机制)
+* [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#热更新)
+* [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#上下文)
 
 ### 常见问题
 
-* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-loop)
-* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-global)
-* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md#q-hot)
+* a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#q-loop)
+* 如果 a.js require 了 b.js, 那么在 b 中定义全局变量 `t = 111` 能否在 a 中直接打印出来? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#q-global)
+* 如何在不重启 node 进程的情况下热更新一个 js/json 文件? 这个问题本身是否有问题? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#q-hot)
 
-[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/node-basic.md)
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md)
 
 ## [事件/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md)
 

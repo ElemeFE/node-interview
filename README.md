@@ -2,11 +2,11 @@
 
 # 如何通过饿了么 Node.js 面试
 
-Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过饿了么大前端的面试, 职位是 2~3 年经验的 Node.js 服务端程序员, 如果你对这个职位感兴趣或者学习 Node.js 一些进阶的内容, 那么欢迎阅读.
+Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过饿了么大前端的面试, 职位是 2~3 年经验的 Node.js 服务端程序员 (并不是全栈), 如果你对这个职位感兴趣或者学习 Node.js 一些进阶的内容, 那么欢迎围观.
 
 需要注意的是, 本文针对的并不是零基础的同学, 你需要有一定的 JavaScript/Node.js 基础, 并且有一定的工作经验. 另外本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分.
 
-如果你觉得大多不了解, 就不用投简历了 <del>(这样两边都节约了时间)</del>, 如果你觉得大都有了解或者***光看大纲都都觉得很简单那么欢迎投递简历至 ElemeFe (fe.job@ele.me)***.
+如果你觉得大多不了解, 就不用投简历了 <del>(这样两边都节约了时间)</del>, 如果你觉得大都有了解或者**光看大纲都都觉得很简单那么欢迎投递简历至 ElemeFe (fe.job@ele.me)**.
 
 ### 导读
 
@@ -17,6 +17,8 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 整体上大纲列举的并不是很全面, 细节上覆盖率不高, 很多讨论只是点到即止, 希望大家带着问题去思考.
 
 ## [Js 基础问题](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
+
+> 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面.
 
 ### 覆盖点
 
@@ -36,8 +38,6 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 [阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/js-basic.md)
 
 ## [模块](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md)
-
-> 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
 
 * [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#模块机制)
 * [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#热更新)
@@ -106,22 +106,29 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#pipe)
 * 什么是文件描述符? 输入流/输出流/错误流是什么? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#file)
 * console.log 是同步还是异步? 如何实现一个 console.log? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#console)
-* 如何同步的获取用户的输入?  [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#如何同步的获取用户的输入)
+* 如何* `[Doc]` HTTP同步的获取用户的输入?  [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#如何同步的获取用户的输入)
 * Readline 是如何实现的? (有思路即可) [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md#readline)
 
 [阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/io.md)
 
 ## Network
 
+* [`[Doc]` Net (网络)](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#net)
+* [`[Doc]` UDP/Datagram](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#udp)
+* [`[Doc]` HTTP](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#http)
+* [`[Doc]` DNS (域名服务器)](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#dns)
+* [`[Doc]` ZLIB (压缩)](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#zlib)
+* [`[Point]` RPC](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#rpc)
+
 ### 常见问题
 
-* HTTP 协议中的 POST 和 PUT 有什么区别?
-* `TCP/UDP` 的区别? `TCP` 粘包是怎么回事，如何处理? `UDP` 有粘包吗?
-* `time_wait` 是什么情况?出现过多的 `close_wait` 可能是什么原因?
+* HTTP 协议中的 POST 和 PUT 有什么区别? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#q-post-put)
+* TCP/UDP 的区别? TCP 粘包是怎么回事，如何处理? UDP 有粘包吗? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#q-tcp-udp)
+* `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? [[more]](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md#q-time-wait)
 * socket hang up 是什么意思? 一般什么情况下出现?
 * 列举几个提高网络传输速度的办法?
 
-`更多整理中`
+[阅读更多](https://github.com/ElemeFE/node-interview/blob/master/sections/network.md)
 
 ## OS
 
@@ -133,6 +140,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * `[Point]` CheckList
 
 ### 常见问题
+
 
 * 服务器负载是什么概念? 如何计算负载?
 * ulimit 是用来干什么的?
@@ -205,6 +213,8 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ## 安全
 
+* `[Doc]` HTTPS
+* `[Doc]` TLS/SSL
 * `[Point]` XSS
 * `[Point]` CSRF
 * `[Point]` 中间人攻击
@@ -218,3 +228,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 如何避免中间人攻击?
 
 `更多整理中`
+
+## 最后
+
+目前 repo 处于施工现场的情况，如果发现问题欢迎在 [issues](https://github.com/ElemeFE/node-interview/issues) 中指出。如果有比较好的问题/知识点/指正，也欢迎提 PR。
+
+另外关于 Js 基础 是个比较大的话题，在本教程不会很细致深入的讨论，更多的是列出一些重要或者更服务端更相关的地方，所以如果你拿着《Javascript 权威指南》给教程提 PR 可能不会采纳。本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分。

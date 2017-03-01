@@ -61,7 +61,7 @@ TCP 头里有一个 Window 字段, 是接收端告诉发送端自己还有多少
 
 ### backlog
 
-![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](assets/socket-backlog.png)
+![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](../assets/socket-backlog.png)
 
 关于该 backlog 的定义参见 [man](https://linux.die.net/man/2/listen) 手册:
 
@@ -73,7 +73,7 @@ backlog 用于设置客户端与服务端 `ESTABLISHED` 之后等待 accept 的�
 
 ### 状态机
 
-![tcpfsm.png](assets/tcpfsm.png)
+![tcpfsm.png](../assets/tcpfsm.png)
 
 关于网络连接的建立以及断开, 存在着一个复杂的状态转换机制, 完整的状态表参见 [《The TCP/IP Guide》](http://www.tcpipguide.com/free/t_TCPOperationalOverviewandtheTCPFiniteStateMachineF-2.htm)
 
@@ -249,16 +249,16 @@ RPC (Remote Procedure Call Protocol) 基于 TCP/IP 来实现调用远程服务�
 
 ### Thrift
 
-如果要自定义一个 RPC 协议, 估计很难做的比 [Apache Thrift](https://thrift.apache.org/) 更好了.
+> **Thrift**是一种[接口描述语言](https://zh.wikipedia.org/wiki/%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%E8%AF%AD%E8%A8%80 "接口描述语言")和二进制通讯协议，它被用来定义和创建跨语言的服务。它被当作一个[远程过程调用](https://zh.wikipedia.org/wiki/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8 "远程过程调用")（RPC）框架来使用，是由[Facebook](https://zh.wikipedia.org/wiki/Facebook "Facebook")为“大规模跨语言服务开发”而开发的。它通过一个代码生成引擎联合了一个软件栈，来创建不同程度的、无缝的[跨平台](https://zh.wikipedia.org/wiki/%E8%B7%A8%E5%B9%B3%E5%8F%B0 "跨平台")高效服务，可以使用[C#](https://zh.wikipedia.org/wiki/C%E2%99%AF "C♯")、[C++](https://zh.wikipedia.org/wiki/C%2B%2B "C++")（基于[POSIX](https://zh.wikipedia.org/wiki/POSIX "POSIX")兼容系统）、Cappuccino、[Cocoa](https://zh.wikipedia.org/wiki/Cocoa "Cocoa")、[Delphi](https://zh.wikipedia.org/wiki/Delphi "Delphi")、[Erlang](https://zh.wikipedia.org/wiki/Erlang "Erlang")、[Go](https://zh.wikipedia.org/wiki/Go "Go")、[Haskell](https://zh.wikipedia.org/wiki/Haskell "Haskell")、[Java](https://zh.wikipedia.org/wiki/Java "Java")、[Node.js](https://zh.wikipedia.org/wiki/Node.js "Node.js")、[OCaml](https://zh.wikipedia.org/wiki/OCaml "OCaml")、[Perl](https://zh.wikipedia.org/wiki/Perl "Perl")、[PHP](https://zh.wikipedia.org/wiki/PHP "PHP")、[Python](https://zh.wikipedia.org/wiki/Python "Python")、[Ruby](https://zh.wikipedia.org/wiki/Ruby "Ruby")和[Smalltalk](https://zh.wikipedia.org/wiki/Smalltalk "Smalltalk")。虽然它以前是由Facebook开发的，但它现在是[Apache软件基金会](https://zh.wikipedia.org/wiki/Apache%E8%BD%AF%E4%BB%B6%E5%9F%BA%E9%87%91%E4%BC%9A "Apache软件基金会")的[开源](https://zh.wikipedia.org/wiki/%E5%BC%80%E6%BA%90 "开源")项目了。该实现被描述在2007年4月的一篇由Facebook发表的技术论文中，该论文现由Apache掌管。
 
 ### HTTP
 
-使用 HTTP 协议来进行 RPC 调用也是很常见的, 比较有名的框架参见 [gRPC](http://www.grpc.io/). 不过相比 TCP 连接, 通过 HTTP 1.1 的方式性能比较低, 到 HTTP 2 也许会有很大的提升, 但是尚未测试.
+使用 HTTP 协议来进行 RPC 调用也是很常见的, 相比 TCP 连接, 通过通过 HTTP 的方式性能会差一些, 但是在使用以及调试上会简单一些. 近期比较有名的框架参见 [gRPC](http://www.grpc.io/):
+
+> gRPC is an open source remote procedure call (RPC) system initially developed at Google. It uses HTTP/2 for transport, Protocol Buffers as the interface description language, and provides features such as authentication, bidirectional streaming and flow control, blocking or nonblocking bindings, and cancellation and timeouts. It generates cross-platform client and server bindings for many languages.
 
 ### MQ
 
-使用消息队列 (Message Queue) 来进行 RPC 调用在业内有不少例子. 最近几年开始流行用 [Apache kafka](https://kafka.apache.org/).
+使用消息队列 (Message Queue) 来进行 RPC 调用 (RPC over mq) 在业内有不少例子, 比较适合业务解耦/广播/限流等场景.
 
 整理中
-
-

@@ -12,7 +12,7 @@
 
 ## Promise
 
-![callback-hell](assets/callback-hell.jpg)
+![callback-hell](../assets/callback-hell.jpg)
 
 相信很多同学在面试的时候都碰到过这样一个问题, `如何处理 Callback Hell`. 在早些年的时候, 大家会看到有很多的解决方案例如 [Q](https://www.npmjs.com/package/q), [async](https://www.npmjs.com/package/async), [EventProxy](https://www.npmjs.com/package/eventproxy) 等等. 最后从流行程度来看 `Promise` 当之无愧的独领风骚, 并且是在 ES6 的 Javascript 标准上赢得了支持.
 

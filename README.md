@@ -107,9 +107,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 如何* `[Doc]` HTTP同步的获取用户的输入?  [[more]](sections/io.md#如何同步的获取用户的输入)
 * Readline 是如何实现的? (有思路即可) [[more]](sections/io.md#readline)
 
-[阅读更多](sections/network.md)
+[阅读更多](sections/io.md)
 
-## [Network](sections/io.md)
+## [Network](sections/network.md)
 
 * [`[Doc]` Net (网络)](sections/network.md#net)
 * [`[Doc]` UDP/Datagram](sections/network.md#udp)

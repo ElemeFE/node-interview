@@ -1,13 +1,11 @@
 # Network
 
-* `[Doc]` Net (网络)
-* `[Doc]` UDP/Datagram
-* `[Doc]` HTTP
-* `[Doc]` HTTPS
-* `[Doc]` SSL/TLS
-* `[Doc]` DNS (域名服务器)
-* `[Doc]` ZLIB (压缩)
-* `[Point]` RPC
+* [`[Doc]` Net (网络)](#net)
+* [`[Doc]` UDP/Datagram](#udp)
+* [`[Doc]` HTTP](#http)
+* [`[Doc]` DNS (域名服务器)](#dns)
+* [`[Doc]` ZLIB (压缩)](#zlib)
+* [`[Point]` RPC](#rpc)
 
 
 ## Net
@@ -59,7 +57,7 @@ TCP 头里有一个 Window 字段, 是接收端告诉发送端自己还有多少
 
 > window 是否设置的越大越好?
 
-类似木桶理论, 一个木桶能装多少水, 是由最短的那块木板决定的. 一个 TCP 连接的 window 是由该连接中间一连串设备中
+类似木桶理论, 一个木桶能装多少水, 是由最短的那块木板决定的. 一个 TCP 连接的 window 是由该连接中间一连串设备中 window 最小的那一个设备决定的.
 
 ### backlog
 
@@ -97,7 +95,7 @@ TIME-WAIT|主动方收到 FIN, 返回收到对方 FIN 的 ACK, 等待对方是�
 
 `TIME_WAIT` 是连接的某一方 (可能是服务端也可能是客户端) 主动断开连接时, 四次挥手等待被断开的一方是否收到最后一次挥手 (ACK) 的状态. 如果在等待时间中, 再次收到第三次挥手 (FIN) 表示对方没收到最后一次挥手, 这时要再 ACK 一次. 这个等待的作用是避免出现连接混用的情况 (`prevent potential overlap with new connections` see [TCP Connection Termination](http://www.tcpipguide.com/free/t_TCPConnectionTermination.htm) for more).
 
-出现大量的 `TIME_WAIT` 比较常见的情况是, 并发量大, 服务器在短时间断开了大量连接. 对应 HTTP server 的情况可能是没开启 keepAlive. 如果有开 keepAlive, 一般是等待客户端自己主动断开, 那么`TIME_WAIT` 就只存在客户端, 而服务端则是 `CLOSE_WAIT` 的状态, 如果服务端出现大量 `CLOSE_WAIT`, 意味着当前服务端建立的链接大面积的被断开, 可能是目标服务集群重启或者拔网线/断电了之类.
+出现大量的 `TIME_WAIT` 比较常见的情况是, 并发量大, 服务器在短时间断开了大量连接. 对应 HTTP server 的情况可能是没开启 `keepAlive`. 如果有开 `keepAlive`, 一般是等待客户端自己主动断开, 那么`TIME_WAIT` 就只存在客户端, 而服务端则是 `CLOSE_WAIT` 的状态, 如果服务端出现大量 `CLOSE_WAIT`, 意味着当前服务端建立的链接大面积的被断开, 可能是目标服务集群重启之类.
 
 
 ## UDP
@@ -178,13 +176,43 @@ HTTP headers 是在进行 HTTP 请求的交互过程中互相支会对方一些�
 * [Request fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Request_fields)
 * [Response fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields)
 
-<del>有点不想写...</del>整理中
+> <a name="q-cookie-session"></a> cookie 与 session 的区别? 服务端如何清除 cookie?
+
+主要区别在于, session 存在服务端, cookie 存在客户端. session 比 cookie 更安全. 而且 cookie 不一定一直能用 (可能被浏览器关掉). 服务端可以通过设置 cookie 的值为空并设置一个及时的 expires 来清除存在客户端上的 cookie.
+
+> <a name="q-cors"></a> 什么是跨域请求? 如何允许跨域?
+
+出于安全考虑, 默认情况下使用 XMLHttpRequest 和 Fetch 发起 HTTP 请求必须遵守同源策略, 即只能向相同域名请求. 向不同域名的请求被称作跨域请求 (cross-origin HTTP request). 可以通过设置 [CORS headers](https://developer.mozilla.org/en-US/docs/Glossary/CORS) 即 `Access-Control-Allow-` 系列来允许跨域. 例如:
+
+```
+location ~* ^/(?:v1|_) {
+  if ($request_method = OPTIONS) { return 200 ''; }
+  header_filter_by_lua '
+    ngx.header["Access-Control-Allow-Origin"] = ngx.var.http_origin; # 这样相当于允许所有来源了
+    ngx.header["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, PATCH, OPTIONS";
+    ngx.header["Access-Control-Allow-Credentials"] = "true";
+    ngx.header["Access-Control-Allow-Headers"] = "Content-Type";
+  ';
+  proxy_pass http://localhost:3001;
+}
+```
+
+> `Script error.` 是什么错误? 如何拿到更详细的信息?
+
+接上题, 由于同源性策略 (CORS), 如果你引用的 js 脚本所在的域与当前域不同, 那么浏览器会把 onError 中的 msg 替换为 `Script error.` 要拿到详细错误的方法, 处理配好 `Access-Control-Allow-Origin` 还有在引用脚本的时候指定 `crossorigin` 例如:
+
+```html
+<script src="http://another-domain.com/app.js" crossorigin="anonymous"></script>
+```
+
+详见[Javascript Script Error.](https://sentry.io/answers/javascript-script-error/)
+
 
 ### Agent
 
 Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling sockets used in HTTP client requests). 也就是复用 HTTP 请求时候的 socket. 如果你没有指定 Agent 的话, 默认用的是 `http.globalAgent`.
 
-另外最近发现一个 Agent 坑爹的地方, 当 keepAlive 为 true 是, 由于 socket 复用, 之前的事件监听如果忘了清楚很容易导致重复监听, 并且旧的监听中的引用不会释放从导致内存泄漏, 参见这个 [issue](https://github.com/nodejs/node/issues/9268). (本组的同学有在整理这方面的文章, 请期待)
+另外最近发现一个 Agent 坑爹的地方, 当 `keepAlive` 为 true 是, 由于 socket 复用, 之前的事件监听如果忘了清除很容易导致重复监听, 并且旧的监听中的引用不会释放从导致内存泄漏, 参见这个 [issue](https://github.com/nodejs/node/issues/9268). (本组的同学有在整理这方面的文章, 请期待)
 
 
 ## DNS
@@ -215,9 +243,21 @@ RPC (Remote Procedure Call Protocol) 基于 TCP/IP 来实现调用远程服务�
 
 常见的 RPC 几大代表:
 
-* [thrift](http://thrift.apache.org/)
+* [Thrift](http://thrift.apache.org/)
 * HTTP
 * MQ
+
+### Thrift
+
+如果要自定义一个 RPC 协议, 估计很难做的比 [Apache Thrift](https://thrift.apache.org/) 更好了.
+
+### HTTP
+
+使用 HTTP 协议来进行 RPC 调用也是很常见的, 比较有名的框架参见 [gRPC](http://www.grpc.io/). 不过相比 TCP 连接, 通过 HTTP 1.1 的方式性能比较低, 到 HTTP 2 也许会有很大的提升, 但是尚未测试.
+
+### MQ
+
+使用消息队列 (Message Queue) 来进行 RPC 调用在业内有不少例子. 最近几年开始流行用 [Apache kafka](https://kafka.apache.org/).
 
 整理中
 

@@ -20,8 +20,6 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 > 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面.
 
-### 覆盖点
-
 * [`[Basic]` 类型判断](sections/js-basic.md#类型判断)
 * [`[Basic]` 作用域](sections/js-basic.md#作用域)
 * [`[Basic]` 引用传递](sections/js-basic.md#引用传递)
@@ -109,9 +107,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 如何* `[Doc]` HTTP同步的获取用户的输入?  [[more]](sections/io.md#如何同步的获取用户的输入)
 * Readline 是如何实现的? (有思路即可) [[more]](sections/io.md#readline)
 
-[阅读更多](sections/io.md)
+[阅读更多](sections/network.md)
 
-## Network
+## [Network](sections/io.md)
 
 * [`[Doc]` Net (网络)](sections/network.md#net)
 * [`[Doc]` UDP/Datagram](sections/network.md#udp)
@@ -122,7 +120,9 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
+* cookie 与 session 的区别? 服务端如何清除 cookie? [[more]](sections/network.md#q-cookie-session)
 * HTTP 协议中的 POST 和 PUT 有什么区别? [[more]](sections/network.md#q-post-put)
+* 什么是跨域请求? 如何允许跨域? [[more]](sections/network.md#q-cors)
 * TCP/UDP 的区别? TCP 粘包是怎么回事，如何处理? UDP 有粘包吗? [[more]](sections/network.md#q-tcp-udp)
 * `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? [[more]](sections/network.md#q-time-wait)
 * socket hang up 是什么意思? 一般什么情况下出现?

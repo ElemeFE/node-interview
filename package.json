@@ -1,0 +1,11 @@
+{
+  "name": "node-interview",
+  "repository": "git@github.com:ElemeFE/node-interview.git",
+  "scripts": {
+    "serve": "docsify serve"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "docsify-cli": "^3.0.1"
+  }
+}

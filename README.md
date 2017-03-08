@@ -126,6 +126,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * TCP/UDP 的区别? TCP 粘包是怎么回事，如何处理? UDP 有粘包吗? [[more]](sections/network.md#q-tcp-udp)
 * `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? [[more]](sections/network.md#q-time-wait)
 * socket hang up 是什么意思? 可能在什么情况下出现? [[more]](sections/network.md#socket-hang-up)
+* hosts 文件是什么? 什么叫 DNS 本地解析?
 * 列举几个提高网络传输速度的办法?
 
 [阅读更多](sections/network.md)
@@ -136,11 +137,12 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Doc]` OS (操作系统)](sections/os.md#os)
 * [`[Doc]` 命令行参数](sections/os.md#命令行参数)
 * [`[Basic]` 负载](sections/os.md#负载)
-* [`[Point]` CheckList](sections/os.md#CheckList)
+* [`[Point]` CheckList](sections/os.md#checklist)
 
 ### 常见问题
 
 * 什么是 TTY? 如何判断是否处于 TTY 环境? [[more]](sections/os.md#tty)
+* 不同操作系统的换行符 (EOL) 有什么区别? [[more]](sections/os.md#os)
 * 服务器负载是什么概念? 如何查看负载? [[more]](sections/os.md#负载)
 * ulimit 是用来干什么的? [[more]](sections/os.md#ulimit)
 

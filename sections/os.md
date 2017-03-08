@@ -70,6 +70,20 @@ false
 |os.uptime()|返回系统的运行时间，单位是秒|
 |os.userInfo([options])|返回当前用户信息|
 
+> 不同操作系统的换行符 (EOL) 有什么区别?
+
+end of line (EOL) 同 newline, line ending, 以及 line break.
+
+通常由 line feed (LF, `\n`) 和 carriage return (CR, `\r`) 组成. 常见的情况:
+
+|符号|系统|
+|---|---|
+|LF|在 Unix 或 Unix 相容系统 (GNU/Linux, AIX, Xenix, Mac OS X, ...)、BeOS、Amiga、RISC OS|
+|CR+LF|MS-DOS、微软视窗操作系统 (Microsoft Windows)、大部分非 Unix 的系统|
+|CR|Apple II 家族, Mac OS 至版本9|
+
+如果不了解 EOL 跨系统的兼容情况, 那么在处理文件的行分割/行统计等情况时可能会被坑.
+
 ### OS 常量
 
 * 信号常量 (Signal Constants), 如 `SIGHUP`, `SIGKILL` 等.

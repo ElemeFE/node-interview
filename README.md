@@ -125,27 +125,26 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 什么是跨域请求? 如何允许跨域? [[more]](sections/network.md#q-cors)
 * TCP/UDP 的区别? TCP 粘包是怎么回事，如何处理? UDP 有粘包吗? [[more]](sections/network.md#q-tcp-udp)
 * `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? [[more]](sections/network.md#q-time-wait)
-* socket hang up 是什么意思? 一般什么情况下出现?
+* socket hang up 是什么意思? 可能在什么情况下出现? [[more]](sections/network.md#socket-hang-up)
 * 列举几个提高网络传输速度的办法?
 
 [阅读更多](sections/network.md)
 
-## OS
+## [OS](sections/io.md)
 
-* `[Doc]` TTY
-* `[Doc]` OS (操作系统)
-* `[Doc]` 命令行参数
-* `[Basic]` 负载
-* `[Basic]` 指标
-* `[Point]` CheckList
+* [`[Doc]` TTY](sections/io.md#tty)
+* [`[Doc]` OS (操作系统)](sections/io.md#os)
+* [`[Doc]` 命令行参数](sections/io.md#命令行参数)
+* [`[Basic]` 负载](sections/io.md#负载)
+* [`[Point]` CheckList](sections/io.md#CheckList)
 
 ### 常见问题
 
+* 什么是 TTY? 如何判断是否处于 TTY 环境? [[more]](sections/io.md#tty)
+* 服务器负载是什么概念? 如何查看负载? [[more]](sections/io.md#负载)
+* ulimit 是用来干什么的? [[more]](sections/io.md#ulimit)
 
-* 服务器负载是什么概念? 如何计算负载?
-* ulimit 是用来干什么的?
-
-`更多整理中`
+[阅读更多](sections/io.md)
 
 ## 错误处理/调试/优化
 

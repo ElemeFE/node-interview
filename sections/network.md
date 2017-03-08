@@ -205,7 +205,7 @@ location ~* ^/(?:v1|_) {
 <script src="http://another-domain.com/app.js" crossorigin="anonymous"></script>
 ```
 
-详见[Javascript Script Error.](https://sentry.io/answers/javascript-script-error/)
+详见 [Javascript Script Error.](https://sentry.io/answers/javascript-script-error/)
 
 
 ### Agent
@@ -213,6 +213,61 @@ location ~* ^/(?:v1|_) {
 Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling sockets used in HTTP client requests). 也就是复用 HTTP 请求时候的 socket. 如果你没有指定 Agent 的话, 默认用的是 `http.globalAgent`.
 
 另外最近发现一个 Agent 坑爹的地方, 当 `keepAlive` 为 true 是, 由于 socket 复用, 之前的事件监听如果忘了清除很容易导致重复监听, 并且旧的监听中的引用不会释放从导致内存泄漏, 参见这个 [issue](https://github.com/nodejs/node/issues/9268). (本组的同学有在整理这方面的文章, 请期待)
+
+### socket hang up
+
+hang up 有挂断的意思, socket hang up 也可以理解为 socket 被挂断. 在 Node.js 中当你要 response 一个请求的时候, 发现该这个 socket 已经被 "挂断", 就会就会报 socket hang up 错误.
+
+[Node.js 中源码的情况:](https://github.com/nodejs/node/blob/v6.x/lib/_http_client.js#L286):
+
+```javascript
+function socketCloseListener() {
+  var socket = this;
+  var req = socket._httpMessage;
+
+  // Pull through final chunk, if anything is buffered.
+  // the ondata function will handle it properly, and this
+  // is a no-op if no final chunk remains.
+  socket.read();
+
+  // NOTE: It's important to get parser here, because it could be freed by
+  // the `socketOnData`.
+  var parser = socket.parser;
+  req.emit('close');
+  if (req.res && req.res.readable) {
+    // Socket closed before we emitted 'end' below.
+    req.res.emit('aborted');
+    var res = req.res;
+    res.on('end', function() {
+      res.emit('close');
+    });
+    res.push(null);
+  } else if (!req.res && !req.socket._hadError) {
+    // This socket error fired before we started to
+    // receive a response. The error needs to
+    // fire on the request.
+    req.emit('error', createHangUpError());  // <------------------- socket hang up
+    req.socket._hadError = true;
+  }
+
+  // Too bad.  That output wasn't getting written.
+  // This is pretty terrible that it doesn't raise an error.
+  // Fixed better in v0.10
+  if (req.output)
+    req.output.length = 0;
+  if (req.outputEncodings)
+    req.outputEncodings.length = 0;
+
+  if (parser) {
+    parser.finish();
+    freeParser(parser, req, socket);
+  }
+}
+```
+
+典型的情况是用户使用浏览器, 请求的时间有点长, 然后用户简单的按了一下 F5 刷新页面. 这个操作会让浏览器取消之前的请求, 然后导致服务端 throw 了一个 socket hang up.
+
+详见万能的 stackoverflow: [NodeJS - What does “socket hang up” actually mean?](http://stackoverflow.com/questions/16995184/nodejs-what-does-socket-hang-up-actually-mean)
 
 
 ## DNS
@@ -225,6 +280,8 @@ DNS 服务主要基于 UDP, 这里简单介绍 Node.js 实现的接口中的两�
 ---|---|---|---|---
 .lookup(hostname[, options], cb)|通过系统自带的 DNS 缓存 (如 `/etc/hosts`)|同步|无|快
 .resolve(hostname[, rrtype], cb)|通过系统配置的 DNS 服务器指定的记录 (rrtype指定)|异步|有|慢
+
+> DNS 模块中 .lookup 与 .resolve 的区别?
 
 当你要解析一个域名的 ip 时, 通过 .lookup 查询直接调用 `getaddrinfo` 来拿取地址, 速度很快, 但是如果本地的 hosts 文件被修改了, .lookup 就会拿 hosts 文件中的地方, 而 .resolve 依旧是外部正常的地址.
 

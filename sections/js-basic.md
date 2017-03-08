@@ -119,8 +119,8 @@ setInterval(replaceThing, 1000)
 
 `...` 的使用上, 如何实现一个数组的去重 (使用 Set 可以加分).
 
-> <a name="q-const"></a> const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是?
+> <a name="q-const"></a> const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象有什么意义?
 
-可以被修改, const 可以避免类型改变, 可以保护引用不变, 引用不变对使用 Map 有很大的意义.
+其中的值可以被修改. 意义上, 主要保护引用不被修改 (如用 [Map](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Map) 等接口对引用的变化很敏感, 使用 const 保护引用始终如一是有意义的), 也适合用在 immutable 的场景.
 
 暂时写上这些, 之后会慢慢整理, 如果内容比较多可能单独归一类来讨论.

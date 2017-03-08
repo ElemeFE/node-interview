@@ -130,21 +130,21 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](sections/network.md)
 
-## [OS](sections/io.md)
+## [OS](sections/os.md)
 
-* [`[Doc]` TTY](sections/io.md#tty)
-* [`[Doc]` OS (操作系统)](sections/io.md#os)
-* [`[Doc]` 命令行参数](sections/io.md#命令行参数)
-* [`[Basic]` 负载](sections/io.md#负载)
-* [`[Point]` CheckList](sections/io.md#CheckList)
+* [`[Doc]` TTY](sections/os.md#tty)
+* [`[Doc]` OS (操作系统)](sections/os.md#os)
+* [`[Doc]` 命令行参数](sections/os.md#命令行参数)
+* [`[Basic]` 负载](sections/os.md#负载)
+* [`[Point]` CheckList](sections/os.md#CheckList)
 
 ### 常见问题
 
-* 什么是 TTY? 如何判断是否处于 TTY 环境? [[more]](sections/io.md#tty)
-* 服务器负载是什么概念? 如何查看负载? [[more]](sections/io.md#负载)
-* ulimit 是用来干什么的? [[more]](sections/io.md#ulimit)
+* 什么是 TTY? 如何判断是否处于 TTY 环境? [[more]](sections/os.md#tty)
+* 服务器负载是什么概念? 如何查看负载? [[more]](sections/os.md#负载)
+* ulimit 是用来干什么的? [[more]](sections/os.md#ulimit)
 
-[阅读更多](sections/io.md)
+[阅读更多](sections/os.md)
 
 ## 错误处理/调试/优化
 

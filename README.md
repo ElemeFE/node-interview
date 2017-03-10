@@ -30,7 +30,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 * js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
-* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 的意义是? [[more]](sections/js-basic.md#q-const)
+* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象的意义是? [[more]](sections/js-basic.md#q-const)
 * Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](sections/js-basic.md#q-mem)
 
 [阅读更多](sections/js-basic.md)
@@ -104,7 +104,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * Stream 的 pipe 的作用是? 在 pipe 的过程中数据是引用传递还是拷贝传递? [[more]](sections/io.md#pipe)
 * 什么是文件描述符? 输入流/输出流/错误流是什么? [[more]](sections/io.md#file)
 * console.log 是同步还是异步? 如何实现一个 console.log? [[more]](sections/io.md#console)
-* 如何* `[Doc]` HTTP同步的获取用户的输入?  [[more]](sections/io.md#如何同步的获取用户的输入)
+* 如何同步的获取用户的输入?  [[more]](sections/io.md#如何同步的获取用户的输入)
 * Readline 是如何实现的? (有思路即可) [[more]](sections/io.md#readline)
 
 [阅读更多](sections/io.md)
@@ -125,6 +125,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 什么是跨域请求? 如何允许跨域? [[more]](sections/network.md#q-cors)
 * TCP/UDP 的区别? TCP 粘包是怎么回事，如何处理? UDP 有粘包吗? [[more]](sections/network.md#q-tcp-udp)
 * `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? [[more]](sections/network.md#q-time-wait)
+* ECONNRESET 是什么错误? 如何复现这个错误?
 * socket hang up 是什么意思? 可能在什么情况下出现? [[more]](sections/network.md#socket-hang-up)
 * hosts 文件是什么? 什么叫 DNS 本地解析?
 * 列举几个提高网络传输速度的办法?

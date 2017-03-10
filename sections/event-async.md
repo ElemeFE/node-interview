@@ -59,7 +59,25 @@ setTimeout(() => {
 }, 10000);
 ```
 
-如果你不了解这两个问题, 可以自己在本地尝试研究一下打印的结果. 这里希望你掌握的是 Promise 的状态转换, 以及异步与 Promise 的关系, Promise 如何帮助你处理异步, 如果你研究过 Promise 的实现那就更好了.
+以及理解如下代码的执行顺序 ([出处](https://zhuanlan.zhihu.com/p/25407758)):
+
+```javascript
+setTimeout(function() {
+  console.log(1)
+}, 0);
+new Promise(function executor(resolve) {
+  console.log(2);
+  for( var i=0 ; i<10000 ; i++ ) {
+    i == 9999 && resolve();
+  }
+  console.log(3);
+}).then(function() {
+  console.log(4);
+});
+console.log(5);
+```
+
+如果你不了解这些问题, 可以自己在本地尝试研究一下打印的结果. 这里希望你掌握的是 Promise 的状态转换, 包括异步与 Promise 的关系, 以及 Promise 如何帮助你处理异步, 如果你研究过 Promise 的实现那就更好了.
 
 ## Events
 

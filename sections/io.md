@@ -242,6 +242,14 @@ function Console(stdout, stderr) {
 
 Node.js 封装了标准 POSIX 文件 I/O 操作的集合. 通过 require('fs') 可以加载该模块. 该模块中的所有方法都有异步执行和同步执行两个版本. 你可以通过 fs.open 获得一个文件的文件描述符.
 
+### 编码
+
+// TODO
+
+UTF8, GBK, es6 中对编码的支持, 如何计算一个汉字的长度
+
+BOM
+
 ### stdio
 
 stdio (standard input output) 标准的输入输出流, 即输入流 (stdin), 输出流 (stdout), 错误流 (stderr) 三者. 在 Node.js 中分别对应 `process.stdin` (Readable), `process.stdout` (Writable) 以及 `process.stderr` (Writable) 三个 stream.

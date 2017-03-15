@@ -227,7 +227,7 @@ domain 本身是一个 EventEmitter 对象, 其中文意思是 "域" 的意思, 
 
 ## Debugger
 
-![node-js-survey-debug](../assets/node-js-survey-debug.png)
+![node-js-survey-debug](/assets/node-js-survey-debug.png)
 
 类似 gdb 的命令行下 debug 工具 (上图中的 build-in debugger), 同时也支持远程 debug (类似 [node-inspector](https://github.com/node-inspector/node-inspector), 目前处于试验状态). 当然, 目前有不少同学觉得 [vscode](https://code.visualstudio.com/) 对 debug 工具集成的比较好.
 

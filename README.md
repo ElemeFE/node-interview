@@ -164,7 +164,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 怎么处理未预料的出错? 用 try/catch ，domains 还是其它什么? [[more]](sections/error.md#q-handle-error)
 * 什么是 `uncaughtException` 事件? 一般在什么情况下使用该事件? [[more]](sections/error.md#uncaughtexception)
 * domain 的原理是? 为什么要弃用 domain? [[more]](sections/error.md#domain)
-* 什么是防御性编程? 与其相反的 let it crash 又是什么?
+* 什么是防御性编程? 与其相对的 let it crash 又是什么?
 * 为什么要在 cb 的第一参数传 error? 为什么有的 cb 第一个参数不是 error, 例如 http.createServer?
 * 为什么有些异常没法根据报错信息定位到代码调用? 如何准确的定位一个异常? [[more]](sections/error.md#错误栈丢失)
 * 内存泄漏通常由哪些原因导致? 如何分析以及定位内存泄漏? [[more]](sections/error.md#内存快照)

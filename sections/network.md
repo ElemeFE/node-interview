@@ -61,7 +61,7 @@ TCP 头里有一个 Window 字段, 是接收端告诉发送端自己还有多少
 
 ### backlog
 
-![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](../assets/socket-backlog.png)
+![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](/assets/socket-backlog.png)
 
 关于该 backlog 的定义参见 [man](https://linux.die.net/man/2/listen) 手册:
 
@@ -73,7 +73,7 @@ backlog 用于设置客户端与服务端 `ESTABLISHED` 之后等待 accept 的�
 
 ### 状态机
 
-![tcpfsm.png](../assets/tcpfsm.png)
+![tcpfsm.png](/assets/tcpfsm.png)
 
 关于网络连接的建立以及断开, 存在着一个复杂的状态转换机制, 完整的状态表参见 [《The TCP/IP Guide》](http://www.tcpipguide.com/free/t_TCPOperationalOverviewandtheTCPFiniteStateMachineF-2.htm)
 

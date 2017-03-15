@@ -31,7 +31,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
 * const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象的意义是? [[more]](sections/js-basic.md#q-const)
-* Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](sections/js-basic.md#q-mem)
+* JavaScript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](sections/js-basic.md#q-mem)
 
 [阅读更多](sections/js-basic.md)
 
@@ -157,13 +157,14 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Doc]` C/C++ 插件](sections/error.md#c-c++-addon)
 * [`[Doc]` V8](sections/error.md#v8)
 * [`[Point]` 内存快照](sections/error.md#内存快照)
-* [`[Point]` CPU剖析](sections/error.md#cpu-剖析)
+* [`[Point]` CPU profiling](sections/error.md#cpu-profiling)
 
 ### 常见问题
 
 * 怎么处理未预料的出错? 用 try/catch ，domains 还是其它什么? [[more]](sections/error.md#q-handle-error)
-* 什么是 `uncaughtException` 事件? 一般在什么情况下使用该事件? [[more]](sections/error.md#uncaughtException)
+* 什么是 `uncaughtException` 事件? 一般在什么情况下使用该事件? [[more]](sections/error.md#uncaughtexception)
 * domain 的原理是? 为什么要弃用 domain? [[more]](sections/error.md#domain)
+* 什么是防御性编程? 与其相反的 let it crash 又是什么?
 * 为什么要在 cb 的第一参数传 error? 为什么有的 cb 第一个参数不是 error, 例如 http.createServer?
 * 为什么有些异常没法根据报错信息定位到代码调用? 如何准确的定位一个异常? [[more]](sections/error.md#错误栈丢失)
 * 内存泄漏通常由哪些原因导致? 如何分析以及定位内存泄漏? [[more]](sections/error.md#内存快照)
@@ -238,4 +239,4 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 目前 repo 处于施工现场的情况，如果发现问题欢迎在 [issues](https://github.com/ElemeFE/node-interview/issues) 中指出。如果有比较好的问题/知识点/指正，也欢迎提 PR。
 
-另外关于 Js 基础 是个比较大的话题，在本教程不会很细致深入的讨论，更多的是列出一些重要或者更服务端更相关的地方，所以如果你拿着《Javascript 权威指南》给教程提 PR 可能不会采纳。本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分。
+另外关于 Js 基础 是个比较大的话题，在本教程不会很细致深入的讨论，更多的是列出一些重要或者更服务端更相关的地方，所以如果你拿着《JavaScript 权威指南》给教程提 PR 可能不会采纳。本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分。

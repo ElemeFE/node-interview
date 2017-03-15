@@ -183,7 +183,7 @@ console.log('This will not run.');
 
 该事件的回调函数接收以下参数：
 
-* `reason` `[<Error>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)` | `<any>` 该 Promise 被 reject 的对象 (通常为 Error 对象)
+* `reason` [`<Error>`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) | `<any>` 该 Promise 被 reject 的对象 (通常为 Error 对象)
 * `p` 被 reject 的 Promise 本身
 
 例如
@@ -199,7 +199,7 @@ somePromise.then((res) => {
 }); // no `.catch` or `.then`
 ```
 
-一下代码也会触发 `unhandledRejection` 事件：
+以下代码也会触发 `unhandledRejection` 事件：
 
 ```javascript
 function SomeResource() {
@@ -272,8 +272,98 @@ setTimeout(function() { v8.setFlagsFromString('--notrace_gc'); }, 60e3);
 
 使用以及内存泄漏的常见原因详见: [如何分析 Node.js 中的内存泄漏](https://zhuanlan.zhihu.com/p/25736931?group_id=825001468703674368).
 
-## CPU 剖析
+## CPU profiling
+
+CPU profiling (剖析) 常用于性能优化. 有许多用于做 profiling 的第三方工具, 但是大部分情况下, 使用 Node.js 内置的是最简单的. 其内置调用的就是 [V8 本身的 profiler](https://github.com/v8/v8/wiki/Using%20V8%E2%80%99s%20internal%20profiler), 它可以在程序执行过程中中是对 stack 间隔性的抽样分析.
+
+使用 `--prof` 开启内置的 profilling
+
+```shell
+node --prof app.js
+```
+
+程序运行之后会生成一个 `isolate-0xnnnnnnnnnnnn-v8.log` 在当前运行目录. 
+
+你可以使用 `--prof-process` 来生成报告查看
+
+```
+node --prof-process isolate-0xnnnnnnnnnnnn-v8.log
+```
+
+报告形如:
+
+```
+Statistical profiling result from isolate-0x103001200-v8.log, (12042 ticks, 2634 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+     35    0.3%          /usr/lib/system/libsystem_platform.dylib
+     27    0.2%          /usr/lib/system/libsystem_pthread.dylib
+      7    0.1%          /usr/lib/system/libsystem_c.dylib
+      3    0.0%          /usr/lib/system/libsystem_kernel.dylib
+      1    0.0%          /usr/lib/system/libsystem_malloc.dylib
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+    208    1.7%    1.7%  Stub: LoadICStub
+    187    1.6%    1.6%  KeyedLoadIC: A keyed load IC from the snapshot
+    104    0.9%    0.9%  Stub: VectorStoreICStub
+     69    0.6%    0.6%  LazyCompile: *emit events.js:136:44
+     68    0.6%    0.6%  Builtin: CallFunction_ReceiverIsNotNullOrUndefined
+     65    0.5%    0.5%  KeyedStoreIC: A keyed store IC from the snapshot {2}
+     47    0.4%    0.4%  Builtin: CallFunction_ReceiverIsAny
+     43    0.4%    0.4%  LazyCompile: *storeHeader _http_outgoing.js:312:21
+     34    0.3%    0.3%  LazyCompile: *removeListener events.js:315:28
+     33    0.3%    0.3%  Stub: RegExpExecStub
+     33    0.3%    0.3%  LazyCompile: *_addListener events.js:210:22
+     32    0.3%    0.3%  Stub: CEntryStub
+     32    0.3%    0.3%  Builtin: ArgumentsAdaptorTrampoline
+     31    0.3%    0.3%  Stub: FastNewClosureStub
+     30    0.2%    0.3%  Stub: InstanceOfStub
+     ...
+
+ [C++]:
+   ticks  total  nonlib   name
+    460    3.8%    3.8%  _mach_port_extract_member
+    329    2.7%    2.7%  _openat$NOCANCEL
+    199    1.7%    1.7%  ___bsdthread_register
+    136    1.1%    1.1%  ___mkdir_extended
+    116    1.0%    1.0%  node::HandleWrap::Close(v8::FunctionCallbackInfo<v8::Value> const&)
+    112    0.9%    0.9%  void v8::internal::BodyDescriptorBase::IterateBodyImpl<v8::internal::StaticScavengeVisitor>(v8::internal::Heap*, v8::internal::HeapObject*, int, int)
+    106    0.9%    0.9%  _http_parser_execute
+    103    0.9%    0.9%  _szone_malloc_should_clear
+     99    0.8%    0.8%  int v8::internal::BinarySearch<(v8::internal::SearchMode)1, v8::internal::DescriptorArray>(v8::internal::DescriptorArray*, v8::internal::Name*, int, int*)
+     89    0.7%    0.7%  node::TCPWrap::Connect(v8::FunctionCallbackInfo<v8::Value> const&)
+     86    0.7%    0.7%  v8::internal::LookupIterator::State v8::internal::LookupIterator::LookupInRegularHolder<false>(v8::internal::Map*, v8::internal::JSReceiver*)
+     ...
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 2.0% are not shown.
+
+   ticks parent  name
+   2634   21.9%  UNKNOWN
+    764   29.0%    LazyCompile: *connect net.js:815:17
+    764  100.0%      LazyCompile: ~<anonymous> net.js:966:30
+    764  100.0%        LazyCompile: *_tickCallback internal/process/next_tick.js:87:25
+    193    7.3%    LazyCompile: *createWriteReq net.js:732:24
+    101   52.3%      LazyCompile: *Socket._writeGeneric net.js:660:42
+     99   98.0%        LazyCompile: ~<anonymous> net.js:667:34
+     99  100.0%          LazyCompile: ~g events.js:287:13
+     99  100.0%            LazyCompile: *emit events.js:136:44
+     92   47.7%      LazyCompile: ~Socket._writeGeneric net.js:660:42
+     91   98.9%        LazyCompile: ~<anonymous> net.js:667:34
+     91  100.0%          LazyCompile: ~g events.js:287:13
+     91  100.0%            LazyCompile: *emit events.js:136:44
+	 ...
+```
+
+|字段|描述|
+|---|---|
+|ticks|时间片|
+|total|当前操作执行的时间占总时间的比率|
+|nonlib|当前非 System library 执行时间比率|
 
 整理中
-
 

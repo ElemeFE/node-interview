@@ -53,7 +53,7 @@ console.log(os.constants.errno);
 
 callback(err, data) 这种形式的错误处理起来繁琐, 并不具备强制性, 目前已经处于仅需要了解, 不推荐使用的情况. 而 domain 模块则是半只脚踏进棺材了.
 
-1) 感谢 [co](https://github.com/visionmedia/co) 的先河, 现在的你已经简单的使用 try/catch 保护关键的位置, 以 koa 为例, 可以通过中间件的形式来进行错误处理, 详见 [Koa error hangding](https://github.com/koajs/koa/wiki/Error-Handling). 之后的 async/await 均属于这种模式.
+1) 感谢 [co](https://github.com/visionmedia/co) 的先河, 现在的你已经简单的使用 try/catch 保护关键的位置, 以 koa 为例, 可以通过中间件的形式来进行错误处理, 详见 [Koa error handling](https://github.com/koajs/koa/wiki/Error-Handling). 之后的 async/await 均属于这种模式.
 
 2) 通过 EventEmitter 的错误监听形式为各大关键的对象加上错误监听的回调. 例如监听 http server, tcp server 等对象的 `error` 事件以及 process 对象提供的 `uncaughtException` 和 `unhandledRejection` 等等.
 

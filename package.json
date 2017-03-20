@@ -2,7 +2,7 @@
   "name": "node-interview",
   "repository": "git@github.com:ElemeFE/node-interview.git",
   "scripts": {
-    "serve": "docsify serve"
+    "serve": "docsify serve ."
   },
   "license": "MIT",
   "dependencies": {

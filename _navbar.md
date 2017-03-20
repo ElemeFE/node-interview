@@ -6,3 +6,6 @@
   - [模块](sections/module)
   - [Network](sections/network)
   - [进程](sections/process)
+- Translations
+  - [中文](/)
+  - [English](/en-us/)

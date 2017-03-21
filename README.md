@@ -178,7 +178,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Basic]` 集成测试](sections/test.md#集成测试)
 * [`[Basic]` 基准测试](sections/test.md#基准测试)
 * [`[Basic]` 压力测试](sections/test.md#压力测试)
-* [`[Doc]` Assert (断言)](sections/test.md#断言)
+* [`[Doc]` Assert (断言)](sections/test.md#assert)
 
 ### 常见问题
 

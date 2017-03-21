@@ -171,23 +171,23 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](sections/error.md)
 
-## 测试
+## [测试](sections/test.md)
 
-* `[Basic]` 单元测试
-* `[Basic]` 基准测试
-* `[Basic]` 集成测试
-* `[Doc]` Assert (断言)
-* `[Module]` 常见测试工具
-* `[Module]` 常见断言工具
+* [`[Basic]` 测试方法](sections/test.md#测试方法)
+* [`[Basic]` 单元测试](sections/test.md#单元测试)
+* [`[Basic]` 集成测试](sections/test.md#集成测试)
+* [`[Basic]` 基准测试](sections/test.md#基准测试)
+* [`[Basic]` 压力测试](sections/test.md#压力测试)
+* [`[Doc]` Assert (断言)](sections/test.md#断言)
 
 ### 常见问题
 
-* 为什么要写测试? 写测试是否会拖累开发进度?
-* 单元测试的单元是指什么? 什么是覆盖率?
-* 测试是如何保证业务逻辑中不会出现死循环的?
-* mock 是指什么? 一般如何实现?
+* [为什么要写测试? 写测试是否会拖累开发进度?](sections/test.md#q-why-write-test)
+* [单元测试的单元是指什么? 什么是覆盖率?](sections/test.md#单元测试)
+* [测试是如何保证业务逻辑中不会出现死循环的?](sections/test.md#q-death-loop)
+* [mock 是什么? 一般在什么情况下 mock?](sections/test.md#mock)
 
-`更多整理中`
+[阅读更多](sections/test.md)
 
 ## util
 

@@ -216,13 +216,13 @@ Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling
 
 想了解详细情况的话，可以查看一下讨论链接。
 
-[socket 复用情况讨论](https://github.com/ElemeFE/node-interview/issues/19)
+[本文 socket 复用情况讨论issue](https://github.com/ElemeFE/node-interview/issues/19)
 
-[此bug 讨论 issue](https://github.com/nodejs/node/issues/9268)
+[Node 讨论 issue](https://github.com/nodejs/node/issues/9268)
 
-[引入此 bug 的 commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565)
+[Node 引入此 bug 的 commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565)
 
-[解决此 bug 的 pr](https://github.com/nodejs/node/pull/9440/files)
+[Node 解决此 bug 的 pr](https://github.com/nodejs/node/pull/9440/files)
 
 (本组的同学有在整理这方面的文章, 请期待)
 

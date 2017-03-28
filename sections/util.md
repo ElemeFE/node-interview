@@ -82,7 +82,7 @@ console.log(qs.parse(str)); // { a: { b: { c: '1' } } }
 console.log(querystring.parse(str)); // { 'a[b][c]': '1' }
 ```
 
-> HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器?
+> <a name="q-get-param"></a> HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器?
 
 ```javascript
 const qs = require('qs');

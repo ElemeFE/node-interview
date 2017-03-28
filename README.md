@@ -198,8 +198,10 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Doc]` Utilities (实用函数)](sections/util.md#util-1)
 * [`[Basic]` 正则表达式](sections/util.md#正则表达式)
 
-* HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器? [[more]](sections/util.md#)
-* Node.js 中继承 (util.inherits) 的实现? [[more]](sections/util.md#util-inherits)
+### 常见问题
+
+* HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器? [[more]](sections/util.md#get-param)
+* Node.js 中继承 (util.inherits) 的实现? [[more]](sections/util.md#utilinherits)
 * 如何递归获取某个文件夹下所有的文件名? [[more]](sections/util.md#q-traversal)
 
 [阅读更多](sections/util.md)

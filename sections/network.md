@@ -91,7 +91,7 @@ FIN-WAIT-2|主动方收到被动方的 ACK, 等待 FIN
 CLOSING|主动方收到了FIN, 却没收到 FIN-WAIT-1 时发的 ACK, 此时等待那个 ACK
 TIME-WAIT|主动方收到 FIN, 返回收到对方 FIN 的 ACK, 等待对方是否真的收到了 ACK, 如果过一会又来一个 FIN, 表示对方没收到, 这时要再 ACK 一次
 
-> <a name="q-time-wait"></a> `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? 
+> <a name="q-time-wait"></a> `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因?
 
 `TIME_WAIT` 是连接的某一方 (可能是服务端也可能是客户端) 主动断开连接时, 四次挥手等待被断开的一方是否收到最后一次挥手 (ACK) 的状态. 如果在等待时间中, 再次收到第三次挥手 (FIN) 表示对方没收到最后一次挥手, 这时要再 ACK 一次. 这个等待的作用是避免出现连接混用的情况 (`prevent potential overlap with new connections` see [TCP Connection Termination](http://www.tcpipguide.com/free/t_TCPConnectionTermination.htm) for more).
 
@@ -128,7 +128,7 @@ UDP socket 支持 n 对 m 的连接状态, 在[官方文档](https://nodejs.org/
   <tr><td>流式多媒体通信</td><td>-</td></tr>
 </table>
 
-简单的说, UDP 速度快, 开销低, 不用封包/拆包允许丢一部分数据, 监控统计/日志数据上报/流媒体通信等场景都可以用 UDP. 目前 Node.js 的项目中使用 UDP 比较流行的是 [StatsD](https://github.com/etsy/statsd) 监控服务. 
+简单的说, UDP 速度快, 开销低, 不用封包/拆包允许丢一部分数据, 监控统计/日志数据上报/流媒体通信等场景都可以用 UDP. 目前 Node.js 的项目中使用 UDP 比较流行的是 [StatsD](https://github.com/etsy/statsd) 监控服务.
 
 
 ## HTTP
@@ -212,7 +212,19 @@ location ~* ^/(?:v1|_) {
 
 Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling sockets used in HTTP client requests). 也就是复用 HTTP 请求时候的 socket. 如果你没有指定 Agent 的话, 默认用的是 `http.globalAgent`.
 
-另外最近发现一个 Agent 坑爹的地方, 当 `keepAlive` 为 true 是, 由于 socket 复用, 之前的事件监听如果忘了清除很容易导致重复监听, 并且旧的监听中的引用不会释放从导致内存泄漏, 参见这个 [issue](https://github.com/nodejs/node/issues/9268). (本组的同学有在整理这方面的文章, 请期待)
+另外最近发现一个 Agent 坑爹的地方, 使用node 版本为 6.8.1（包括）到6.10（不包括）时会出现此问题。当 keepAlive 为 true 或者长时间大量请求时, 一旦设置了 request timeout 的话，由于 socket 一直未销毁, socket 添加了 timeout 事件，但是在请求完成以后没有清除事件，导致事件重复监听，且事件闭包引用了 req，导致内存泄漏。
+
+想了解详细情况的话，可以查看一下讨论链接。
+
+[本文 socket 复用情况讨论issue](https://github.com/ElemeFE/node-interview/issues/19)
+
+[Node 讨论 issue](https://github.com/nodejs/node/issues/9268)
+
+[Node 引入此 bug 的 commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565)
+
+[Node 解决此 bug 的 pr](https://github.com/nodejs/node/pull/9440/files)
+
+(本组的同学有在整理这方面的文章, 请期待)
 
 ### socket hang up
 
@@ -291,7 +303,7 @@ DNS 服务主要基于 UDP, 这里简单介绍 Node.js 实现的接口中的两�
 
 hosts 文件是个没有扩展名的系统文件，其作用就是将网址域名与其对应的 IP 地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从 hosts 文件中寻找对应的IP地址。  
 
-当我们访问一个域名时，实际上需要的是访问对应的 IP 地址。这时候，获取 IP 地址的方式，先是读取浏览器缓存，如果未命中 => 接着读取本地 hosts 文件，如果还是未命中 => 则向 DNS 服务器发送请求获取。在向 DNS 服务器获取 IP 地址之前的行为，叫做 DNS 本地解析。 
+当我们访问一个域名时，实际上需要的是访问对应的 IP 地址。这时候，获取 IP 地址的方式，先是读取浏览器缓存，如果未命中 => 接着读取本地 hosts 文件，如果还是未命中 => 则向 DNS 服务器发送请求获取。在向 DNS 服务器获取 IP 地址之前的行为，叫做 DNS 本地解析。
 
 ## ZLIB
 

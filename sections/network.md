@@ -212,19 +212,15 @@ location ~* ^/(?:v1|_) {
 
 Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling sockets used in HTTP client requests). 也就是复用 HTTP 请求时候的 socket. 如果你没有指定 Agent 的话, 默认用的是 `http.globalAgent`.
 
-另外最近发现一个 Agent 坑爹的地方, 使用node 版本为 6.8.1（包括）到6.10（不包括）时会出现此问题。当 keepAlive 为 true 或者长时间大量请求时, 一旦设置了 request timeout 的话，由于 socket 一直未销毁, socket 添加了 timeout 事件，但是在请求完成以后没有清除事件，导致事件重复监听，且事件闭包引用了 req，导致内存泄漏。
+另外, 目前在 Node.js 的 6.8.1（包括）到 6.10（不包括）版本中发现一个问题:
 
-想了解详细情况的话，可以查看一下讨论链接。
+* 1. 你将 keepAlive 设置为 `true` 时, socket 有复用
+* 2. 即使 keepAlive 没有设置成 `true` 但是长时间内有大量请求时, 同样有复用 socket (复用情况参见[@zcs19871221](https://github.com/zcs19871221)的[解析](https://github.com/zcs19871221/mydoc/blob/master/nodejsAgent.md))
 
-[本文 socket 复用情况讨论issue](https://github.com/ElemeFE/node-interview/issues/19)
+1 和 2 这两种情况下, 一旦设置了 request timeout, 由于 socket 一直未销毁, 如果你在请求完成以后没有注意清除该事件, 会导致事件重复监听, 且该事件闭包引用了 req, 会导致内存泄漏.
 
-[Node 讨论 issue](https://github.com/nodejs/node/issues/9268)
+如果有疑虑的话可以参见 Node 官方讨论的 [issue](https://github.com/nodejs/node/issues/9268) 以及引入此 bug 的 [commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565), 如果此处描述有疑问可以在本 repo 的 [issue](https://github.com/ElemeFE/node-interview/issues/19) 中指出.
 
-[Node 引入此 bug 的 commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565)
-
-[Node 解决此 bug 的 pr](https://github.com/nodejs/node/pull/9440/files)
-
-(本组的同学有在整理这方面的文章, 请期待)
 
 ### socket hang up
 

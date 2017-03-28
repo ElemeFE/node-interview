@@ -40,6 +40,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Basic]` 模块机制](sections/module.md#模块机制)
 * [`[Basic]` 热更新](sections/module.md#热更新)
 * [`[Basic]` 上下文](sections/module.md#上下文)
+* [`[Basic]` 包管理](sections/module.md#包管理)
 
 ### 常见问题
 
@@ -136,6 +137,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 * [`[Doc]` TTY](sections/os.md#tty)
 * [`[Doc]` OS (操作系统)](sections/os.md#os-1)
+* [`[Doc]` Path](sections/os.md#path)
 * [`[Doc]` 命令行参数](sections/os.md#命令行参数)
 * [`[Basic]` 负载](sections/os.md#负载)
 * [`[Point]` CheckList](sections/os.md#checklist)
@@ -182,24 +184,25 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 ### 常见问题
 
-* [为什么要写测试? 写测试是否会拖累开发进度?](sections/test.md#q-why-write-test)
-* [单元测试的单元是指什么? 什么是覆盖率?](sections/test.md#单元测试)
-* [测试是如何保证业务逻辑中不会出现死循环的?](sections/test.md#q-death-loop)
-* [mock 是什么? 一般在什么情况下 mock?](sections/test.md#mock)
+* 为什么要写测试? 写测试是否会拖累开发进度?[[more]](sections/test.md#q-why-write-test)
+* 单元测试的单元是指什么? 什么是覆盖率?[[more]](sections/test.md#单元测试)
+* 测试是如何保证业务逻辑中不会出现死循环的?[[more]](sections/test.md#q-death-loop)
+* mock 是什么? 一般在什么情况下 mock?[[more]](sections/test.md#mock)
 
 [阅读更多](sections/test.md)
 
-## util
+## [util](sections/util.md)
 
-* `[Doc]` URL
-* `[Doc]` Path (路径)
-* `[Doc]` Utilities (实用函数)
-* `[Doc]` Query Strings (查询字符串)
-* `[Basic]` 正则表达式
+* [`[Doc]` URL](sections/util.md#url)
+* [`[Doc]` Query Strings (查询字符串)](sections/util.md#query-strings)
+* [`[Doc]` Utilities (实用函数)](sections/util.md#util-1)
+* [`[Basic]` 正则表达式](sections/util.md#正则表达式)
 
-* 如何获取某个文件夹下所有的文件名?
+* HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器? [[more]](sections/util.md#)
+* Node.js 中继承 (util.inherits) 的实现? [[more]](sections/util.md#util-inherits)
+* 如何递归获取某个文件夹下所有的文件名? [[more]](sections/util.md#q-traversal)
 
-`更多整理中`
+[阅读更多](sections/util.md)
 
 ## 存储
 

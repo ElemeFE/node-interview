@@ -45,6 +45,13 @@
 
 索引是用空间换时间的一种优化策略. 推荐阅读: [mysql索引类型](http://www.cnblogs.com/cq-home/p/3482101.html)
 
+### Replication
+
+master/slave
+master/master
+
+读写分离
+
 ## Mongodb
 
 > Monogdb 连接问题(超时/断开等)有可能是什么问题导致的?
@@ -58,9 +65,31 @@
 * etc...
 
 
-replset
+### Replication
+
+在 MongoDB 副本集中(replset) ，主节点负责处理客户端的读写请求，备份节点则负责映射主节点的数据。
+
+备份节点的工作原理过程可以大致描述为，备份节点定期轮询主节点上的数据操作，然后对自己的数据副本进行这些操作，从而保证跟主节点的数据同步。
+
+至于主节点上的所有数据库状态改变的操作，都会存放在一张特定的系统表中。备份节点则是根据这些数据进行自己的数据更新。
+
+参见 [MongoDB副本集的工作原理](http://www.cnblogs.com/wilber2013/p/4154406.html)
+
+master/slave
+master/master
+
+读写分离
+
+### other
+
+populate
 
 aggregate
+
+pipeline
+
+Cursor
+
 
 整理中
 
@@ -93,7 +122,7 @@ aggregate
 
 ### 事务
 
-事务并不仅仅是 sql 数据库中的一个功能, 也是分布式系统开发中的一个思想, 事务在分布式的问题中可以称为 "两阶段提交" (一下引用陈皓原文)
+事务并不仅仅是 sql 数据库中的一个功能, 也是分布式系统开发中的一个思想, 事务在分布式的问题中可以称为 "两阶段提交" (以下引用陈皓原文)
 
 第一阶段：
 
@@ -130,10 +159,10 @@ aggregate
 
 ## 其他
 
-zookeeper
-kafka
-storm
-hadoop
-spark
+* zookeeper
+* kafka
+* storm
+* hadoop
+* spark
 
 

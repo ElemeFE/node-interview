@@ -221,7 +221,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * 什么情况下数据会出现脏数据? 如何避免? [[more]](sections/storage.md#数据一致性)
 * redis 与 memcached 的区别? [[more]](sections/storage.md#缓存)
 
-`更多整理中`
+[阅读更多](sections/storage.md)
 
 ## 安全
 

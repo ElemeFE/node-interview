@@ -1,8 +1,9 @@
 # 模块
 
-* [`[Basic]` 模块机制](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#模块机制)
-* [`[Basic]` 热更新](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#热更新)
-* [`[Basic]` 上下文](https://github.com/ElemeFE/node-interview/blob/master/sections/module.md#上下文)
+* [`[Basic]` 模块机制](#模块机制)
+* [`[Basic]` 热更新](#热更新)
+* [`[Basic]` 上下文](#上下文)
+* [`[Basic]` 包管理](#包管理)
 
 ## 常见问题
 
@@ -17,7 +18,8 @@
 
 其他还有很多内容也是属于很 '基础' 的 Node.js 问题 (例如异步/线程等等), 但是由于归类的问题并没有放在这个分类中. 所以这里只简单讲几个之后没归类的基础问题.
 
-### 模块机制
+
+## 模块机制
 
 node 的基础中毫无疑问的应该是有关于模块机制的方面的, 也即 `require` 这个内置功能的一些原理的问题.
 
@@ -68,7 +70,7 @@ function require(...) {
 
 再晋级一点, 众所周知, node 的模块机制是基于 [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 规范的. 对于从前端转 node 的同学, 如果面试官想问的难一点会考验关于 [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 的一些问题. 比如比较 `AMD`, `CMD`, [`CommonJS`](http://javascript.ruanyifeng.com/nodejs/module.html) 三者的区别, 包括询问关于 node 中 `require` 的实现原理等.
 
-### 热更新
+## 热更新
 
 从面试官的角度看, `热更新` 是很多程序常见的问题. 对客户端而言, 热更新意味着不用换包, 当然也包含着 md5 校验/差异更新等复杂问题; 对服务端而言, 热更新意味着服务不用重启, 这样可用性较高<del>同时也优雅和有逼格</del>. 问的过程中可以一定程度的暴露应聘程序员的水平.
 
@@ -80,7 +82,7 @@ function require(...) {
 
 所以这个问题其实本身其实是值得商榷的, 可能是典型的 [`X-Y Problem`](http://coolshell.cn/articles/10804.html), 不过聊起来确实是可以暴露水平.
 
-### 上下文
+## 上下文
 
 如果你已经了解 ①② 那么你也应该了解, 对于 Node.js 而言, 正常情况下只有一个上下文, 甚至于内置的很多方面例如 `require` 的实现只是在启动的时候运行了[内置的函数](https://github.com/nodejs/node/tree/master/lib). 
 
@@ -111,3 +113,22 @@ vm.runInThisContext(code)(require);
 这种执行方式与 eval 和 Function 有明显的区别. 关于 VM 更多的一些接口可以先阅读[官方文档 VM (虚拟机)](https://nodejs.org/dist/latest-v6.x/docs/api/vm.html)
 
 讲完这个知识点, 这里留下一个简单的问题, 既然可以通过新的上下文来避免污染, 那么`为什么 Node.js 不给每一个 `.js` 文件以独立的上下文来避免作用域被污染?` <del>(反应不过来的同学还是别投简历了, 微笑脸)</del>
+
+
+## 包管理
+
+
+整理中...
+
+为什么我装了全局, 但是提示我 not found
+
+npm
+yarn
+
+锁版本
+
+lerna：一个用户管理多个包模块的工具。
+
+left-pad事件
+
+greenkeeper 等

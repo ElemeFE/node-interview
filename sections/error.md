@@ -134,7 +134,7 @@ Error: test error
 
 错误栈中仅输出到 test 函数内调用的地方位置, 再往上 main 的调用信息就丢失了. 也就是说如果你的函数调用深度比较深的情况下, 你使用异步调用某个函数出错了的情况下追溯这个异步的调用是一个很困难的事情, 因为其之上的栈都已经丢失了. 如果你用过 [async](https://github.com/caolan/async) 之类的模块, 你还可能发现, 报错的 stack 会非常的长而且曲折, 光看 stack 很难去定位问题.
 
-这项目不大/作者清楚的情况下不是问题, 但是当项目大起来, 开发人员多起来之后, 这样追溯错误会变得异常痛苦. 关于这个问题, 在上文中提到 [错误处理的最佳实践](https://cnodejs.org/topic/55714dfac4e7fbea6e9a2e5d) 中, 关于 `编写新函数的具体建议` 那一带的内容有描述到. 通过使用 [verror](https://www.npmjs.com/package/verror) 这样的方式, 让 Error 一层层封装, 并在每一层将错误的信息一层层的包上, 最后拿到的 Error 直接可以从 message 中获取用于定位问题的关键信息.
+这在项目不大/作者清楚的情况下不是问题, 但是当项目大起来, 开发人员多起来之后, 这样追溯错误会变得异常痛苦. 关于这个问题, 在上文中提到 [错误处理的最佳实践](https://cnodejs.org/topic/55714dfac4e7fbea6e9a2e5d) 中, 关于 `编写新函数的具体建议` 那一带的内容有描述到. 通过使用 [verror](https://www.npmjs.com/package/verror) 这样的方式, 让 Error 一层层封装, 并在每一层将错误的信息一层层的包上, 最后拿到的 Error 直接可以从 message 中获取用于定位问题的关键信息.
 
 以昨天的数据为准（2017-3-13）各位只要对比一下看看 npm 上上个月 [verror](https://www.npmjs.com/package/verror) 的下载量 `1100w` 比 [express](https://www.npmjs.com/package/express) 的 `1070w` 还高. 应该就能感受到这种写法有多流行了.
 

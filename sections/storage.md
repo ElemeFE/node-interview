@@ -9,16 +9,10 @@
 
 科班的同学可以了解一下[数据库范式](http://www.cnblogs.com/CareySon/archive/2010/02/16/1668803.html), 在 ElemeFe 面试不会问, 但是其他地方可能会问 (比如阿里).
 
-> <a name="q-deploy"></a> 备份数据库与 M/S, M/M 等部署方式的区别?
-
-关于数据库基于各种模式的特点全部可以通过以下图片分清:
-
-![storage](/assets/storage.jpeg)
-
-图片出处：Google App Engine 的 co-founder Ryan Barrett 在 2009 年的 google i/o 上的演讲 [《Transaction Across DataCenter》](http://snarfed.org/transactions_across_datacenters_io.html)（视频： http://www.youtube.com/watch?v=srOgpXECblk） 
-
 
 ## Mysql
+
+SQL (Structured Query Language) 是[关系式数据库管理系统](https://en.wikipedia.org/wiki/Relational_database)的标准语言, 关于关系型数据库这里主要带大家看一下 Mysql 的几个问题
 
 ### 存储引擎
 
@@ -43,14 +37,8 @@
 
 ### 索引
 
-索引是用空间换时间的一种优化策略. 推荐阅读: [mysql索引类型](http://www.cnblogs.com/cq-home/p/3482101.html)
+索引是用空间换时间的一种优化策略. 推荐阅读: [mysql索引类型](http://www.cnblogs.com/cq-home/p/3482101.html) 以及 [主键与唯一索引的区别](http://blog.mimvp.com/2015/03/the-difference-between-primary-key-and-unique-index/)
 
-### Replication
-
-master/slave
-master/master
-
-读写分离
 
 ## Mongodb
 
@@ -64,22 +52,6 @@ master/master
 * mongodb 最大连接数不够用 (可能是连接未复用导致)
 * etc...
 
-
-### Replication
-
-在 MongoDB 副本集中(replset) ，主节点负责处理客户端的读写请求，备份节点则负责映射主节点的数据。
-
-备份节点的工作原理过程可以大致描述为，备份节点定期轮询主节点上的数据操作，然后对自己的数据副本进行这些操作，从而保证跟主节点的数据同步。
-
-至于主节点上的所有数据库状态改变的操作，都会存放在一张特定的系统表中。备份节点则是根据这些数据进行自己的数据更新。
-
-参见 [MongoDB副本集的工作原理](http://www.cnblogs.com/wilber2013/p/4154406.html)
-
-master/slave
-master/master
-
-读写分离
-
 ### other
 
 populate
@@ -90,8 +62,30 @@ pipeline
 
 Cursor
 
-
 整理中
+
+## Replication
+
+> 备份数据库与 M/S, M/M 等部署方式的区别?
+
+关于数据库基于各种模式的特点全部可以通过以下图片分清:
+
+![storage](/assets/storage.jpeg)
+
+图片出处：Google App Engine 的 co-founder Ryan Barrett 在 2009 年的 google i/o 上的演讲 [《Transaction Across DataCenter》](http://snarfed.org/transactions_across_datacenters_io.html)（视频： http://www.youtube.com/watch?v=srOgpXECblk） 
+
+根据上图, 我们可以知道  Master/Slave 与 Master/Master 的关系.
+
+<table>
+  <tr><th>attr</th><th>Master/Slave</th><th>Master/Master</th></tr>
+  <tr><td>一致性</td><td colspan="2">Eventually：当你写入一个新值后，有可能读不出来，但在某个时间窗口之后保证最终能读出来。比如：DNS，电子邮件、Amazon S3，Google搜索引擎这样的系统。</td></tr>
+  <tr><td>事务</td><td align="center">完整</td><td align="center">本地</td></tr>
+  <tr><td>延迟</td><td colspan="2" align="center">低延迟</td></tr>
+  <tr><td>吞吐</td><td colspan="2" align="center">高吞吐</td></tr>
+  <tr><td>数据丢失</td><td colspan="2" align="center">部分丢失</td></tr>
+  <tr><td>熔断</td><td align="center">只读</td><td align="center">读/写</td></tr>
+</table>
+
 
 ## 数据一致性
 

@@ -210,12 +210,13 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 * [`[Point]` Mysql](sections/storage.md#mysql)
 * [`[Point]` Mongodb](sections/storage.md#mongodb)
+* [`[Point]` Replication](sections/storage.md#replication)
 * [`[Point]` 数据一致性](sections/storage.md#数据一致性)
 * [`[Point]` 缓存](sections/storage.md#缓存)
 
 ### 常见问题
 
-* 备份数据库与 M/S, M/M 等部署方式的区别? [[more]](sections/storage.md#q-deploy)
+* 备份数据库与 M/S, M/M 等部署方式的区别? [[more]](sections/storage.md#replication)
 * 索引有什么用，大致原理是什么? 设计索引有什么注意点? [[more]](sections/storage.md#索引)
 * Monogdb 连接问题(超时/断开等)有可能是什么问题导致的? [[more]](sections/storage.md#Mongodb)
 * 什么情况下数据会出现脏数据? 如何避免? [[more]](sections/storage.md#数据一致性)

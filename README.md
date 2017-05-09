@@ -31,7 +31,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](sections/js-basic.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
 * const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象的意义是? [[more]](sections/js-basic.md#q-const)
-* Javascript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](sections/js-basic.md#q-mem)
+* JavaScript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](sections/js-basic.md#q-mem)
 
 [阅读更多](sections/js-basic.md)
 
@@ -40,6 +40,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 * [`[Basic]` 模块机制](sections/module.md#模块机制)
 * [`[Basic]` 热更新](sections/module.md#热更新)
 * [`[Basic]` 上下文](sections/module.md#上下文)
+* [`[Basic]` 包管理](sections/module.md#包管理)
 
 ### 常见问题
 
@@ -135,7 +136,8 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 ## [OS](sections/os.md)
 
 * [`[Doc]` TTY](sections/os.md#tty)
-* [`[Doc]` OS (操作系统)](sections/os.md#os)
+* [`[Doc]` OS (操作系统)](sections/os.md#os-1)
+* [`[Doc]` Path](sections/os.md#path)
 * [`[Doc]` 命令行参数](sections/os.md#命令行参数)
 * [`[Basic]` 负载](sections/os.md#负载)
 * [`[Point]` CheckList](sections/os.md#checklist)
@@ -149,90 +151,103 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](sections/os.md)
 
-## 错误处理/调试/优化
+## [错误处理/调试/优化](sections/error.md)
 
-* `[Doc]` Errors (异常)
-* `[Doc]` Domain (域)
-* `[Doc]` Debugger (调试器)
-* `[Doc]` C/C++ 插件
-* `[Doc]` V8
-* `[Point]` 内存快照
-* `[Point]` CPU剖析
+* [`[Doc]` Errors (异常)](sections/error.md#errors)
+* [`[Doc]` Domain (域)](sections/error.md#domain)
+* [`[Doc]` Debugger (调试器)](sections/error.md#debugger)
+* [`[Doc]` C/C++ 插件](sections/error.md#c-c++-addon)
+* [`[Doc]` V8](sections/error.md#v8)
+* [`[Point]` 内存快照](sections/error.md#内存快照)
+* [`[Point]` CPU profiling](sections/error.md#cpu-profiling)
 
 ### 常见问题
 
-* 怎么处理未预料的出错?用 try/catch ，domains 还是其它什么?
-* domain 的原理是? 为什么要弃用 domain?
+* 怎么处理未预料的出错? 用 try/catch ，domains 还是其它什么? [[more]](sections/error.md#q-handle-error)
+* 什么是 `uncaughtException` 事件? 一般在什么情况下使用该事件? [[more]](sections/error.md#uncaughtexception)
+* domain 的原理是? 为什么要弃用 domain? [[more]](sections/error.md#domain)
+* 什么是防御性编程? 与其相对的 let it crash 又是什么?
 * 为什么要在 cb 的第一参数传 error? 为什么有的 cb 第一个参数不是 error, 例如 http.createServer?
+* 为什么有些异常没法根据报错信息定位到代码调用? 如何准确的定位一个异常? [[more]](sections/error.md#错误栈丢失)
+* 内存泄漏通常由哪些原因导致? 如何分析以及定位内存泄漏? [[more]](sections/error.md#内存快照)
 
-`更多整理中`
+[阅读更多](sections/error.md)
 
-## 测试
+## [测试](sections/test.md)
 
-* `[Basic]` 单元测试
-* `[Basic]` 基准测试
-* `[Basic]` 集成测试
-* `[Doc]` Assert (断言)
-* `[Module]` 常见测试工具
-* `[Module]` 常见断言工具
-
-### 常见问题
-
-* 为什么要写测试? 写测试是否会拖累开发进度?
-* 单元测试的单元是指什么? 什么是覆盖率?
-* 测试是如何保证业务逻辑中不会出现死循环的?
-* mock 是指什么? 一般如何实现?
-
-`更多整理中`
-
-## util
-
-* `[Doc]` URL
-* `[Doc]` Path (路径)
-* `[Doc]` Utilities (实用函数)
-* `[Doc]` Query Strings (查询字符串)
-* `[Basic]` 正则表达式
-
-* 如何获取某个文件夹下所有的文件名?
-
-`更多整理中`
-
-## 存储
-
-* `[Point]` Sql
-* `[Point]` NoSql
-* `[Point]` 缓存
-* `[Point]` 数据一致性
+* [`[Basic]` 测试方法](sections/test.md#测试方法)
+* [`[Basic]` 单元测试](sections/test.md#单元测试)
+* [`[Basic]` 集成测试](sections/test.md#集成测试)
+* [`[Basic]` 基准测试](sections/test.md#基准测试)
+* [`[Basic]` 压力测试](sections/test.md#压力测试)
+* [`[Doc]` Assert (断言)](sections/test.md#assert)
 
 ### 常见问题
 
-* 索引有什么用，大致原理是什么?设计索引有什么注意点?
-* Session/Cookie 有什么区别?
-* 连接超时有可能是什么问题导致的?
-* 什么情况下数据会出现脏读? 如何避免?
+* 为什么要写测试? 写测试是否会拖累开发进度?[[more]](sections/test.md#q-why-write-test)
+* 单元测试的单元是指什么? 什么是覆盖率?[[more]](sections/test.md#单元测试)
+* 测试是如何保证业务逻辑中不会出现死循环的?[[more]](sections/test.md#q-death-loop)
+* mock 是什么? 一般在什么情况下 mock?[[more]](sections/test.md#mock)
 
-`更多整理中`
+[阅读更多](sections/test.md)
 
-## 安全
+## [util](sections/util.md)
 
-* `[Doc]` HTTPS
-* `[Doc]` TLS/SSL
-* `[Point]` XSS
-* `[Point]` CSRF
-* `[Point]` 中间人攻击
-* `[Point]` Sql/Nosql 注入攻击
-* `[Doc]` Crypto (加密)
+* [`[Doc]` URL](sections/util.md#url)
+* [`[Doc]` Query Strings (查询字符串)](sections/util.md#query-strings)
+* [`[Doc]` Utilities (实用函数)](sections/util.md#util-1)
+* [`[Basic]` 正则表达式](sections/util.md#正则表达式)
 
 ### 常见问题
 
-* CSRF 的攻击和防范方法?
-* 加密如何保证用户密码的安全性?
-* 如何避免中间人攻击?
+* HTTP 如何通过 GET 方法 (URL) 传递 let arr = [1,2,3,4] 给服务器? [[more]](sections/util.md#get-param)
+* Node.js 中继承 (util.inherits) 的实现? [[more]](sections/util.md#utilinherits)
+* 如何递归获取某个文件夹下所有的文件名? [[more]](sections/util.md#q-traversal)
 
-`更多整理中`
+[阅读更多](sections/util.md)
+
+## [存储](sections/storage.md)
+
+* [`[Point]` Mysql](sections/storage.md#mysql)
+* [`[Point]` Mongodb](sections/storage.md#mongodb)
+* [`[Point]` Replication](sections/storage.md#replication)
+* [`[Point]` 数据一致性](sections/storage.md#数据一致性)
+* [`[Point]` 缓存](sections/storage.md#缓存)
+
+### 常见问题
+
+* 备份数据库与 M/S, M/M 等部署方式的区别? [[more]](sections/storage.md#replication)
+* 索引有什么用，大致原理是什么? 设计索引有什么注意点? [[more]](sections/storage.md#索引)
+* Monogdb 连接问题(超时/断开等)有可能是什么问题导致的? [[more]](sections/storage.md#Mongodb)
+* 什么情况下数据会出现脏数据? 如何避免? [[more]](sections/storage.md#数据一致性)
+* redis 与 memcached 的区别? [[more]](sections/storage.md#缓存)
+
+[阅读更多](sections/storage.md)
+
+## [安全](sections/security.md)
+
+* [`[Doc]` Crypto (加密)](sections/security.md#crypto)
+* [`[Doc]` TLS/SSL](sections/security.md#tls-ssl)
+* [`[Doc]` HTTPS](sections/security.md#https)
+* [`[Point]` XSS](sections/security.md#xss)
+* [`[Point]` CSRF](sections/security.md#csrf)
+* [`[Point]` 中间人攻击](sections/security.md#中间人攻击)
+* [`[Point]` Sql/Nosql 注入](sections/security.md#SQL-NoSQL-注入)
+
+### 常见问题
+
+* 加密是如何保证用户密码的安全性? [[more]](sections/security.md#crypto)
+* TLS 与 SSL 有什么区别? [[more]](sections/security.md#tls-ssl)
+* HTTPS 能否被劫持? [[more]](sections/security.md#https)
+* XSS 攻击是什么? 有什么危害? [[more]](sections/security.md#xss)
+* 过滤 Html 标签能否防止 XSS? 请列举不能的情况? [[more]](sections/security.md#xss)
+* CSRF 是什么? 如何防范? [[more]](sections/security.md#csrf)
+* 如何避免中间人攻击? [[more]](sections/security.md#中间人攻击)
+
+[阅读更多](sections/security.md)
 
 ## 最后
 
 目前 repo 处于施工现场的情况，如果发现问题欢迎在 [issues](https://github.com/ElemeFE/node-interview/issues) 中指出。如果有比较好的问题/知识点/指正，也欢迎提 PR。
 
-另外关于 Js 基础 是个比较大的话题，在本教程不会很细致深入的讨论，更多的是列出一些重要或者更服务端更相关的地方，所以如果你拿着《Javascript 权威指南》给教程提 PR 可能不会采纳。本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分。
+另外关于 Js 基础 是个比较大的话题，在本教程不会很细致深入的讨论，更多的是列出一些重要或者跟服务端更相关的地方，所以如果你拿着《JavaScript 权威指南》给教程提 PR 可能不会采纳。本教程的重点更准确的说是服务端基础中 Node.js 程序员需要了解的部分。

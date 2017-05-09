@@ -61,7 +61,7 @@ TCP 头里有一个 Window 字段, 是接收端告诉发送端自己还有多少
 
 ### backlog
 
-![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](../assets/socket-backlog.png)
+![图片出处 http://www.cnxct.com/something-about-phpfpm-s-backlog/](/assets/socket-backlog.png)
 
 关于该 backlog 的定义参见 [man](https://linux.die.net/man/2/listen) 手册:
 
@@ -73,7 +73,7 @@ backlog 用于设置客户端与服务端 `ESTABLISHED` 之后等待 accept 的�
 
 ### 状态机
 
-![tcpfsm.png](../assets/tcpfsm.png)
+![tcpfsm.png](/assets/tcpfsm.png)
 
 关于网络连接的建立以及断开, 存在着一个复杂的状态转换机制, 完整的状态表参见 [《The TCP/IP Guide》](http://www.tcpipguide.com/free/t_TCPOperationalOverviewandtheTCPFiniteStateMachineF-2.htm)
 
@@ -91,11 +91,11 @@ FIN-WAIT-2|主动方收到被动方的 ACK, 等待 FIN
 CLOSING|主动方收到了FIN, 却没收到 FIN-WAIT-1 时发的 ACK, 此时等待那个 ACK
 TIME-WAIT|主动方收到 FIN, 返回收到对方 FIN 的 ACK, 等待对方是否真的收到了 ACK, 如果过一会又来一个 FIN, 表示对方没收到, 这时要再 ACK 一次
 
-> <a name="q-time-wait"></a> `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因? 
+> <a name="q-time-wait"></a> `TIME_WAIT` 是什么情况? 出现过多的 `TIME_WAIT` 可能是什么原因?
 
 `TIME_WAIT` 是连接的某一方 (可能是服务端也可能是客户端) 主动断开连接时, 四次挥手等待被断开的一方是否收到最后一次挥手 (ACK) 的状态. 如果在等待时间中, 再次收到第三次挥手 (FIN) 表示对方没收到最后一次挥手, 这时要再 ACK 一次. 这个等待的作用是避免出现连接混用的情况 (`prevent potential overlap with new connections` see [TCP Connection Termination](http://www.tcpipguide.com/free/t_TCPConnectionTermination.htm) for more).
 
-出现大量的 `TIME_WAIT` 比较常见的情况是, 并发量大, 服务器在短时间断开了大量连接. 对应 HTTP server 的情况可能是没开启 `keepAlive`. 如果有开 `keepAlive`, 一般是等待客户端自己主动断开, 那么`TIME_WAIT` 就只存在客户端, 而服务端则是 `CLOSE_WAIT` 的状态, 如果服务端出现大量 `CLOSE_WAIT`, 意味着当前服务端建立的链接大面积的被断开, 可能是目标服务集群重启之类.
+出现大量的 `TIME_WAIT` 比较常见的情况是, 并发量大, 服务器在短时间断开了大量连接. 对应 HTTP server 的情况可能是没开启 `keepAlive`. 如果有开 `keepAlive`, 一般是等待客户端自己主动断开, 那么`TIME_WAIT` 就只存在客户端, 而服务端则是 `CLOSE_WAIT` 的状态, 如果服务端出现大量 `CLOSE_WAIT`, 意味着当前服务端建立的连接大面积的被断开, 可能是目标服务集群重启之类.
 
 
 ## UDP
@@ -128,7 +128,7 @@ UDP socket 支持 n 对 m 的连接状态, 在[官方文档](https://nodejs.org/
   <tr><td>流式多媒体通信</td><td>-</td></tr>
 </table>
 
-简单的说, UDP 速度快, 开销低, 不用封包/拆包允许丢一部分数据, 监控统计/日志数据上报/流媒体通信等场景都可以用 UDP. 目前 Node.js 的项目中使用 UDP 比较流行的是 [StatsD](https://github.com/etsy/statsd) 监控服务. 
+简单的说, UDP 速度快, 开销低, 不用封包/拆包允许丢一部分数据, 监控统计/日志数据上报/流媒体通信等场景都可以用 UDP. 目前 Node.js 的项目中使用 UDP 比较流行的是 [StatsD](https://github.com/etsy/statsd) 监控服务.
 
 
 ## HTTP
@@ -212,13 +212,21 @@ location ~* ^/(?:v1|_) {
 
 Node.js 中的 `http.Agent` 用于池化 HTTP 客户端请求的 socket (pooling sockets used in HTTP client requests). 也就是复用 HTTP 请求时候的 socket. 如果你没有指定 Agent 的话, 默认用的是 `http.globalAgent`.
 
-另外最近发现一个 Agent 坑爹的地方, 当 `keepAlive` 为 true 是, 由于 socket 复用, 之前的事件监听如果忘了清除很容易导致重复监听, 并且旧的监听中的引用不会释放从导致内存泄漏, 参见这个 [issue](https://github.com/nodejs/node/issues/9268). (本组的同学有在整理这方面的文章, 请期待)
+另外, 目前在 Node.js 的 6.8.1（包括）到 6.10（不包括）版本中发现一个问题:
+
+* 1. 你将 keepAlive 设置为 `true` 时, socket 有复用
+* 2. 即使 keepAlive 没有设置成 `true` 但是长时间内有大量请求时, 同样有复用 socket (复用情况参见[@zcs19871221](https://github.com/zcs19871221)的[解析](https://github.com/zcs19871221/mydoc/blob/master/nodejsAgent.md))
+
+1 和 2 这两种情况下, 一旦设置了 request timeout, 由于 socket 一直未销毁, 如果你在请求完成以后没有注意清除该事件, 会导致事件重复监听, 且该事件闭包引用了 req, 会导致内存泄漏.
+
+如果有疑虑的话可以参见 Node 官方讨论的 [issue](https://github.com/nodejs/node/issues/9268) 以及引入此 bug 的 [commit](https://github.com/nodejs/node/blob/ee7af01b93cc46f1848f6962ad2d6c93f319341a/lib/_http_client.js#L565), 如果此处描述有疑问可以在本 repo 的 [issue](https://github.com/ElemeFE/node-interview/issues/19) 中指出.
+
 
 ### socket hang up
 
 hang up 有挂断的意思, socket hang up 也可以理解为 socket 被挂断. 在 Node.js 中当你要 response 一个请求的时候, 发现该这个 socket 已经被 "挂断", 就会就会报 socket hang up 错误.
 
-[Node.js 中源码的情况:](https://github.com/nodejs/node/blob/v6.x/lib/_http_client.js#L286):
+[Node.js 中源码的情况:](https://github.com/nodejs/node/blob/v6.x/lib/_http_client.js#L286)
 
 ```javascript
 function socketCloseListener() {
@@ -287,18 +295,23 @@ DNS 服务主要基于 UDP, 这里简单介绍 Node.js 实现的接口中的两�
 
 由于 .lookup 是同步的, 所以如果由于什么不可控的原因导致 `getaddrinfo` 缓慢或者阻塞是会影响整个 Node 进程的, 参见[文档](https://nodejs.org/dist/latest-v6.x/docs/api/dns.html#dns_dns_lookup).
 
+> hosts 文件是什么? 什么叫 DNS 本地解析?
+
+hosts 文件是个没有扩展名的系统文件，其作用就是将网址域名与其对应的 IP 地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从 hosts 文件中寻找对应的IP地址。  
+
+当我们访问一个域名时，实际上需要的是访问对应的 IP 地址。这时候，获取 IP 地址的方式，先是读取浏览器缓存，如果未命中 => 接着读取本地 hosts 文件，如果还是未命中 => 则向 DNS 服务器发送请求获取。在向 DNS 服务器获取 IP 地址之前的行为，叫做 DNS 本地解析。
 
 ## ZLIB
 
 在网络传输过程中, 如果网速稳定的情况下, 对数据进行压缩, 压缩比率越大, 那么传输的效率就越高等同于速度越快了. zlib 模块提供了 Gzip/Gunzip, Deflate/Inflate 和 DeflateRaw/InflateRaw 等压缩方法的类, 这些类接收相同的参数, 都属于可读写的 Stream 实例.
 
-整理中
+TODO
 
 ## RPC
 
 RPC (Remote Procedure Call Protocol) 基于 TCP/IP 来实现调用远程服务器的方法, 与 http 同属应用层. 常用于构建集群, 以及微服务 (推荐一本[《Node.js 微服务》](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01MXY8ARP)<del>虽然我还没看完</del>)
 
-常见的 RPC 几大代表:
+常见的 RPC 方式:
 
 * [Thrift](http://thrift.apache.org/)
 * HTTP
@@ -318,4 +331,4 @@ RPC (Remote Procedure Call Protocol) 基于 TCP/IP 来实现调用远程服务�
 
 使用消息队列 (Message Queue) 来进行 RPC 调用 (RPC over mq) 在业内有不少例子, 比较适合业务解耦/广播/限流等场景.
 
-整理中
+TODO

@@ -91,6 +91,94 @@ end of line (EOL) 同 newline, line ending, 以及 line break.
 * Windows 错误常量 (Windows Specific Error Constants), 如 `WSAEACCES`, `WSAEBADF` 等.
 * libuv 常量 (libuv Constants), 仅 `UV_UDP_REUSEADDR`.
 
+
+## Path
+
+Node.js 内置的 path 是用于处理路径问题的模块. 不过众所周知, 路径在不同操作系统下又不可调和的差异.
+
+### Windows vs. POSIX
+
+|POSIX|值|Windows|值|
+|---|---|---|---|
+|path.posix.sep|`'/'`|path.win32.sep|`'\\'`|
+|path.posix.normalize('/foo/bar//baz/asdf/quux/..')|`'/foo/bar/baz/asdf'`|path.win32.normalize('C:\\temp\\\\foo\\bar\\..\\')|`'C:\\temp\\foo\\'`|
+|path.posix.basename('/tmp/myfile.html')|`'myfile.html'`|path.win32.basename('C:\\temp\\myfile.html')|`'myfile.html'`|
+|path.posix.join('/asdf', '/test.html')|`'/asdf/test.html'`|path.win32.join('/asdf', '/test.html')|`'\\asdf\\test.html'`|
+|path.posix.relative('/root/a', '/root/b')|`'../b'`|path.win32.relative('C:\\a', 'c:\\b')|`'..\\b'`
+|path.posix.isAbsolute('/baz/..')|`true`|path.win32.isAbsolute('C:\\foo\\..')|`true`|
+|path.posix.delimiter|`':'`|path.win32.delimiter|`','`|
+|process.env.PATH|`'/usr/bin:/bin'`|process.env.PATH|`C:\Windows\system32;C:\Program Files\node\'`|
+|PATH.split(path.posix.delimiter)|`['/usr/bin', '/bin']`|PATH.split(path.win32.delimiter)|`['C:\\Windows\\system32', 'C:\\Program Files\\node\\']`|
+
+
+看了上表之后, 你应该了解到当你处于某个平台之下的时候, 所使用的 `path` 模块的方法其实就是对应的平台的方法, 例如笔者这里用的是 mac, 所以:
+
+```javascript
+const path = require('path');
+console.log(path.basename === path.posix.basename); // true
+```
+
+如果你处于其中某一个平台, 但是要处理另外一个平台的路径, 需要注意这个跨平台的问题.
+
+### path 对象
+
+on POSIX:
+
+```javascript
+path.parse('/home/user/dir/file.txt')
+// Returns:
+// {
+//    root : "/",
+//    dir : "/home/user/dir",
+//    base : "file.txt",
+//    ext : ".txt",
+//    name : "file"
+// }
+```
+
+```javascript
+┌─────────────────────┬────────────┐
+│          dir        │    base    │
+├──────┬              ├──────┬─────┤
+│ root │              │ name │ ext │
+"  /    home/user/dir / file  .txt "
+└──────┴──────────────┴──────┴─────┘
+```
+
+on Windows:
+
+```javascript
+path.parse('C:\\path\\dir\\file.txt')
+// Returns:
+// {
+//    root : "C:\\",
+//    dir : "C:\\path\\dir",
+//    base : "file.txt",
+//    ext : ".txt",
+//    name : "file"
+// }
+```
+
+```javascript
+┌─────────────────────┬────────────┐
+│          dir        │    base    │
+├──────┬              ├──────┬─────┤
+│ root │              │ name │ ext │
+" C:\      path\dir   \ file  .txt "
+└──────┴──────────────┴──────┴─────┘
+```
+
+### path.extname(path)
+
+|case|return|
+|---|---|
+|path.extname('index.html')|`'.html'`|
+|path.extname('index.coffee.md')|`'.md'`|
+|path.extname('index.')|`'.'`|
+|path.extname('index')|`''`|
+|path.extname('.index')|`''`|
+
+
 ## 命令行参数
 
 命令行参数 (Command Line Options), 即对 CLI 使用上的一些文档. 关于 CLI 主要有 4 种使用方式:

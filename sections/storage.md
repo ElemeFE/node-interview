@@ -153,7 +153,7 @@ Cursor
 |Persistence | × | ✓ |
 |transcations | × | ✓ |
 |consistency | strong (by cas) | weak |
-|thread | multi | signle |
+|thread | multi | single |
 |memory | physical | physical & swap |
 
 

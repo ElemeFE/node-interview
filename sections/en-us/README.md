@@ -1,23 +1,31 @@
 ![ElemeFE-background](/assets/ElemeFE-background.png)
 
-# Node interview of ElemeFE
+## Movition
 
-Hi, welcome to ElemeFE
 
 ## Guide
+
 
 ## [Basic](sections/en-us/js-basic.md)
 
 > It's much more diff between frontend and backend.
 
+* `[Basic]` Type judgment
+* `[Basic]` Scope
+* `[Basic]` Reference
+* `[Basic]` Memory release
+* `[Basic]` ES6+ featrues
 
 **Common Problem**
-
 
 [View more](sections/en-us/js-basic.md)
 
 ## [Module](sections/en-us/module.md)
 
+* `[Basic]` Module
+* `[Basic]` Hotfix
+* `[Basic]` Context
+* `[Basic]` Package Manager
 
 **Common Problem**
 
@@ -26,6 +34,11 @@ Hi, welcome to ElemeFE
 
 ## [Event & Async](sections/en-us/event-async.md)
 
+* `[Basic]` Promise
+* `[Doc]` Events
+* `[Doc]` Timers
+* `[Point]` Blocking & Non-blocking
+* `[Point]` Parallel & Concurrent
 
 **Common Problem**
 
@@ -34,6 +47,11 @@ Hi, welcome to ElemeFE
 
 ## [Process](sections/en-us/process.md)
 
+* `[Doc]` Process
+* `[Doc]` Child Processes
+* `[Doc]` Cluster
+* `[Basic]` IPC
+* `[Basic]` Daemon
 
 **Common Problem**
 
@@ -43,6 +61,13 @@ Hi, welcome to ElemeFE
 
 ## [IO](sections/en-us/io.md)
 
+* `[Doc]` Buffer
+* `[Doc]` String Decoder
+* `[Doc]` Stream
+* `[Doc]` Console
+* `[Doc]` File System
+* `[Doc]` Readline
+* `[Doc]` REPL
 
 **Common Problem**
 
@@ -51,6 +76,12 @@ Hi, welcome to ElemeFE
 
 ## [Network](sections/en-us/network.md)
 
+* `[Doc]` Net
+* `[Doc]` UDP/Datagram
+* `[Doc]` HTTP
+* `[Doc]` DNS
+* `[Doc]` ZLIB
+* `[Point]` RPC
 
 **Common Problem**
 
@@ -59,6 +90,12 @@ Hi, welcome to ElemeFE
 
 ## [OS](sections/en-us/os.md)
 
+* `[Doc]` TTY
+* `[Doc]` OS
+* `[Doc]` Command Line Options
+* `[Basic]` Load
+* `[Point]` CheckList
+* `[Basic]` Indicators
 
 **Common Problem**
 
@@ -67,6 +104,13 @@ Hi, welcome to ElemeFE
 
 ## [Error/Debug/Opt](sections/en-us/error.md)
 
+* `[Doc]` Errors
+* `[Doc]` Domain
+* `[Doc]` Debugger
+* `[Doc]` C/C++ Addon
+* `[Doc]` V8
+* `[Point]` Memory snapshot
+* `[Point]` CPU Profilling
 
 **Common Problem**
 
@@ -75,6 +119,12 @@ Hi, welcome to ElemeFE
 
 ## [Test](sections/en-us/test.md)
 
+* `[Basic]` Methods
+* `[Basic]` Unit Test
+* `[Basic]` Benchmarks
+* `[Basic]` Integration Test
+* `[Basic]` Pressure Test
+* `[Doc]` Assert
 
 **Common Problem**
 
@@ -83,6 +133,10 @@ Hi, welcome to ElemeFE
 
 ## [Util](sections/en-us/util.md)
 
+* `[Doc]` URL
+* `[Doc]` Query Strings
+* `[Doc]` Utilities
+* `[Basic]` Regex
 
 **Common Problem**
 
@@ -91,6 +145,10 @@ Hi, welcome to ElemeFE
 
 ## [Storage](sections/en-us/storage.md)
 
+* `[Point]` Sql
+* `[Point]` NoSql
+* `[Point]` Cache
+* `[Point]` Consistency
 
 **Common Problem**
 
@@ -99,6 +157,13 @@ Hi, welcome to ElemeFE
 
 ## [Security](sections/en-us/security.md)
 
+* `[Doc]` Crypto
+* `[Doc]` TLS/SSL
+* `[Doc]` HTTPS
+* `[Point]` XSS
+* `[Point]` CSRF
+* `[Point]` MITM
+* `[Point]` Sql/Nosql Injection
 
 **Common Problem**
 

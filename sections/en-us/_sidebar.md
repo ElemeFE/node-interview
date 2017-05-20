@@ -1,0 +1,16 @@
+<!-- docs/_sidebar.md -->
+
+- [Node interview](/)
+  - [Guide](/)
+  - [Js Basic](sections/en-us/js-basic.md)
+  - [Module](sections/en-us/module.md)
+  - [Event & Async](sections/en-us/event-async.md)
+  - [Process](sections/en-us/process.md)
+  - [IO](sections/en-us/io.md)
+  - [Network](sections/en-us/network.md)
+  - [OS](sections/en-us/os.md)
+  - [Error/Debug/Opt](sections/en-us/error.md)
+  - [Test](sections/en-us/test.md)
+  - [Util](sections/en-us/util.md)
+  - [Storage](sections/en-us/storage.md)
+  - [Security](sections/en-us/security.md)

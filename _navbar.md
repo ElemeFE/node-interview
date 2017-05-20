@@ -1,11 +1,4 @@
-- [首页](/)
-- 章节
-  - [事件/异步](sections/event-async)
-  - [IO](sections/io)
-  - [Javascript 基础问题](sections/js-basic)
-  - [模块](sections/module)
-  - [Network](sections/network)
-  - [进程](sections/process)
+- [Home](/)
 - Translations
-  - [中文](/)
-  - [English](/en-us/)
+  - [English](sections/en-us/)
+  - [简体中文](sections/zh-cn/)

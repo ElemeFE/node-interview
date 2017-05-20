@@ -1,5 +1,6 @@
 {
   "name": "node-interview",
+  "version": "0.1.0",
   "repository": "git@github.com:ElemeFE/node-interview.git",
   "scripts": {
     "serve": "docsify serve ."

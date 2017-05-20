@@ -227,17 +227,17 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 ## [安全](sections/security.md)
 
 * [`[Doc]` Crypto (加密)](sections/security.md#crypto)
-* [`[Doc]` TLS/SSL](sections/security.md#tls-ssl)
+* [`[Doc]` TLS/SSL](sections/security.md#tlsssl)
 * [`[Doc]` HTTPS](sections/security.md#https)
 * [`[Point]` XSS](sections/security.md#xss)
 * [`[Point]` CSRF](sections/security.md#csrf)
 * [`[Point]` 中间人攻击](sections/security.md#中间人攻击)
-* [`[Point]` Sql/Nosql 注入](sections/security.md#SQL-NoSQL-注入)
+* [`[Point]` Sql/Nosql 注入](sections/security.md#sqlnosql-注入)
 
 ### 常见问题
 
 * 加密是如何保证用户密码的安全性? [[more]](sections/security.md#crypto)
-* TLS 与 SSL 有什么区别? [[more]](sections/security.md#tls-ssl)
+* TLS 与 SSL 有什么区别? [[more]](sections/security.md#tlsssl)
 * HTTPS 能否被劫持? [[more]](sections/security.md#https)
 * XSS 攻击是什么? 有什么危害? [[more]](sections/security.md#xss)
 * 过滤 Html 标签能否防止 XSS? 请列举不能的情况? [[more]](sections/security.md#xss)

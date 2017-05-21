@@ -10,7 +10,7 @@ This is the interview Index about it, and it shows you how to pass the Node.js i
 
 ## What is ElemeFE?
 
-It means Frontend team of Eleme (饿了么) which seems like the bigest takeaway company of China.
+It means Frontend team of Eleme (饿了么) which seems like the biggest takeaway company of China.
 
 There are some public projects of Eleme:
 
@@ -20,7 +20,7 @@ There are some public projects of Eleme:
 * [restc](https://elemefe.github.io/restc/) A server-side middleware to visualize REST requests.
 * [vue-infinite-scroll](https://github.com/ElemeFE/vue-infinite-scroll) An infinite scroll directive for vue.js.
 
-As you see, we are frontend team, but we'v been doing some backend job to support frontend to gain more.
+As you see, we are frontend team, but we've been doing some backend job to support frontend to gain more.
 
 #### Language support
 

@@ -1,4 +1,4 @@
-# Error/Debug/Opt
+# Error & Debug
 
 * `[Doc]` Errors
 * `[Doc]` Domain

@@ -151,7 +151,7 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 [阅读更多](sections/zh-cn/os.md)
 
-## [错误处理/调试/优化](sections/zh-cn/error.md)
+## [错误处理/调试](sections/zh-cn/error.md)
 
 * [`[Doc]` Errors (异常)](sections/zh-cn/error.md#errors)
 * [`[Doc]` Domain (域)](sections/zh-cn/error.md#domain)

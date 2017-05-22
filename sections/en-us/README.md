@@ -102,7 +102,7 @@
 
 [View more](sections/en-us/os.md)
 
-## [Error/Debug/Opt](sections/en-us/error.md)
+## [Error & Debug](sections/en-us/error.md)
 
 * `[Doc]` Errors
 * `[Doc]` Domain

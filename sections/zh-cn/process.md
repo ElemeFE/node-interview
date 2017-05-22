@@ -108,7 +108,7 @@ function test() {
 
 > <a name="q-fork"></a> child_process.fork 与 POSIX 的 fork 有什么区别?
 
-Node.js 的 `child_process.fork()` 不像 POSIX [fork(2)](http://man7.org/linux/man-pages/man2/fork.2.html) 系统调用, 不会拷贝当前父进程. 这里对于其他语言转过的同学可能比较误导, 可以作为一个比较偏的面试题.
+Node.js 的 `child_process.fork()` 在 Unix 上的实现最终调用了 POSIX [fork(2)](http://man7.org/linux/man-pages/man2/fork.2.html), 而 POSIX 的 fork 需要手动管理子进程的资源释放 (waitpid), child_process.fork 则不用关心这个问题, Node.js 会自动释放, 并且可以在 option 中选择父进程死后是否允许子进程存活.
 
 * spawn() 启动一个子进程来执行命令
   * options.detached 父进程死后是否允许子进程存活
@@ -173,7 +173,7 @@ cluster 模块提供了两种分发连接的方式.
 
 第二种方式是由主进程创建 socket 监听端口后, 将 socket 句柄直接分发给相应的 worker, 然后当连接进来时, 就直接由相应的 worker 来接收连接并处理.
 
-使用第二种方式时, 多个 worker 之间会存在竞争关系, 产生一个老生常谈的 "[惊群效应](https://www.google.com.hk/search?q=%E6%83%8A%E7%BE%A4%E6%95%88%E5%BA%94)" 从而导致效率变低的问题. 该问题常见于 Apache. 并且各自竞争的情况下无法控制一个新的连接由哪个进程来处理, 从而导致各 worker 进程之间的负载不均衡, 比如通常 70% 的连接仅被 8 个进程中的 2 个处理, 而其他进程比较清闲.
+使用第二种方式时理论上性能应该较高, 然后时间上存在负载不均衡的问题, 比如通常 70% 的连接仅被 8 个进程中的 2 个处理, 而其他进程比较清闲.
 
 ## 进程间通信
 

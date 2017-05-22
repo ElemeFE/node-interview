@@ -2,29 +2,20 @@
 
 # Node interview of ElemeFE
 
-## What's this?
+* ## What's this?
 
-We were looking for developer which had three years development experience with Node.js & Backend dev.
+We were looking for senior backend developer with Node.js. And, this repo is the interview catalog (not just questions & answers) about it, and it shows you how to pass the Node.js interview of [ElemeFE](https://github.com/ElemeFE/).
 
-This is the interview Index about it, and it shows you how to pass the Node.js interview of ElemeFE.
+* ## Motivation
 
-## What is ElemeFE?
+We had a lot of interviews about Node.js & full-stack in 2016. We found there are many developers came from frontend, and most of them had leaky knowledge of backend system. Thus we found it's difficult to got senior Node.js developer about backend (not full-stack).
 
-It means Frontend team of Eleme (饿了么) which seems like the biggest takeaway company of China.
+Due to our consistent of open source and sharing spirit, we prepared this Node.js advanced tutorial which called "node-interview".
 
-There are some public projects of Eleme:
+* ## Start Reading
+  * [English Entry](sections/en-us/)
+  * [简体中文入口](sections/zh-cn/)
 
-* [Element](http://element.eleme.io/#/en-US) A Vue.js 2.0 UI Toolkit for Web.
-* [Element-react](https://github.com/eleme/element-react) React.js version for Element.
-* [Mint UI](http://mint-ui.github.io/#!/en) Mobile UI elements for Vue.js.
-* [restc](https://elemefe.github.io/restc/) A server-side middleware to visualize REST requests.
-* [vue-infinite-scroll](https://github.com/ElemeFE/vue-infinite-scroll) An infinite scroll directive for vue.js.
+> The content is translated from chinese, We'd say sorry that the translation is just started, you may not able to read it completely. BTW, it is welcome to help us to improve the translations.
 
-As you see, we are frontend team, but we've been doing some backend job to support frontend to gain more.
 
-#### Language support
-
-This index is translated from chinese, We'd say sorry that the translation is just started, you may not able to read it completely. BTW, it is welcome to help us to improve the translations.
-
-##### [English](sections/en-us/)
-##### [简体中文](sections/zh-cn/)

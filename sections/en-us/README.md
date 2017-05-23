@@ -6,60 +6,60 @@
 ## Guide
 
 
-## [Basic](sections/en-us/js-basic.md)
+## [Common](/sections/en-us/common.md)
 
 > It's much more diff between frontend and backend.
 
-* `[Basic]` Type judgment
-* `[Basic]` Scope
-* `[Basic]` Reference
-* `[Basic]` Memory release
-* `[Basic]` ES6+ featrues
+* `[Common]` Type judgment
+* `[Common]` Scope
+* `[Common]` Reference
+* `[Common]` Memory release
+* `[Common]` ES6+ featrues
 
 **Common Problem**
 
-[View more](sections/en-us/js-basic.md)
+[View more](/sections/en-us/js-basic.md)
 
-## [Module](sections/en-us/module.md)
+## [Module](/sections/en-us/module.md)
 
-* `[Basic]` Module
-* `[Basic]` Hotfix
-* `[Basic]` Context
-* `[Basic]` Package Manager
+* `[Common]` Module
+* `[Common]` Hotfix
+* `[Common]` Context
+* `[Common]` Package Manager
 
 **Common Problem**
 
 
-[View more](sections/en-us/module.md)
+[View more](/sections/en-us/module.md)
 
-## [Event & Async](sections/en-us/event-async.md)
+## [Event & Async](/sections/en-us/event-async.md)
 
-* `[Basic]` Promise
+* `[Common]` Promise
 * `[Doc]` Events
 * `[Doc]` Timers
-* `[Point]` Blocking & Non-blocking
-* `[Point]` Parallel & Concurrent
+* `[Bonus]` Blocking & Non-blocking
+* `[Bonus]` Parallel & Concurrent
 
 **Common Problem**
 
 
-[View more](sections/en-us/event-async.md)
+[View more](/sections/en-us/event-async.md)
 
-## [Process](sections/en-us/process.md)
+## [Process](/sections/en-us/process.md)
 
 * `[Doc]` Process
 * `[Doc]` Child Processes
 * `[Doc]` Cluster
-* `[Basic]` IPC
-* `[Basic]` Daemon
+* `[Bonus]` IPC
+* `[Bonus]` Daemon
 
 **Common Problem**
 
 
-[View more](sections/en-us/process.md)
+[View more](/sections/en-us/process.md)
 
 
-## [IO](sections/en-us/io.md)
+## [IO](/sections/en-us/io.md)
 
 * `[Doc]` Buffer
 * `[Doc]` String Decoder
@@ -72,103 +72,103 @@
 **Common Problem**
 
 
-[View more](sections/en-us/io.md)
+[View more](/sections/en-us/io.md)
 
-## [Network](sections/en-us/network.md)
+## [Network](/sections/en-us/network.md)
 
 * `[Doc]` Net
 * `[Doc]` UDP/Datagram
 * `[Doc]` HTTP
 * `[Doc]` DNS
 * `[Doc]` ZLIB
-* `[Point]` RPC
+* `[Common]` RPC
 
 **Common Problem**
 
 
-[View more](sections/en-us/network.md)
+[View more](/sections/en-us/network.md)
 
-## [OS](sections/en-us/os.md)
+## [OS](/sections/en-us/os.md)
 
 * `[Doc]` TTY
 * `[Doc]` OS
 * `[Doc]` Command Line Options
-* `[Basic]` Load
-* `[Point]` CheckList
-* `[Basic]` Indicators
+* `[Common]` Load
+* `[Bonus]` CheckList
+* `[Common]` Indicators
 
 **Common Problem**
 
 
-[View more](sections/en-us/os.md)
+[View more](/sections/en-us/os.md)
 
-## [Error & Debug](sections/en-us/error.md)
+## [Error & Debug](/sections/en-us/error.md)
 
 * `[Doc]` Errors
 * `[Doc]` Domain
 * `[Doc]` Debugger
 * `[Doc]` C/C++ Addon
 * `[Doc]` V8
-* `[Point]` Memory snapshot
-* `[Point]` CPU Profilling
+* `[Bonus]` Memory snapshot
+* `[Bonus]` CPU Profilling
 
 **Common Problem**
 
 
-[View more](sections/en-us/error.md)
+[View more](/sections/en-us/error.md)
 
-## [Test](sections/en-us/test.md)
+## [Test](/sections/en-us/test.md)
 
-* `[Basic]` Methods
-* `[Basic]` Unit Test
-* `[Basic]` Benchmarks
-* `[Basic]` Integration Test
-* `[Basic]` Pressure Test
+* `[Common]` Methods
+* `[Common]` Unit Test
+* `[Common]` Benchmarks
+* `[Common]` Integration Test
+* `[Common]` Pressure Test
 * `[Doc]` Assert
 
 **Common Problem**
 
 
-[View more](sections/en-us/test.md)
+[View more](/sections/en-us/test.md)
 
-## [Util](sections/en-us/util.md)
+## [Util](/sections/en-us/util.md)
 
 * `[Doc]` URL
 * `[Doc]` Query Strings
 * `[Doc]` Utilities
-* `[Basic]` Regex
+* `[Common]` Regex
 
 **Common Problem**
 
 
-[View more](sections/en-us/util.md)
+[View more](/sections/en-us/util.md)
 
-## [Storage](sections/en-us/storage.md)
+## [Storage](/sections/en-us/storage.md)
 
-* `[Point]` Sql
-* `[Point]` NoSql
-* `[Point]` Cache
-* `[Point]` Consistency
+* `[Common]` Sql
+* `[Common]` NoSql
+* `[Bonus]` Cache
+* `[Bonus]` Consistency
 
 **Common Problem**
 
 
-[View more](sections/en-us/storage.md)
+[View more](/sections/en-us/storage.md)
 
-## [Security](sections/en-us/security.md)
+## [Security](/sections/en-us/security.md)
 
 * `[Doc]` Crypto
 * `[Doc]` TLS/SSL
 * `[Doc]` HTTPS
-* `[Point]` XSS
-* `[Point]` CSRF
-* `[Point]` MITM
-* `[Point]` Sql/Nosql Injection
+* `[Bonus]` XSS
+* `[Bonus]` CSRF
+* `[Bonus]` MITM
+* `[Bonus]` Sql/Nosql Injection
 
 **Common Problem**
 
 
-[View more](sections/en-us/security.md)
+[View more](/sections/en-us/security.md)
 
 ## Final
 

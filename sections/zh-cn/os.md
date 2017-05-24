@@ -35,7 +35,7 @@ $ ps -x
 23733 ?        Ssl    2:53 PM2 v1.1.2: God Daemon
 ```
 
-其中为 `?` 的是没有依赖 TTY 的进程, 即[守护进程](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B).
+其中为 `?` 的是没有依赖 TTY 的进程, 即[守护进程](/sections/zh-cn/process.md#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B).
 
 在 Node.js 中你可以通过 stdio 的 isTTY 来判断当前进程是否处于 TTY (如终端) 的环境.
 

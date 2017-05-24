@@ -1,10 +1,10 @@
 # 事件/异步
 
-* [`[Basic]` Promise](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#promise)
-* [`[Doc]` Events (事件)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#events)
-* [`[Doc]` Timers (定时器)](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#timers)
-* [`[Point]` 阻塞/异步](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#阻塞异步)
-* [`[Point]` 并行/并发](https://github.com/ElemeFE/node-interview/blob/master/sections/event-async.md#并行并发)
+* [`[Basic]` Promise](/sections/zh-cn/event-async.md#promise)
+* [`[Doc]` Events (事件)](/sections/zh-cn/event-async.md#events)
+* [`[Doc]` Timers (定时器)](/sections/zh-cn/event-async.md#timers)
+* [`[Point]` 阻塞/异步](/sections/zh-cn/event-async.md#阻塞异步)
+* [`[Point]` 并行/并发](/sections/zh-cn/event-async.md#并行并发)
 
 ## 简述
 

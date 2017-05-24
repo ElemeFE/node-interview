@@ -1,10 +1,10 @@
 # 进程
 
-* [`[Doc]` Process (进程)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#process)
-* [`[Doc]` Child Processes (子进程)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#child-process)
-* [`[Doc]` Cluster (集群)](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#cluster)
-* [`[Basic]` 进程间通信](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#进程间通信)
-* [`[Basic]` 守护进程](https://github.com/ElemeFE/node-interview/blob/master/sections/process.md#守护进程)
+* [`[Doc]` Process (进程)](/sections/zh-cn/process.md#process)
+* [`[Doc]` Child Processes (子进程)](/sections/zh-cn/process.md#child-process)
+* [`[Doc]` Cluster (集群)](/sections/zh-cn/process.md#cluster)
+* [`[Basic]` 进程间通信](/sections/zh-cn/process.md#进程间通信)
+* [`[Basic]` 守护进程](/sections/zh-cn/process.md#守护进程)
 
 ## 简述
 

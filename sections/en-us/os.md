@@ -35,9 +35,9 @@ $ ps -x
 23733 ?        Ssl    2:53 PM2 v1.1.2: God Daemon
 ```
 
-If there is a `?` means the process is not dependent on TTY, this process is called [Daemon](/sections/en-us/process.md#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B).
+The process marked with `?` is not depending on TTY, which is called [Daemon](/sections/en-us/process.md#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B).
 
-In Node.js, you can use stdio's isTTY to determine whether the current process is in a TTY (such as terminal) environment.
+In Node.js, you can use stdio's isTTY attribute to determine whether the current process is in a TTY (such as terminal) environment.
 
 ```shell
 $ node -p -e "Boolean(process.stdout.isTTY)"
@@ -48,38 +48,38 @@ false
 
 ## OS
 
-Through the OS module, you can get some auxiliary functions to the basic information of the current system.
+You can get some auxiliary functions to the basic information of the current system through the OS module.
 
 |Attribute|Description|
 |---|---|
-|os.EOL|Return the current system's `End Of Line`, based on the current system|
-|os.arch()|Return the CPU architecture of the current system, such as `'x86'` or `'x64'`|
-|os.constants|Return system constants|
-|os.cpus()|Return the information for each kernel of the CPU|
-|os.endianness()|Return byte order of CPU, return `BE` if it is big endian, return `LE` if it is little endian.|
-|os.freemem()|Return the size of the system's free memory, in bytes|
-|os.homedir()|Return the root directory of the current user|
-|os.hostname()|Return the hostname of the current system|
-|os.loadavg()|Return load information|
-|os.networkInterfaces()|Return the NIC information (similar to `ifconfig`)|
-|os.platform()|Return the platform information specified at compile time, such as `win32`, `linux`, same as `process.platform()`|
-|os.release()|Return the distribution version number of the operating system|
-|os.tmpdir()|Return the default temporary folder of the system|
-|os.totalmem()|Return the total memory size (witsame as the memory bar size)|
-|os.type()|Return the name of the system according to [`uname`](https://en.wikipedia.org/wiki/Uname#Examples)|
-|os.uptime()|Return the running time of the system, in seconds|
-|os.userInfo([options])|Return the current user information|
+|os.EOL|Returns the current system's `End Of Line`, based on the current system|
+|os.arch()|Returns the CPU architecture of the current system, such as `'x86'` or `'x64'`|
+|os.constants|Returns system constants|
+|os.cpus()|Returns the information for each kernel of the CPU|
+|os.endianness()|Returns byte order of CPU, return `BE` if it is big endian, return `LE` if it is little endian.|
+|os.freemem()|Returns the size of the system's free memory, in bytes|
+|os.homedir()|Returns the root directory of the current user|
+|os.hostname()|Returns the hostname of the current system|
+|os.loadavg()|Returns load information|
+|os.networkInterfaces()|Returns the NIC information (similar to `ifconfig`)|
+|os.platform()|Returns the platform information specified at compile time, such as `win32`, `linux`, same as `process.platform()`|
+|os.release()|Returns the distribution version number of the operating system|
+|os.tmpdir()|Returns the default temporary folder of the system|
+|os.totalmem()|Returns the total memory size (the same as the memory bar size)|
+|os.type()|Returns the name of the system according to [`uname`](https://en.wikipedia.org/wiki/Uname#Examples)|
+|os.uptime()|Returns the running time of the system, in seconds|
+|os.userInfo([options])|Returns the current user information|
 
-> What is the difference between line breaks (EOL) in different operating systems?
+> What's the difference between the line breaks (EOL) of different operating systems?
 
 End of line (EOL) is the same as newline, line ending and line break.
 
-Usually composed of line feed (LF, `\n`) and carriage return (CR, `\r`). Common cases:
+And it's usually composed of line feed (LF, `\n`) and carriage return (CR, `\r`). Here are some common cases:
 
 |Symbol|System|
 |---|---|
-|LF|In Unix or Unix compatible systems (GNU/Linux, AIX, Xenix, Mac OS X, ...)、BeOS、Amiga、RISC OS|
-|CR+LF|MS-DOS、Microsoft Windows、Most non Unix systems|
+|LF|In Unix or Unix compatible systems (GNU/Linux, AIX, Xenix, Mac OS X, ...), BeOS, Amiga, RISC OS|
+|CR+LF|MS-DOS, Microsoft Windows, Most non Unix systems|
 |CR|Apple II family, Mac OS to version 9|
 
 If you don't understand the cross-system compatibility of EOL, you might have problems dealing with the line segmentation/row statistics of the file.
@@ -111,7 +111,7 @@ The built-in path in Node.js is a module for handling path problems, but as we a
 |PATH.split(path.posix.delimiter)|`['/usr/bin', '/bin']`|PATH.split(path.win32.delimiter)|`['C:\\Windows\\system32', 'C:\\Program Files\\node\\']`|
 
 
-After looking at the table, you should realize that when you are under a certain platform, the `path` module is actually the method of the corresponding platform. For example, I uses Mac here, so:
+After looking at the table, you should realize that when under a certain platform, the `path` module is actually the method of the corresponding platform. For example, I uses Mac here, so:
 
 ```javascript
 const path = require('path');
@@ -186,19 +186,19 @@ Command Line Options is some documentation on the use of CLI. There are 4 main w
 * node [options] [v8 options] [script.js | -e "script"] [arguments]
 * node debug [script.js | -e "script" | <host>:<port>] …
 * node --v8-options
-* direct start REPL environment without parameters
+* Starts REPL environment without parameters directly
 
 ### Options
 
 |Parameter|Introduction|
 |---|---|
-|-v, --version|View the current node version|
-|-h, --help|View help documentation|
+|-v, --version|Show the version of current node|
+|-h, --help|Show help documentation|
 |-e, --eval "script"|The parameter string is executed as code
 |-p, --print "script"|Print the return value of `-e`
-|-c, --check|Checking syntax does not perform
-|-i, --interactive|Open REPL mode even if stdin is not terminal
-|-r, --require module|Specify the module `require` before startup
+|-c, --check|Check syntax without executing the code
+|-i, --interactive|Open REPL mode even if stdin is not the terminal
+|-r, --require module|`require` the Specified module before startup
 |--no-deprecation|Close the scrap module warning
 |--trace-deprecation|Print stack trace information for an obsolete module
 |--throw-deprecation|Throw errors while executing an obsolete module
@@ -206,7 +206,7 @@ Command Line Options is some documentation on the use of CLI. There are 4 main w
 |--trace-warnings|Print warning stack (including discarded modules)
 |--trace-sync-io|As soon as the asynchronous I/O is detected at the beginning of the event loop, the stack trace will be printed
 |--zero-fill-buffers|Zero-fill **Buffer** and **SlowBuffer**
-|--preserve-symlinks|When parsing and caching modules, instruct the module loader to save symbolic links
+|--preserve-symlinks|Instruct the module loader to save symbolic links when parsing and caching modules
 |--track-heap-objects|Track the allocation of heap objects for heap snapshot
 |--prof-process|Using the V8 option `--prof` to generate the Profilling Report
 |--v8-options|Show the V8 command line options
@@ -214,7 +214,7 @@ Command Line Options is some documentation on the use of CLI. There are 4 main w
 |--enable-fips|Turn on FIPS-compliant crypto at startup
 |--force-fips|Enforce FIPS-compliant at startup
 |--openssl-config=file|Load the OpenSSL configuration file at startup
-|--icu-data-dir=file|Specify the ICU data loading path
+|--icu-data-dir=file|Specify the loading path of ICU data
 
 ### Environment Variable
 

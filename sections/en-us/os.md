@@ -192,45 +192,45 @@ Command Line Options is some documentation on the use of CLI. There are 4 main w
 
 |Parameter|Introduction|
 |---|---|
-|-v, --version|Show the version of current node|
-|-h, --help|Show help documentation|
+|-v, --version|Shows the version of current node|
+|-h, --help|Shows help documentation|
 |-e, --eval "script"|The parameter string is executed as code
-|-p, --print "script"|Print the return value of `-e`
-|-c, --check|Check syntax without executing the code
-|-i, --interactive|Open REPL mode even if stdin is not the terminal
+|-p, --print "script"|Prints the return value of `-e`
+|-c, --check|Checks syntax without executing the code
+|-i, --interactive|Opens REPL mode even if stdin is not the terminal
 |-r, --require module|`require` the Specified module before startup
-|--no-deprecation|Close the scrap module warning
-|--trace-deprecation|Print stack trace information for an obsolete module
-|--throw-deprecation|Throw errors while executing an obsolete module
-|--no-warnings|Ignore warnings (including obsolete warnings)
-|--trace-warnings|Print warning stack (including discarded modules)
+|--no-deprecation|Closes the scrap module warning
+|--trace-deprecation|Prints stack trace information for an obsolete module
+|--throw-deprecation|Throws errors while executing an obsolete module
+|--no-warnings|Ignores warnings (including obsolete warnings)
+|--trace-warnings|Prints warning stack (including discarded modules)
 |--trace-sync-io|As soon as the asynchronous I/O is detected at the beginning of the event loop, the stack trace will be printed
 |--zero-fill-buffers|Zero-fill **Buffer** and **SlowBuffer**
-|--preserve-symlinks|Instruct the module loader to save symbolic links when parsing and caching modules
-|--track-heap-objects|Track the allocation of heap objects for heap snapshot
+|--preserve-symlinks|Instructs the module loader to save symbolic links when parsing and caching modules
+|--track-heap-objects|Tracks the allocation of heap objects for heap snapshot
 |--prof-process|Using the V8 option `--prof` to generate the Profilling Report
-|--v8-options|Show the V8 command line options
+|--v8-options|Shows the V8 command line options
 |--tls-cipher-list=list|Specifies the list of alternative default TLS encryption devices
-|--enable-fips|Turn on FIPS-compliant crypto at startup
-|--force-fips|Enforce FIPS-compliant at startup
-|--openssl-config=file|Load the OpenSSL configuration file at startup
-|--icu-data-dir=file|Specify the loading path of ICU data
+|--enable-fips|Turns on FIPS-compliant crypto at startup
+|--force-fips|Enforces FIPS-compliant at startup
+|--openssl-config=file|Loads the OpenSSL configuration file at startup
+|--icu-data-dir=file|Specifies the loading path of ICU data
 
 ### Environment Variable
 
 |Environment variable|Introduction|
 |----|----|
 |`NODE_DEBUG=module[,…]`|Specifies the list of core modules to print debug information
-|`NODE_PATH=path[:…]`|Specifies the list of search directory module path prefix
-|`NODE_DISABLE_COLORS=1`|Close the color display for REPL
+|`NODE_PATH=path[:…]`|Specifies prefix list of the module search directory
+|`NODE_DISABLE_COLORS=1`|Closes the color display for REPL
 |`NODE_ICU_DATA=file`|ICU (Intl, object) data path
 |`NODE_REPL_HISTORY=file`|Path of persistent storage REPL history file
 |`NODE_TTY_UNSAFE_ASYNC=1`|When set to 1, The stdio operation will proceed synchronously (such as console.log becomes synchronous)
-|`NODE_EXTRA_CA_CERTS=file`|Specify an extra certificate path for CA (such as VeriSign)
+|`NODE_EXTRA_CA_CERTS=file`|Specifies an extra certificate path for CA (such as VeriSign)
 
 ## Load
 
-Load is an important concept to measure the running state of the server. Through the load situation, we can know whether the server is idle, good, busy or about crash.
+Load is an important concept to measure the running state of the server. Through the load situation, we can know whether the server is idle, good, busy or about to crash.
 
 Typically, the load we want to look at is the CPU load, for more information you can read this blog: [Understanding Linux CPU Load](http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages).
 
@@ -240,7 +240,7 @@ To get the current system load, you can use `uptime`, `top` command in terminal 
 load average: 0.09, 0.05, 0.01
 ```
 
-Here are the average load on the system of the last 1 minutes, 5 minutes, 15 minutes. When one of the CPU core work in full load, the value of load is 1, so the value represent how many CPU cores are in full load.
+Here are the average load on the system of the last 1 minutes, 5 minutes, 15 minutes. When one of the CPU core is working in full load, the value of load will be 1, so the value represents how many CPU cores are in full load.
 
 In Node.js, the CPU load of a single process can be viewed using the [pidusage](https://github.com/soyuka/pidusage) module.
 
@@ -371,4 +371,4 @@ virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
 ```
 
-Note, open socket and other resources are also kind of file descriptor, if `ulimit -n` is too small, in addition to the file can not open, it may not establish socket links.
+Note: open socket and other resources are also kind of file descriptor, if `ulimit -n` is too small, not only will you not open the file, but also can not establish a socket link.

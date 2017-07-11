@@ -87,9 +87,9 @@ alert('xss')">
 <img src="javascrip&#116&#58alert(/xss/)">
 ```
 
-### CPS 策略
+### CSP 策略
 
-在百般无奈, 没有统一解决方案的情况下, 厂商们推出了 CPS 策略. 
+在百般无奈, 没有统一解决方案的情况下, 厂商们推出了 CSP 策略. 
 
 以 Node.js 为例, 计算脚本的 hashes 值:
 ```

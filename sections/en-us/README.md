@@ -117,6 +117,10 @@
 
 **Common Problem**
 
+* What's TTY? How to check if terminal is TTY? [[more]](/sections/en-us/os.md#tty)
+* Is there different among operating system's EOL(end of line)? [[more]](/sections/en-us/os.md#os)
+* What is system load? how to check it? [[more]](/sections/en-us/os.md#load)
+* What's ulimit for? [[more]](/sections/en-us/os.md#ulimit)
 
 [View more](/sections/en-us/os.md)
 

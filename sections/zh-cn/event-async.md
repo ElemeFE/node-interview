@@ -208,7 +208,7 @@ function sleep(ms) {
    └───────────────────────┘
 ```
 
-关于事件循环, Timers 以及 nextTick 的关系详见官方文档 [The Node.js Event Loop, Timers, and process.nextTick() (英文)](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) 以及阮一峰的 [JavaScript 运行机制详解：再谈Event Loop (中文)](http://www.ruanyifeng.com/blog/2014/10/event-loop.html) 等.
+关于事件循环, Timers 以及 nextTick 的关系详见官方文档 The Node.js Event Loop, Timers, and process.nextTick(): [英文](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)， [论坛中文讨论](https://cnodejs.org/topic/57d68794cb6f605d360105bf)
 
 ## 并行/并发
 

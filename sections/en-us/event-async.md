@@ -170,7 +170,7 @@ Simply use the callback function is not asynchronous, IO operation may be asynch
 > if you have built a website by koa, this website has a interface A, and in some cases, interface A can be the endless loop, unfortunately, if you triggered this endless loop, what will be the impact on your website? 
 
 
-In Node.js environment javascript code has only one single thread. Only the current code has been excuted, the process will cut into the event loop, and then  pop out the next callback function from the event queue to start the implementation of the code. so ① to achieve a sleep function, as long as an infinite loop can block the execution of the entire js process (on how to avoid the  colleagues write deadless loop, see the chapter of `test`.)
+In Node.js environment javascript code has only one single thread. Only the current code has been excuted, the process will cut into the event loop, and then  pop out the next callback function from the event queue to start the implementation of the code. so ① to implement a Sleep function, as long as an infinite loop can block the execution of the entire js process (on how to avoid the  colleagues write deadless loop, see the chapter of `test`.)
 
 
 > <a name="q-5"></a> How to implement a Sleep function? ①
@@ -197,7 +197,7 @@ The writter think there are two kinds of 'asynchronous' in Node.js:  `hard async
 
 `hard asynchronous` means IO operation or some cases that you need  libuv module externally and of course includes `readFileSync` or `execSync`. Because of the single thread feature of Node.js, it is unwise to do some IO operation in synchronous way as it will block the excutation of other code. 
 
-`soft asynchronous` is that some asynchronous cases achieved by `setTimeout`. To understand the diffrence among nextTick, setTimeout and setImmediate , you can see this article. <a name="q-4"></a> [article](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+`soft asynchronous` is that some asynchronous cases implemented by `setTimeout`. To understand the diffrence among nextTick, setTimeout and setImmediate , you can see this article. <a name="q-4"></a> [article](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
 
 

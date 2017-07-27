@@ -225,7 +225,7 @@ The writter think there are two kinds of 'asynchronous' in Node.js:  `hard async
    └───────────────────────┘
 ```
 
-To know more about event loop, Timers, nextTick，we recommend the Node.js documentation and this article: [The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/).
+To know more about event loop, Timers, nextTick, we recommend the Node.js documentation, [*The Node.js Event Loop, Timers, and process.nextTick()*](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) and [*Tasks, microtasks, queues and schedules*](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/).
 
 
 ## Paraller/Concurrent

@@ -16,24 +16,24 @@ Hi, 欢迎来到 ElemeFE, 如标题所示本教程的目的是教你如何通过
 
 整体上大纲列举的并不是很全面, 细节上覆盖率不高, 很多讨论只是点到即止, 希望大家带着问题去思考.
 
-## [Js 基础问题](/sections/zh-cn/js-basic.md)
+## [Js 基础问题](/sections/zh-cn/common.md)
 
 > 与前端 Js 不同, 后端是直面服务器的, 更加偏向内存方面.
 
-* [`[Basic]` 类型判断](/sections/zh-cn/js-basic.md#类型判断)
-* [`[Basic]` 作用域](/sections/zh-cn/js-basic.md#作用域)
-* [`[Basic]` 引用传递](/sections/zh-cn/js-basic.md#引用传递)
-* [`[Basic]` 内存释放](/sections/zh-cn/js-basic.md#内存释放)
-* [`[Basic]` ES6 新特性](/sections/zh-cn/js-basic.md#es6-新特性)
+* [`[Basic]` 类型判断](/sections/zh-cn/common.md#类型判断)
+* [`[Basic]` 作用域](/sections/zh-cn/common.md#作用域)
+* [`[Basic]` 引用传递](/sections/zh-cn/common.md#引用传递)
+* [`[Basic]` 内存释放](/sections/zh-cn/common.md#内存释放)
+* [`[Basic]` ES6 新特性](/sections/zh-cn/common.md#es6-新特性)
 
 **常见问题**
 
-* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](/sections/zh-cn/js-basic.md#q-value)
+* js 中什么类型是引用传递, 什么类型是值传递? 如何将值类型的变量以引用的方式传递? [[more]](/sections/zh-cn/common.md#q-value)
 * js 中， 0.1 + 0.2 === 0.3 是否为 true ? 在不知道浮点数位数时应该怎样判断两个浮点数之和与第三数是否相等？
-* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象的意义是? [[more]](/sections/zh-cn/js-basic.md#q-const)
-* JavaScript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](/sections/zh-cn/js-basic.md#q-mem)
+* const 定义的 Array 中间元素能否被修改? 如果可以, 那 const 修饰对象的意义是? [[more]](/sections/zh-cn/common.md#q-const)
+* JavaScript 中不同类型以及不同环境下变量的内存都是何时释放? [[more]](/sections/zh-cn/common.md#q-mem)
 
-[阅读更多](/sections/zh-cn/js-basic.md)
+[阅读更多](/sections/zh-cn/common.md)
 
 ## [模块](/sections/zh-cn/module.md)
 

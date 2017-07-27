@@ -20,7 +20,7 @@ I believe that in the interview, many students have been asked such a question: 
 
 To learn more basic knowledge about `promise`, we recommend this article. [Promise](http://javascript.ruanyifeng.com/advanced/promise.html#toc9)
 
-> <a name="q-1"></a> What the difference between the second argument of '.then' function and '.catch' function?
+> <a name="q-1"></a> What's the difference between the second argument of '.then' function and '.catch' function?
 
 To distinguish the difference, you can read this article [We have a problem with promises](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)
 
@@ -93,7 +93,7 @@ If you don't kown the answers of these questions, you can print the output at lo
 A class or a Object can get basic `events` methods by extending `EventEmitter` class, and we call it 'emitter', and the callback funciton that emit a kind of event is called as 'listener'. It is diffrent from DOM tree in browser, there are no bubble and capture actions or methods to handle event.
 
 
-><a name="q-2">Whether the emit of Eventemitter is synchronous or asynchronous?   
+><a name="q-2">Is the Eventemitter.emit synchronous or asynchronous?   
 
 The answer is **synchronous**, there are some description on Node.js documentation:
 
@@ -154,7 +154,7 @@ Pay attention to that some students prefer to monitor the status of certain clas
 
 ## Blocking/non-blocking
 
-> <a name="q-3"></a> how to judge whether a interface is asynchronous? Whether it must be asynchronous if a callback function provided?
+> <a name="q-3"></a> How to judge whether a interface is asynchronous? Is it asynchronous while a callback provided?
 
 
 This is a open question, you can have your own way to judge.
@@ -173,7 +173,7 @@ Simply use the callback function is not asynchronous, IO operation may be asynch
 In Node.js environment javascript code has only one single thread. Only the current code has been excuted, the process will cut into the event loop, and then  pop out the next callback function from the event queue to start the implementation of the code. so ① to achieve a sleep function, as long as an infinite loop can block the execution of the entire js process (on how to avoid the  colleagues write deadless loop, see the chapter of `test`.)
 
 
-> <a name="q-5"></a> how to acheive a sleep function ①
+> <a name="q-5"></a> How to implement a Sleep function? ①
 
 ```javascript
 function sleep(ms) {
@@ -187,7 +187,7 @@ Asynchronous in Node.js means an event queue in other thread achived by libuv mo
 
 If endless loop logic trigger in your website, the whole process will be blocked, and all request will timeout, asynchronous code will never be excuted, and your website will be crashed.
 
-> <a name="q-6"></a> How to achieve an async reduce?
+> <a name="q-6"></a> How to implement an async.reduce?
 
 You need to konw that reduce is analyze a recursive data structure and through use of a given combining operation, recombine the results of recursively processing its constituent parts, building up a return value.
 
@@ -197,7 +197,7 @@ The writter think there are two kinds of 'asynchronous' in Node.js:  `hard async
 
 `hard asynchronous` means IO operation or some cases that you need  libuv module externally and of course includes `readFileSync` or `execSync`. Because of the single thread feature of Node.js, it is unwise to do some IO operation in synchronous way as it will block the excutation of other code. 
 
-`soft asynchronous` is that some asynchronous cases achieved by `setTimeout`. To understand the diffrence between nextTick, setTimeout and setImmediate , you can see this article. <a name="q-4"></a> [article](https://cnodejs.org/topic/5556efce7cabb7b45ee6bcac)
+`soft asynchronous` is that some asynchronous cases achieved by `setTimeout`. To understand the diffrence among nextTick, setTimeout and setImmediate , you can see this article. <a name="q-4"></a> [article](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
 
 

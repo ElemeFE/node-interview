@@ -42,6 +42,12 @@
 
 **Common Problem**
 
+* What's the difference between the Promise's second argument of '.then' function and '.catch' function? [[more]](/sections/en-us/event-async.md#q-1)
+* Is the Eventemitter.emit synchronous or asynchronous? [[more]](/sections/en-us/event-async.md#q-2)
+* How to judge whether a interface is asynchronous? Is it asynchronous while a callback provided? [[more]](/sections/en-us/event-async.md#q-3)
+* Diff among nextTick, setTimeout and setImmediate? [[more]](/sections/en-us/event-async.md#q-4)
+* How to implement a Sleep function? [[more]](/sections/en-us/event-async.md#q-5)
+* How to implement an async.reduce? [[more]](/sections/en-us/event-async.md#q-6)
 
 [View more](/sections/en-us/event-async.md)
 

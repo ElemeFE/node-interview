@@ -61,11 +61,11 @@
 
 **Common Problem**
 
-* What's the current working directory of the process? What's it for? [[more]](/sections/zh-cn/process.md#q-cwd)
-* Difference between child_process.fork and fork in POSIX? [[more]](/sections/zh-cn/process.md#q-fork)
-* Does the death of parent process or child process  affect each other? What is an orphan process? [[more]](/sections/zh-cn/process.md#q-child)
-* How does the cluster load balance work? [[more]](/sections/zh-cn/process.md#how-it-works)
-* What's daemon process? how to implement? [[more]](/sections/zh-cn/process.md#daemon-process)
+* What's the current working directory of the process? What's it for? [[more]](/sections/en-us/process.md#q-cwd)
+* Difference between child_process.fork and fork in POSIX? [[more]](/sections/en-us/process.md#q-fork)
+* Does the death of parent process or child process  affect each other? What is an orphan process? [[more]](/sections/en-us/process.md#q-child)
+* How does the cluster load balance work? [[more]](/sections/en-us/process.md#how-it-works)
+* What's daemon process? how to implement? [[more]](/sections/en-us/process.md#daemon-process)
 
 [View more](/sections/en-us/process.md)
 
@@ -82,6 +82,13 @@
 
 **Common Problem**
 
+* What does Buffer for? Can we change the buffer's size? [[more]](/sections/en-us/io.md#buffer)
+* What's the highWaterMark & drain event of Stream? What's their relation? [[more]](/sections/en-us/io.md#buffer-2)
+* What's Stream.pipe for? Is it make copy or pass object while piping? [[more]](/sections/en-us/io.md#pipe)
+* What is stdio, stdout, stderr and file descriptor? [[more]](/sections/en-us/io.md#file)
+* Is console.log asynchronous? How to implement console.log? [[more]](/sections/en-us/io.md#console)
+* How to get user input synchronously?  [[more]](/sections/en-us/io.md#how-to-get-user-input-synchronizely)
+* How to implement 'Readline'? [[more]](/sections/en-us/io.md#readline)
 
 [View more](/sections/en-us/io.md)
 

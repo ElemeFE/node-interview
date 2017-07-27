@@ -169,6 +169,9 @@
 
 **Common Problem**
 
+* How does HTTP pass `let arr = [1,2,3,4]` to the server by GET method? [[more]](/sections/en-us/util.md#get-param)
+* How to implement util.inherits in Node.js? [[more]](/sections/en-us/util.md#utilinherits)
+* How do I get all the file names under a folder? [[more]](/sections/en-us/util.md#q-traversal)
 
 [View more](/sections/en-us/util.md)
 

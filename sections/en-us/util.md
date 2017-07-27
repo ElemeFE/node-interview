@@ -128,7 +128,7 @@ Most of them can be used as an interview to ask how to implement.
 
 ### util.inherits
 
-> how to implement util.inherits in Node.js?
+> How to implement util.inherits in Node.js?
 
 https://github.com/nodejs/node/blob/v7.6.0/lib/util.js#L960
 

@@ -1,8 +1,5 @@
 ![ElemeFE-background](/assets/ElemeFE-background.png)
 
-## Movition
-
-
 ## Guide
 
 
@@ -204,3 +201,4 @@
 
 ## Final
 
+Current repo is translating, you can report on [issues](https://github.com/ElemeFE/node-interview/issues) freely if there is typo or reading problem.

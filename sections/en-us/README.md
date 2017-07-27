@@ -124,7 +124,7 @@
 
 [View more](/sections/en-us/os.md)
 
-## [Error & Debug](/sections/en-us/error.md)
+## [Error handle & Debug](/sections/en-us/error.md)
 
 * `[Doc]` Errors
 * `[Doc]` Domain
@@ -136,6 +136,13 @@
 
 **Common Problem**
 
+* How to handle unexpected errors? With try/catch, domains or something eles? [[more]](/sections/en-us/error.md#q-handle-error)
+* What is `uncaughtException` event? when shoud we use it? [[more]](/sections/en-us/error.md#uncaughtexception)
+* What is domain's principle? why domain is deprecated? [[more]](/sections/en-us/error.md#domain)
+* What's defensive programming? how about 'let it crash'?
+* Why we need error-first callback? why there are callback not error-first, such as http.createServer?
+* Why there are errors can't location? how to locate accurately? [[more]](/sections/en-us/error.md#error-stack-is-missing)
+* What cause memory leak? how to locate and analyse it? [[more]](/sections/en-us/error.md#memory-snapshots)
 
 [View more](/sections/en-us/error.md)
 

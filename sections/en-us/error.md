@@ -1,4 +1,4 @@
-# Error handling/Debug/Optimization
+# Error handle & Debug
 
 * [`[Doc]` Errors](/sections/en-us/error.md#errors)
 * [`[Doc]` Domain](/sections/en-us/error.md#domain)

@@ -88,7 +88,7 @@ Configuration is a very common problem in development deployments. As usual, the
 
 You can specify the configuration by [Setting Environment Variables](http://cn.bing.com/search?q=linux+Setting+Environment+Variable&qs=n&form=QBRE&sp=-1&pq=linux+setting+environment+variable&sc=1-34&sk=&cvid=1027E58E457E42DEB5A4A4E495EEC4A9), then obtain the configuration item by using `process.env`. In addition, you can obtain by reading the configuration file. There are many excellent libraries such as `Dotenv`, ` node-config`, etc. in this field. But when loading the configuration file by using these libraries, it usually encounters a problem with the current working directory.
 
-> <a name="q-cwd"></a> What is the current working directory of the process? What is its role?
+> <a name="q-cwd"></a> What's the current working directory of the process? What's it for?
 
 You can obtain the current working directory by using `process.cwd()`. It usually is the directory when the command line starts. It can also be specified at startup. File operations, etc. obtain the file by using the relative path which is relative to the current working directory.
 
@@ -108,7 +108,7 @@ Familiar with basic commands about process, such as top, ps, pstree , etc.
 
 Child Process is an important concept in the process.  In Node.js, you can use `child_process` module to execute executable files, call commands in command line , such as programs in other languages, etc. You can also execute js code as a sub-process by using this module. The well-known Netease's distributed architecture [pomelo](https://github.com/NetEase/pomelo) is based on the module(not `cluster`) to implement the multi-process distributed architecture.
 
-> <a name="q-fork"></a> What are the differences between child_process.fork and fork in POSIX?
+> <a name="q-fork"></a> What're the difference between child_process.fork and fork in POSIX?
 
 In Node.js, `child_process.fork()` calls POSIX [fork(2)](http://man7.org/linux/man-pages/man2/fork.2.html). You need manually manage the release of resources in the child process for fork POSIX. You don't need to care about this problem when using `child_process.fork`, beacuse Node.js will automatic release, and provide options whether the child process can survive after the parent process is destroyed. 
 
@@ -130,7 +130,7 @@ The exec/execSync method will directly call bash to explain the command. So if t
 The common interview question is what are the differences between `child.kill` and `child.send`. 
 One is based on the signal system, the other is based on IPC.
 
-> <a name="q-child"></a> Does the parent process or child process death affect each other? What is an orphan process?
+> <a name="q-child"></a> Does the death of parent process or child process  affect each other? What is an orphan process?
 
 The death of a child process will not affect the parent process. When the child process dies (the last thread of the thread group, usually when the "lead" thread dies), it will send a death signal to its parent process. On the other hand, when the parent process dies, by default, the child process will follow the death. But at this time, if the child process is in the operational state, dead state, etc., it will be adopted by process identifier 1(the init system process) and become an orphaned process. In addition, when the child process dies("terminated" state), the parent process does not call `wait()` or `waitpid()` to return the child's infomation in time, there is a `PCB` remaining in the process table. The child process is called a zombie process.
 

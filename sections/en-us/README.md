@@ -61,6 +61,11 @@
 
 **Common Problem**
 
+* What's the current working directory of the process? What's it for? [[more]](/sections/zh-cn/process.md#q-cwd)
+* Difference between child_process.fork and fork in POSIX? [[more]](/sections/zh-cn/process.md#q-fork)
+* Does the death of parent process or child process  affect each other? What is an orphan process? [[more]](/sections/zh-cn/process.md#q-child)
+* How does the cluster load balance work? [[more]](/sections/zh-cn/process.md#how-it-works)
+* What's daemon process? how to implement? [[more]](/sections/zh-cn/process.md#daemon-process)
 
 [View more](/sections/en-us/process.md)
 

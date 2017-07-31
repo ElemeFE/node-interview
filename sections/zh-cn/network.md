@@ -155,7 +155,7 @@ methods|CRUD|幂等|缓存
 GET|Read|✓|✓
 POST|Create||
 PUT|Update/Replace|✓
-PATCH|Update/Modify|✓
+PATCH|Update/Modify||
 DELETE|Delete|✓
 
 > GET 和 POST 有什么区别?

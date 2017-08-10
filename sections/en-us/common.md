@@ -4,4 +4,4 @@
 * `[Common]` Scope
 * `[Common]` Reference
 * `[Common]` Memory release
-* `[Common]` ES6+ featrues
+* `[Common]` ES6+ features

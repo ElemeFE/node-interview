@@ -9,7 +9,7 @@
 
 ## 简述
 
-与前端 Js 不同, 后端方面除了SSR/爬虫之外很少会接触 DOM, 所以关于 DOM 方面的各种知识基本不会讨论. 前端很少碰到内存问题, 但是后端几乎是直面服务器内存的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
+与前端 Js 不同, 后端方面除了SSR/爬虫之外很少会接触 DOM, 所以关于 DOM 方面的各种知识基本不会讨论. 浏览器端除了图形业务外很少碰到内存问题, 但是后端几乎是直面服务器内存的, 更加偏向内存方面, 对于一些更基础的问题也会更加关注.
 
 不过由于 Js 方面的知识点实在太多, 《Javascript 权威指南》的厚度完全可以说明问题, 所以本教程并不会完整的带大家过一遍 Js 的基础问题, 只是简单列举一些饿了么在面试 Node.js 程序的时候通常会问的一些 Js 基础问题, 有的详细的地方会直接留下书名或者博文链接, 以供大家深入了解, 这里就不赘述了.
 
@@ -86,26 +86,17 @@ while(true)
 思考完之后可以尝试找找别的情况如何爆掉 V8 的内存. 以及来聊聊内存泄漏?
 
 ```javascript
-var theThing = null  
-var replaceThing = function () {
-  var originalThing = theThing
-  var unused = function () {
-    if (originalThing)
-      console.log("hi")
+function out() {
+  const bigData = new Buffer(100);
+  inner = function () {
+    void bigData;
   }
-  theThing = {
-    longStr: new Array(1000000).join('*'),
-    someMethod: function () {
-      console.log(someMessage)
-    }
-  };
-};
-setInterval(replaceThing, 1000)
+}
 ```
 
-比如上述情况中 `unused` 的函数中持有了 `originalThing` 的引用, 使得每次旧的对象不会释放从而导致内存泄漏 (例子出自[《Node.js 垃圾回收》](https://eggggger.xyz/2016/10/22/node-gc/))
+闭包会引用到父级函数中的变量，如果闭包未释放，就会导致内存泄漏。上面例子是 inner 直接挂在了 root 上，从而导致内存泄漏（bigData 不会释放）。详见[《如何分析 Node.js 中的内存泄漏》](https://zhuanlan.zhihu.com/p/25736931)
 
-当然对于一些高水平的同学, 要求能清楚的了解 v8 内存 GC 的机制, 懂得内存快照等 (之后会在`调试/优化`的小结中讨论) 了. 比如 V8 中不同类型的数据存储的位置, 在内存释放的时候不同区域的不同策略等等.
+对于一些高水平的同学, 要求能清楚的了解 v8 内存 GC 的机制, 懂得内存快照等 (之后会在`调试/优化`的小结中讨论) 了. 比如 V8 中不同类型的数据存储的位置, 在内存释放的时候不同区域的不同策略等等.
 
 ## ES6 新特性
 

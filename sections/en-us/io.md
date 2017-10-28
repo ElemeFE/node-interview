@@ -142,7 +142,7 @@ Class| Scenario |Overrided method
 
 ### Object mode
 
-The stream created by the Node API can only manipulate strings or buffer objects. But the implementation of the stream can be based on other types of Javascript(Except for null, it has a special meaning in stream). This stream is in the "object mode (objectMode)".
+The stream created by the Node API can only manipulate strings or buffer objects. But the implementation of the stream can be based on other types of JavaScript(Except for null, it has a special meaning in stream). This stream is in the "object mode (objectMode)".
 You can generate an object-mode stream by providing the `objectMode` parameter when creating a stream object. It is not safe to attempt to convert an existing stream to object mode.
 
 ### Buffer
@@ -254,7 +254,7 @@ BOM
 
 stdio (standard input output), includes stdin, stdout and stderr. Corresponding to `process.stdin` (Readable),` process.stdout` (Writable) and `process.stderr` (Writable) respectively in Node.js.
 
-The output function is the first function that everyone needs to learn when learning a programming language. Such as `printf("hello, world!");` of C language, `print 'hello, world!'` of python/ruby and `console.log('hello, world!');` in Javascript.
+The output function is the first function that everyone needs to learn when learning a programming language. Such as `printf("hello, world!");` of C language, `print 'hello, world!'` of python/ruby and `console.log('hello, world!');` in JavaScript.
 
 Here is the implementation of such an output function in the C language pseudo-code:
 

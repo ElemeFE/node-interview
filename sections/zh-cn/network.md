@@ -205,7 +205,7 @@ location ~* ^/(?:v1|_) {
 <script src="http://another-domain.com/app.js" crossorigin="anonymous"></script>
 ```
 
-详见 [Javascript Script Error.](https://sentry.io/answers/javascript-script-error/)
+详见 [JavaScript Script Error.](https://sentry.io/answers/javascript-script-error/)
 
 
 ### Agent

@@ -182,7 +182,7 @@ HTTP headers 是在进行 HTTP 请求的交互过程中互相支会对方一些�
 
 > <a name="q-cors"></a> 什么是跨域请求? 如何允许跨域?
 
-出于安全考虑, 默认情况下使用 XMLHttpRequest 和 Fetch 发起 HTTP 请求必须遵守同源策略, 即只能向相同 host 请求 (host = hostname : port). 向不同 host 的请求被称作跨域请求 (cross-origin HTTP request). 可以通过设置 [CORS headers](https://developer.mozilla.org/en-US/docs/Glossary/CORS) 即 `Access-Control-Allow-` 系列来允许跨域. 例如:
+出于安全考虑, 默认情况下使用 XMLHttpRequest 和 Fetch 发起 HTTP 请求必须遵守同源策略, 即只能向相同 host 请求 (host = hostname : port) 注[1]. 向不同 host 的请求被称作跨域请求 (cross-origin HTTP request). 可以通过设置 [CORS headers](https://developer.mozilla.org/en-US/docs/Glossary/CORS) 即 `Access-Control-Allow-` 系列来允许跨域. 例如:
 
 ```
 location ~* ^/(?:v1|_) {
@@ -196,6 +196,8 @@ location ~* ^/(?:v1|_) {
   proxy_pass http://localhost:3001;
 }
 ```
+
+注[1]：同源除了相同 host 也包括相同协议. 所以即使 host 相同, 从 HTTP 到 HTTPS 也属于跨域, 见[讨论](https://github.com/ElemeFE/node-interview/issues/55).
 
 > `Script error.` 是什么错误? 如何拿到更详细的信息?
 

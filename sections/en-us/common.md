@@ -51,9 +51,9 @@ If C++ is mentioned in resume, it is certain to ask `what is the difference betw
 
 > <a name="q-mem"></a> When will each types and each scope of variables be released in JavaScript?
 
-If reference was no longer referenced, it would be collected by the GC of v8. If a value variable was inside a closure, it wouldn't be release until the closure was collected. In non-closure scope, it will be collected when v8 is switched to new space.
+If reference was no longer referenced, it would be collected by the GC of V8. If a value variable was inside a closure, it wouldn't be release until the closure was no longer referenced. In non-closure scope, it will be collected when V8 is switched to new space.
 
-In contrast to frontend JavaScript, a Node.js developer with more than 2 years experience should care about memory. Though you may not understand in depth, you had better have a concept of basic meomry release and start to pay attention to memory leaks.
+In contrast to frontend JavaScript, a Node.js developer with more than 2 years experience should care about memory. Though you may not understand in depth, you had better have a basic concept of memory release and start to pay attention to memory leaks.
 
 You need to know which operations lead to memory leaks, or even crash the memory. For example, will the code segment given below fill up with all of V8's memory?
 
@@ -71,7 +71,7 @@ while(true)
   arr.push();
 ```
 
-If a `Buffer` was push, what would happen?
+If a `Buffer` was pushed, what would happen?
 
 ```javaScript
 let arr = [];
@@ -90,19 +90,19 @@ function out() {
 }
 ```
 
-Closure references variable from its parent. If it is not release, a memory leak happens. The example above shows `inner` is under the root, which causes a memory leak (`bigData` is not released).
+Closure references variable from its parent. If it is not released, a memory leak happens. The example above shows `inner` is under the root, which causes a memory leak (`bigData` is not released).
 
-For senior candidates, you need to know the mechanism of GC in v8 and know how memory snapshot (which will be discussed in chapter of `Debug/Optimization`) works. e.g. Where do V8 store different types of data? What are the specific optimizing strategies for different areas when doing memory release?
+For senior candidates, you need to know the mechanism of GC in V8 and know how memory snapshot (which will be discussed in chapter of `Debug/Optimization`) works. e.g. Where do V8 store different types of data? What are the specific optimizing strategies for different areas when doing memory release?
 
 ## ES6 features
 
 We recommend a [ECMAScript 6 Tutorial](http://es6.ruanyifeng.com/) book from @ruanyifeng (in Chinese).
 
-The basic questions can be the differences between `let` and `var`, and between `-> (arrow function)` and `function`.
+The basic questions can be the differences between `let` and `var`, and between `arrow function` and `function`.
 
 To go deeper, there are lots of details in es6, such as `reference` together with `const`. Talk about `Set` and `Map` in context of usage and disadvantages of `{}`. Or it can be about the privatization and `symbol`.
 
-However, it is unnecessary to ask `what is a closure?`. Instead, we'd like to ask about the application of closures. e.g. If interviewer usually uses closure to make data private, then we may ask can new features (e.g. can `class` and `symbol`) be private? If true, then why we need closure here? When will data in a closure be released? And so on.
+However, it is unnecessary to ask `what is a closure?`. Instead, we'd like to ask about the application of closures. e.g. If interviewer usually uses closure to make data private, then we may ask can new features (e.g. `class` and `symbol`) be private? If true, then why we need closure here? When will data in a closure be released? And so on.
 
 For `...`, how to implement deletion of duplicated for an array (Bonus point for using Set).
 

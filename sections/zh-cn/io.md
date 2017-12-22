@@ -65,7 +65,7 @@ const euro = Buffer.from([0xE2, 0x82, 0xAC]);
 console.log(decoder.write(euro)); // €
 ```
 
-当然也可以断断续续的处理.
+stringDecoder.write 会确保返回的字符串不包含 Buffer 末尾残缺的多字节字符，残缺的多字节字符会被保存在一个内部的 buffer 中用于下次调用 stringDecoder.write() 或 stringDecoder.end()。
 
 ```javascript
 const StringDecoder = require('string_decoder').StringDecoder;

@@ -199,7 +199,7 @@ pipe 方法最主要的目的就是将数据的流动缓冲到一个可接受的
 
 ## Console
 
-[console.log 正常情况下是异步的, 除非你使用 `new Console(stdout[, stderr])` 指定了一个文件为目的地](https://nodejs.org/dist/latest-v6.x/docs/api/console.html#console_asynchronous_vs_synchronous_consoles). 不过一般情况下的实现都是如下 ([6.x 源代码](https://github.com/nodejs/node/blob/v6.x/lib/console.js#L42)):
+[console.log 同步还是异步取决于与谁相连和`os`](https://nodejs.org/dist/latest-v6.x/docs/api/process.html#process_a_note_on_process_i_o). 不过一般情况下的实现都是如下 ([6.x 源代码](https://github.com/nodejs/node/blob/v6.x/lib/console.js#L42))，其中`this._stdout`默认是`process.stdout`:
 
 ```javascript
 // As of v8 5.0.71.32, the combination of rest param, template string

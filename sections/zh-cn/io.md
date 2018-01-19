@@ -65,7 +65,7 @@ const euro = Buffer.from([0xE2, 0x82, 0xAC]);
 console.log(decoder.write(euro)); // €
 ```
 
-当然也可以断断续续的处理.
+stringDecoder.write 会确保返回的字符串不包含 Buffer 末尾残缺的多字节字符，残缺的多字节字符会被保存在一个内部的 buffer 中用于下次调用 stringDecoder.write() 或 stringDecoder.end()。
 
 ```javascript
 const StringDecoder = require('string_decoder').StringDecoder;
@@ -199,7 +199,7 @@ pipe 方法最主要的目的就是将数据的流动缓冲到一个可接受的
 
 ## Console
 
-[console.log 正常情况下是异步的, 除非你使用 `new Console(stdout[, stderr])` 指定了一个文件为目的地](https://nodejs.org/dist/latest-v6.x/docs/api/console.html#console_asynchronous_vs_synchronous_consoles). 不过一般情况下的实现都是如下 ([6.x 源代码](https://github.com/nodejs/node/blob/v6.x/lib/console.js#L42)):
+[console.log 同步还是异步取决于与谁相连和`os`](https://nodejs.org/dist/latest-v6.x/docs/api/process.html#process_a_note_on_process_i_o). 不过一般情况下的实现都是如下 ([6.x 源代码](https://github.com/nodejs/node/blob/v6.x/lib/console.js#L42))，其中`this._stdout`默认是`process.stdout`:
 
 ```javascript
 // As of v8 5.0.71.32, the combination of rest param, template string

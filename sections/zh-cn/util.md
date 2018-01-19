@@ -221,10 +221,12 @@ console.log(traversal('.'));
 ```javascript
 const glob = require("glob");
 
-glob("**/*.js", (err, files) {
+glob("**/*.js", (err, files) => {
   if (err) {
     throw new Error(err);
   }
-  console.log('Here you are:', files.map(path.basename));
+  files.map((filename) => {
+    console.log('Here you are:', filename);
+  });
 });
 ```

@@ -1,4 +1,4 @@
-![ElemeFE-background](/assets/ElemeFE-background.png)
+![ElemeFE-background](../../assets/ElemeFE-background.png)
 
 ## Guide
 

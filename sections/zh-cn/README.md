@@ -1,4 +1,4 @@
-![ElemeFE-background](/assets/ElemeFE-background.png)
+![ElemeFE-background](../../assets/ElemeFE-background.png)
 
 # 如何通过饿了么 Node.js 面试
 

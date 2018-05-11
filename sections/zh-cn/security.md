@@ -45,7 +45,7 @@ Node.js 的加密貌似有点问题, 某些算法算出来跟别的语言 (比�
 
 由 RA 统筹、审核用户的证书申请, 将证书申请送至 CA 处理后发出证书, 并将证书公告至 DS 中. 在使用证书的过程中, 除了对证书的信任关系与证书本身的正确性做检查外, 并透过产生和发布证书废止列表 (Certificate Revocation List, CRL) 对证书的状态做确认检查, 了解证书是否因某种原因而遭废弃. 证书就像是个人的身分证, 其内容包括证书序号、用户名称、公开金钥 (Public Key) 、证书有效期限等.
 
-在 TLS/SLL 中你可以使用 OpenSSL 来生成 TLS/SSL 传输时用来认证的 public/private key. 不过这个 public/private key 是自己生成的, 而通过 PKI 基础设施可以获得权威的第三方证书 (key) 从而加密 HTTP 传输安全. 目前博客圈子里比较流行的是 [Let's Encrypt 签发免费的 HTTPS 证书](https://imququ.com/post/letsencrypt-certificate.html).
+在 TLS/SSL 中你可以使用 OpenSSL 来生成 TLS/SSL 传输时用来认证的 public/private key. 不过这个 public/private key 是自己生成的, 而通过 PKI 基础设施可以获得权威的第三方证书 (key) 从而加密 HTTP 传输安全. 目前博客圈子里比较流行的是 [Let's Encrypt 签发免费的 HTTPS 证书](https://imququ.com/post/letsencrypt-certificate.html).
 
 需要注意的是, 如果 PKI 受到攻击, 那么 HTTPS 也一样不安全. 可以参见 [HTTPS 劫持 - 知乎讨论](https://www.zhihu.com/question/22795329) 中的情况, 证书由 CA 机构签发, 一般浏览器遇到非权威的 CA 机构是会告警的 (参见 [12306](https://kyfw.12306.cn/otn/)), 但是如果你在某些特殊的情况下信任了某个未知机构/证书, 那么也可能被劫持.
 

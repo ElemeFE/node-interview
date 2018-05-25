@@ -27,7 +27,7 @@ For more details about the process and the operating system, you can read the AP
 ## Process
 
 
-Here we will discuss the `project` object in Node.js. It can be printed out by using `console.log (process)` in the code. You can see the process object exposed a lot of useful properties and methods. For more details you can refer [Official document](https://nodejs.org/dist/latest-v6.x/docs/api/process.html), which has been very detailed, 
+Here we will discuss the `process` object in Node.js. It can be printed out by using `console.log (process)` in the code. You can see the process object exposed a lot of useful properties and methods. For more details you can refer [Official document](https://nodejs.org/dist/latest-v6.x/docs/api/process.html), which has been very detailed, 
 including but not limited to:
 
 * The basic information of the process

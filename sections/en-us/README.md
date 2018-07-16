@@ -15,7 +15,7 @@
 
 **Common Problem**
 
-[View more](/sections/en-us/js-basic.md)
+[View more](/sections/en-us/common.md)
 
 ## [Module](/sections/en-us/module.md)
 

@@ -231,7 +231,7 @@ You can see the latest news about this module at: [deprecate domains](https://gi
 
 Command line debug tool like gdb (Build-in debugger in the image above), it also supports remote debug (like [node-inspector](https://github.com/node-inspector/node-inspector), but still in  trial). Of course, many developers feel that [vscode](https://code.visualstudio.com/) has maken a better integration to the debug tools.
 
-We recommend reading [official ducoment](https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html) to learn how to use this build-in debugger. If you want to dig deeper, see: [Modify the value of a variable in the NodeJS program dynamically](http://code.oneapm.com/nodejs/2015/06/27/intereference/)
+We recommend reading [official document](https://nodejs.org/dist/latest-v6.x/docs/api/debugger.html) to learn how to use this build-in debugger. If you want to dig deeper, see: [Modify the value of a variable in the NodeJS program dynamically](http://code.oneapm.com/nodejs/2015/06/27/intereference/)
 
 
 ## C/C++ Addon

@@ -64,7 +64,7 @@ function require(...) {
 
 > <a name="q-loop"></a> a.js 和 b.js 两个文件互相 require 是否会死循环? 双方是否能导出变量? 如何从设计上避免这种问题?
 
-② 不会, 先执行的导出空对象, 通过导出工厂函数让对方从函数去拿比较好避免. 模块在导出的只是 `var module = { exports: {} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完 exports 就是 `{}` 在 b.js 的开头拿到的就是 `{}` 而已.
+② 不会, 先执行的导出其 **未完成的副本**, 通过导出工厂函数让对方从函数去拿比较好避免. 模块在导出的只是 `var module = { exports: {...} };` 中的 exports, 以从 a.js 启动为例, a.js 还没执行完会返回一个 a.js 的 exports 对象的 **未完成的副本** 给 b.js 模块。 然后 b.js 完成加载，并将 exports 对象提供给 a.js 模块。
 
 另外还有非常基础和常见的问题, 比如 module.exports 和 exports 的区别这里也能一并解决了 exports 只是 module.exports 的一个引用. 没看懂可以在细看我以前发的[帖子](https://cnodejs.org/topic/5734017ac3e4ef7657ab1215).
 

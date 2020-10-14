@@ -1,5 +1,5 @@
 ![ElemeFE-background](assets/ElemeFE-background.png)
-
+Nodejs is a backend technology used to create server side javascript code.
 # Node interview of ElemeFE
 
 * ## What's this?
